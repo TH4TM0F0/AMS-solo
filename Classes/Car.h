@@ -4,15 +4,15 @@
 enum CarStatus
 {
 	Ready = 0,			/// idle case
-	Assigned = 1,			/// going to a patient
+	Assigned = 1,		/// going to a patient
 	Loaded = 2			/// driving back the patient
 };
 class Car
 {
 private:
 	int id;
-	std::string type;
-	int speed;
+	std::string type;	/// NC --> Normal Car , SC --> Special Car
+	int speed;			/// metres / timestep
 	CarStatus status;
 	Patient* assignedPatient;
 public:
