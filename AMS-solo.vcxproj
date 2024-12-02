@@ -127,24 +127,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Car.h" />
+    <ClInclude Include="Classes\Car.h" />
     <ClInclude Include="DerivedDS\DerivedPriQueue.h" />
     <ClInclude Include="DerivedDS\DerivedQueue.h" />
-    <ClInclude Include="Hospital.h" />
+    <ClInclude Include="Classes\Hospital.h" />
     <ClInclude Include="AllowedDS\LinkedQueue.h" />
     <ClInclude Include="Organizer.h" />
-    <ClInclude Include="Patient.h" />
+    <ClInclude Include="Classes\Patient.h" />
     <ClInclude Include="AllowedDS\priQueue.h" />
-    <ClInclude Include="UI.h" />
+    <ClInclude Include="Classes\UI.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="Classes\Car.cpp" />
     <ClCompile Include="DerivedDS\DerivedPriQueue.cpp" />
     <ClCompile Include="DerivedDS\DerivedQueue.cpp" />
-    <ClCompile Include="Hospital.cpp" />
+    <ClCompile Include="Classes\Hospital.cpp" />
     <ClCompile Include="Organizer.cpp" />
-    <ClCompile Include="Patient.cpp" />
-    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Classes\Patient.cpp" />
+    <ClCompile Include="Classes\UI.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
