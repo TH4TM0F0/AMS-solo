@@ -127,20 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Project allowed DS\Project allowed DS\LinkedQueue.h" />
-    <ClInclude Include="..\..\Project allowed DS\Project allowed DS\priQueue.h" />
     <ClInclude Include="Car.h" />
-    <ClInclude Include="DerivedPriQueue.h" />
-    <ClInclude Include="DerivedQueue.h" />
+    <ClInclude Include="DerivedDS\DerivedPriQueue.h" />
+    <ClInclude Include="DerivedDS\DerivedQueue.h" />
     <ClInclude Include="Hospital.h" />
+    <ClInclude Include="AllowedDS\LinkedQueue.h" />
     <ClInclude Include="Organizer.h" />
     <ClInclude Include="Patient.h" />
+    <ClInclude Include="AllowedDS\priQueue.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
-    <ClCompile Include="DerivedPriQueue.cpp" />
-    <ClCompile Include="DerivedQueue.cpp" />
+    <ClCompile Include="DerivedDS\DerivedPriQueue.cpp" />
+    <ClCompile Include="DerivedDS\DerivedQueue.cpp" />
     <ClCompile Include="Hospital.cpp" />
     <ClCompile Include="Organizer.cpp" />
     <ClCompile Include="Patient.cpp" />

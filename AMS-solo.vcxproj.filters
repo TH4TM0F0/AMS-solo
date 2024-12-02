@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Project allowed DS\Project allowed DS\LinkedQueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Project allowed DS\Project allowed DS\priQueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Car.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -36,10 +30,16 @@
     <ClInclude Include="Organizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DerivedQueue.h">
+    <ClInclude Include="DerivedDS\DerivedQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DerivedPriQueue.h">
+    <ClInclude Include="DerivedDS\DerivedPriQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AllowedDS\LinkedQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AllowedDS\priQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -59,10 +59,10 @@
     <ClCompile Include="Organizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DerivedQueue.cpp">
+    <ClCompile Include="DerivedDS\DerivedQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DerivedPriQueue.cpp">
+    <ClCompile Include="DerivedDS\DerivedPriQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
