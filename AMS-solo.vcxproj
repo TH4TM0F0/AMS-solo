@@ -129,6 +129,22 @@
   <ItemGroup>
     <ClInclude Include="..\..\Project allowed DS\Project allowed DS\LinkedQueue.h" />
     <ClInclude Include="..\..\Project allowed DS\Project allowed DS\priQueue.h" />
+    <ClInclude Include="Car.h" />
+    <ClInclude Include="DerivedPriQueue.h" />
+    <ClInclude Include="DerivedQueue.h" />
+    <ClInclude Include="Hospital.h" />
+    <ClInclude Include="Organizer.h" />
+    <ClInclude Include="Patient.h" />
+    <ClInclude Include="UI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="DerivedPriQueue.cpp" />
+    <ClCompile Include="DerivedQueue.cpp" />
+    <ClCompile Include="Hospital.cpp" />
+    <ClCompile Include="Organizer.cpp" />
+    <ClCompile Include="Patient.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
