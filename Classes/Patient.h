@@ -12,6 +12,7 @@ private:
 	int severity;			/// for EP only
 public:
 	// Constructor
+	Patient();
 	Patient(int id, std::string type, int requestTime, int nearestHospitalID, int distance, int severity = 0);
 
 	// Setters

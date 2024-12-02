@@ -1,5 +1,10 @@
 #include "Patient.h"
 
+Patient::Patient()
+{
+
+}
+
 Patient::Patient(int id, std::string type, int requestTime, int nearestHospitalID, int distance, int severity)
 {
 	setID(id);
