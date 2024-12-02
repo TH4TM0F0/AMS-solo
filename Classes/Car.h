@@ -14,17 +14,19 @@ private:
 	std::string type;	/// NC --> Normal Car , SC --> Special Car
 	int speed;			/// metres / timestep
 	CarStatus status;
+	int hospitalId;     /// id of the hospital that the car belongs to
 	Patient* assignedPatient;
 public:
 	// Constructor
 	Car();
-	Car(int id, std::string type, int speed, CarStatus status, Patient* assignedPatient);
+	Car(int id, std::string type, int speed, CarStatus status, int hospitalId, Patient* assignedPatient);
 
 	// Setters
 	void setID(int id);
 	void setType(std::string type);
 	void setSpeed(int speed);
 	void setStatus(CarStatus status);
+	void setHospitalID(int hospitalId);
 	void setAssignedPatient(Patient* assignedPatient);
 
 	// Getters

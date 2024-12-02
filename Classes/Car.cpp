@@ -5,12 +5,13 @@ Car::Car()
 
 }
 
-Car::Car(int id, std::string type, int speed, CarStatus status, Patient* assignedPatient = nullptr)
+Car::Car(int id, std::string type, int speed, CarStatus status, int hospitalId, Patient* assignedPatient = nullptr)
 {
 	setID(id);
 	setType(type);
 	setSpeed(speed);
 	setStatus(status);
+	setHospitalID(hospitalId);
 	setAssignedPatient(assignedPatient);
 }
 
@@ -32,6 +33,11 @@ void Car::setSpeed(int speed)
 void Car::setStatus(CarStatus status)
 {
 	this->status = status;
+}
+
+void Car::setHospitalID(int hospitalId)
+{
+	this->hospitalId = hospitalId;
 }
 
 void Car::setAssignedPatient(Patient* assignedPatient)

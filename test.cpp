@@ -5,9 +5,9 @@
 int main()
 {
 	/// testing the Car class 
-	/*Car c1(1, "SC", 100, Ready, nullptr);
-	Car c2(2, "SC", 100, Ready, nullptr);
-	Car c3(3, "SC", 100, Ready, nullptr);
+	/*Car c1(1, "SC", 100, Ready,1 ,nullptr);
+	Car c2(2, "SC", 100, Ready, 1, nullptr);
+	Car c3(3, "SC", 100, Ready, 1, nullptr);
 	LinkedQueue<Car> queue;
 	queue.enqueue(c1);
 	queue.enqueue(c2);
