@@ -27,7 +27,7 @@
     <ClInclude Include="Classes\UI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Organizer.h">
+    <ClInclude Include="Organizer\Organizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DerivedDS\DerivedQueue.h">
@@ -56,7 +56,7 @@
     <ClCompile Include="Classes\UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Organizer.cpp">
+    <ClCompile Include="Organizer\Organizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DerivedDS\DerivedQueue.cpp">

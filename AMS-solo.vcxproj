@@ -132,7 +132,7 @@
     <ClInclude Include="DerivedDS\DerivedQueue.h" />
     <ClInclude Include="Classes\Hospital.h" />
     <ClInclude Include="AllowedDS\LinkedQueue.h" />
-    <ClInclude Include="Organizer.h" />
+    <ClInclude Include="Organizer\Organizer.h" />
     <ClInclude Include="Classes\Patient.h" />
     <ClInclude Include="AllowedDS\priQueue.h" />
     <ClInclude Include="Classes\UI.h" />
@@ -142,7 +142,7 @@
     <ClCompile Include="DerivedDS\DerivedPriQueue.cpp" />
     <ClCompile Include="DerivedDS\DerivedQueue.cpp" />
     <ClCompile Include="Classes\Hospital.cpp" />
-    <ClCompile Include="Organizer.cpp" />
+    <ClCompile Include="Organizer\Organizer.cpp" />
     <ClCompile Include="Classes\Patient.cpp" />
     <ClCompile Include="Classes\UI.cpp" />
     <ClCompile Include="test.cpp" />
