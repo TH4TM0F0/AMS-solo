@@ -7,5 +7,11 @@ private:
 public:
 	// Constructor
 	Hospital();
+
+
+
+
+	// Destructor
+	~Hospital();
 };
 
