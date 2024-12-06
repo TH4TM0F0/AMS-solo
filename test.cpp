@@ -39,4 +39,15 @@ int main()
 	queue.dequeue(p);
 	std::cout << p;*/
 	/// Check
+
+	/// testing the printing functions of the derived queue
+	Car* c1 = new Car(1, "SC", 100, Ready, 1, nullptr);
+	Car* c2 = new Car(2, "SC", 100, Ready, 1, nullptr);
+	Car* c3 = new Car(3, "SC", 100, Ready, 1, nullptr);
+	DerivedQueue<Car*> queue;
+	queue.enqueue(c1);
+	queue.enqueue(c2);
+	queue.enqueue(c3);
+	//queue.print();
+
 }
