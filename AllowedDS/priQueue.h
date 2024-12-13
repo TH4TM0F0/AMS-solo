@@ -99,4 +99,27 @@ public:
     bool isEmpty() const {
         return head == nullptr;
     }
+
+    void print()
+    {
+        Node<T>* iteratorPtr = head;
+        if (!iteratorPtr)
+        {
+            std::cout << "[EMPTY]";
+            return;
+        }
+        std::cout << "[ ";
+        while (iteratorPtr)
+        {
+			std::cout << *(iteratorPtr->getItem());
+			if (iteratorPtr->getNext())
+			{
+				std::cout << " --> ";
+			}
+			iteratorPtr = iteratorPtr->getNext();
+        }
+		std::cout << " ]";
+		return;
+        
+    }
 };

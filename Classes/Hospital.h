@@ -15,7 +15,7 @@ private:
 	int speedofScars;
 
 	// Patients Lists
-	DerivedQueue<Patient*> NormalPatientList;
+	//DerivedQueue<Patient*> NormalPatientList;
 	LinkedQueue<Patient*> SpecialPatientList;
 	priQueue<Patient*> EmergencyPatientList;
 

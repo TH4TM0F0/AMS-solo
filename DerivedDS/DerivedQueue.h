@@ -3,12 +3,12 @@
 template <typename T>
 class DerivedQueue : public LinkedQueue<T>
 {
-private:
-    int count = 0;
+protected:
+    int count;
 public:
-    void search(T& entry);
-
-    void print();
-
-    void cancelRequest(/* Patient* cancelled_Ptr */);
+    // Added Funcs
+    void cancelRequest(/* Patient* cancelled_Ptr */)
+    {
+        /// PH2 isa
+    }
 };

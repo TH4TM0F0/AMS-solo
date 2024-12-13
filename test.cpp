@@ -1,9 +1,9 @@
 #include <iostream>
-#include "../Solo Project/AllowedDS/LinkedQueue.h"
-#include "../Solo Project/AllowedDS/priQueue.h"
-#include "../Solo Project/DerivedDS/DerivedQueue.h"
-#include "../Solo Project/Classes/Car.h"
-#include "../Solo Project/Classes/Patient.h"
+#include "../Data_Solo/AllowedDS/LinkedQueue.h"
+#include "../Data_Solo/AllowedDS/priQueue.h"
+#include "../Data_Solo/DerivedDS/DerivedQueue.h"
+#include "../Data_Solo/Classes/Car.h"
+#include "../Data_Solo/Classes/Patient.h"
 int main()
 {
 	/// testing the Car class 
@@ -40,14 +40,16 @@ int main()
 	std::cout << p;*/
 	/// Check
 
-	/// testing the printing functions of the derived queue
-	Car* c1 = new Car(1, "SC", 100, Ready, 1, nullptr);
+	/// testing the printing functions of the queue
+	/*Car* c1 = new Car(1, "SC", 100, Ready, 1, nullptr);
 	Car* c2 = new Car(2, "SC", 100, Ready, 1, nullptr);
 	Car* c3 = new Car(3, "SC", 100, Ready, 1, nullptr);
 	DerivedQueue<Car*> queue;
 	queue.enqueue(c1);
 	queue.enqueue(c2);
 	queue.enqueue(c3);
-	//queue.print();
+	queue.print();*/
+	/// Check
+	
 
 }

@@ -1,4 +1,5 @@
-
+#pragma once
+#include <iostream>
 /*
 This is a program that implements the queue abstract data type using a linked list.
 The queue is implemented as a chain of linked nodes that has two pointers,
@@ -115,6 +116,7 @@ public:
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
+	void print();
 	~LinkedQueue();
 
 	//copy constructor
@@ -221,6 +223,36 @@ bool LinkedQueue<T>::peek(T& frntEntry) const
 	return true;
 
 }
+/////////////////////////////////////////////////////////////////////////////////////////
+/*
+Function: print
+iterates on the queue and prints the data
+
+Input: None.
+Output: all elements inside the queue are printed.
+*/
+template<typename T>
+inline void LinkedQueue<T>::print()
+{
+	Node<T>* iteratorPtr = frontPtr;
+	if (!iteratorPtr)
+	{
+		std::cout << "[EMPTY]";
+		return;
+	}
+	std::cout << "[ ";
+	while (iteratorPtr)
+	{
+		std::cout << *(iteratorPtr->getItem());
+		if (iteratorPtr->getNext())
+		{
+			std::cout << " --> ";
+		}
+		iteratorPtr = iteratorPtr->getNext();
+	}
+	std::cout << " ]";
+	return;
+}
 ///////////////////////////////////////////////////////////////////////////////////
 /*
 Function: destructor
@@ -256,4 +288,3 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue<T>& LQ)
 }
 
 #endif
-

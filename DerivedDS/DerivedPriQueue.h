@@ -6,6 +6,8 @@ class DerivedpriQueue :
 {
 private:
 public:
-
-    void returnedCar(/*TBD in Ph2*/);
+    void returnedCar(/*TBD in Ph2*/)
+    {
+        /// Ph2 isa
+    }
 };

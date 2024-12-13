@@ -139,8 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Car.cpp" />
-    <ClCompile Include="DerivedDS\DerivedPriQueue.cpp" />
-    <ClCompile Include="DerivedDS\DerivedQueue.cpp" />
     <ClCompile Include="Classes\Hospital.cpp" />
     <ClCompile Include="Organizer\Organizer.cpp" />
     <ClCompile Include="Classes\Patient.cpp" />
