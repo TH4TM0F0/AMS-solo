@@ -44,7 +44,7 @@ int main()
 	/*Car* c1 = new Car(1, "SC", 100, Ready, 1, nullptr);
 	Car* c2 = new Car(2, "SC", 100, Ready, 1, nullptr);
 	Car* c3 = new Car(3, "SC", 100, Ready, 1, nullptr);
-	DerivedQueue<Car*> queue;
+	LinkedQueue<Car*> queue;
 	queue.enqueue(c1);
 	queue.enqueue(c2);
 	queue.enqueue(c3);
