@@ -45,6 +45,11 @@ void Car::setAssignedPatient(Patient* assignedPatient)
 	this->assignedPatient = assignedPatient;
 }
 
+void Car::setRequestTime(int requestTime)
+{
+	this->requestTime = requestTime;
+}
+
 int Car::getID()
 {
 	return id;
@@ -68,6 +73,31 @@ CarStatus Car::getStatus()
 Patient* Car::getAssignedPatient()
 {
 	return assignedPatient;
+}
+
+int Car::getRequestTime()
+{
+	return requestTime;
+}
+
+int Car::getAssignmentTime()
+{
+	return assignmentTime;
+}
+
+int Car::getPickupTime()
+{
+	return ceil(assignmentTime + float(assignedPatient->getDistance()/speed));
+}
+
+int Car::getPatientWaitingTime()
+{
+	return pickupTime - requestTime;
+}
+
+int Car::getDropoffTime()
+{
+	return ceil(pickupTime + float(assignedPatient->getDistance() / speed));
 }
 
 std::ostream& operator<<(std::ostream& out, Car& car)

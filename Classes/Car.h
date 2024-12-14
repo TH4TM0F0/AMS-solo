@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <cmath>
 #include "../Classes/Patient.h"
 enum CarStatus
 {
@@ -10,12 +11,18 @@ enum CarStatus
 class Car
 {
 private:
-	int id;
-	std::string type;	/// NC --> Normal Car , SC --> Special Car
-	int speed;			/// metres / timestep
-	CarStatus status;
-	int hospitalId;     /// id of the hospital that the car belongs to
-	Patient* assignedPatient;
+	int id = 0;
+	std::string type = " ";					/// NC --> Normal Car , SC --> Special Car
+	int speed = 0;							/// metres / timestep
+	CarStatus status = Ready;
+	int hospitalId = 0;						/// id of the hospital that the car belongs to
+	Patient* assignedPatient = nullptr;
+	int requestTime = 0;					/// time when the car was requested
+	int assignmentTime = 0;					/// time when the car is assigned by the hospital to go pick the patient
+	int pickupTime = 0;						/// time when the car arrives to the patient
+	int patientwaitingTime = 0;
+	int dropoffTime = 0;					/// time when the car arrives back with the patient
+	int carbusyTime = 0;					/// total time a car is not free
 public:
 	// Constructor
 	Car();
@@ -28,6 +35,12 @@ public:
 	void setStatus(CarStatus status);
 	void setHospitalID(int hospitalId);
 	void setAssignedPatient(Patient* assignedPatient);
+	void setRequestTime(int requestTime);
+	/*void setAssignmentTime();
+	void setPickupTime();
+	void setPatientWaitingTime();
+	void setDropoffTime();
+	void setCarBusyTime();*/
 
 	// Getters
 	int getID();
@@ -35,6 +48,12 @@ public:
 	int getSpeed();
 	CarStatus getStatus();
 	Patient* getAssignedPatient();
+	int getRequestTime();
+	int getAssignmentTime();
+	int getPickupTime();
+	int getPatientWaitingTime();
+	int getDropoffTime();
+	int getCarBusyTime();
 
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Car& car);

@@ -50,6 +50,11 @@ void Patient::setSeverity(int severity)
 	this->severity = severity;
 }
 
+void Patient::setCancelTime(int cancelTime)
+{
+	this->cancelTime = cancelTime;
+}
+
 int Patient::getID()
 {
 	return id;
@@ -83,6 +88,11 @@ int Patient::getDistance()
 int Patient::getSeverity()
 {
 	return severity;
+}
+
+int Patient::getCancelTime()
+{
+	return cancelTime;
 }
 
 std::ostream& operator<<(std::ostream& out, Patient& patient)

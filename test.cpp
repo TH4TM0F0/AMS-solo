@@ -4,6 +4,7 @@
 #include "../Data_Solo/DerivedDS/DerivedQueue.h"
 #include "../Data_Solo/Classes/Car.h"
 #include "../Data_Solo/Classes/Patient.h"
+#include "../Data_Solo/Organizer/Organizer.h"
 int main()
 {
 	/// testing the Car class 
@@ -51,5 +52,8 @@ int main()
 	queue.print();*/
 	/// Check
 	
+
+	Organizer org;
+	org.loadInputFile();
 
 }

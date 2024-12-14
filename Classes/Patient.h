@@ -3,13 +3,14 @@
 class Patient
 {
 private:
-	int id;
-	std::string type;		/// NP --> Normal Patient , SP --> Special Pateint , EP --> Emergency Patient
-	int requestTime;
-	int pickupTime;				
-	int nearestHospitalID;		
-	int distance;			/// dis between patient and nearest hospital
-	int severity;			/// for EP only
+	int id = 0;
+	std::string type = " ";		/// NP --> Normal Patient , SP --> Special Pateint , EP --> Emergency Patient
+	int requestTime = 0;
+	int pickupTime = 0;				
+	int nearestHospitalID = 0;		
+	int distance = 0;			/// dis between patient and nearest hospital
+	int severity = 0;			/// for EP only
+	int cancelTime = 0;			/// for NP only
 public:
 	// Constructor
 	Patient();
@@ -23,6 +24,7 @@ public:
 	void setNearestHospitalID(int nearestHospitalID);
 	void setDistance(int distance);
 	void setSeverity(int severity);
+	void setCancelTime(int cancelTime);
 
 	// Getters
 	int getID();
@@ -32,6 +34,7 @@ public:
 	int getNearestHospitalID();
 	int getDistance();
 	int getSeverity();
+	int getCancelTime();
 
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Patient& patient);

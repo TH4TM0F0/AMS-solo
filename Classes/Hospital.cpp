@@ -1,5 +1,9 @@
 #include "Hospital.h"
 
+Hospital::Hospital()
+{
+}
+
 Hospital::Hospital(int id)
 {
 	setID(id);
@@ -53,6 +57,49 @@ int Hospital::getSpeedofNcars()
 int Hospital::getSpeedofScars()
 {
 	return speedofScars;
+}
+
+void Hospital::assignCarsList(int startingid)
+{
+	/// starting id is a passed parameter where we start the ids from it to numofscar and num of ncars
+	/// ids mapping
+
+	/// scars list
+	///		starting id --> starting id (passed parameter)
+	///		ending id --> num of scars + starting of scars
+	int scarsinitialID = startingid;
+	int scarsendingID = numofScars + startingid + 1;
+
+	/// ncars list
+	///		starting id --> scar ending id + 1
+	///		ending id --> num of ncars + starting of ncars
+	int ncarsinitialID = scarsendingID;
+	int ncarsendingID = numofScars + ncarsinitialID + 1;
+
+
+	/// Scars list
+	for (int i = scarsinitialID; i < scarsendingID; i++)
+	{
+		Car* carPtr = new Car(i, "SC", this->speedofScars, Ready, this->id, nullptr);
+		SpecialCarList.enqueue(carPtr);
+	}
+
+	/// Ncars list
+	for (int i = ncarsinitialID; i < ncarsendingID; i++)
+	{
+		Car* carPtr = new Car(i, "NC", this->speedofNcars, Ready, this->id, nullptr);
+		NormalCarList.enqueue(carPtr);
+	}
+}
+
+void Hospital::addNcar(Car* car)
+{
+	NormalCarList.enqueue(car);
+}
+
+void Hospital::addScar(Car* car)
+{
+	SpecialCarList.enqueue(car);
 }
 
 std::ostream& operator<<(std::ostream& out, Hospital& hospital)

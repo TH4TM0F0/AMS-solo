@@ -8,14 +8,14 @@
 class Hospital
 {
 private:
-	int id;
-	int numofNcars;
-	int numofScars;
-	int speedofNcars;
-	int speedofScars;
+	int id = 0;
+	int numofNcars = 0;
+	int numofScars = 0;
+	int speedofNcars = 0;
+	int speedofScars = 0;
 
 	// Patients Lists
-	//DerivedQueue<Patient*> NormalPatientList;
+	DerivedQueue<Patient*> NormalPatientList;
 	LinkedQueue<Patient*> SpecialPatientList;
 	priQueue<Patient*> EmergencyPatientList;
 
@@ -25,6 +25,7 @@ private:
 
 public:
 	// Constructor
+	Hospital();
 	Hospital(int id);
 
 	// Setters
@@ -41,6 +42,13 @@ public:
 	int getSpeedofNcars();
 	int getSpeedofScars();
 
+	// Assign car lists funcs --> used when reading the input file
+	void assignCarsList(int startingid);
+	
+
+	// addReturning cars --> used only when a car was assigned to a patient and now has returned to it's hospital
+	void addNcar(Car* car);
+	void addScar(Car* car);
 
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Hospital& hospital);

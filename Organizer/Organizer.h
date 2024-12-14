@@ -9,48 +9,56 @@
 class Organizer
 {
 private:
-	int timestep;															/// time representation in the project
-	int numofHospitals;
-	int speedofScar;
-	int speedofNcar;
-	int numofScars;
-	int numofNcars;
+	int timestep = 0;															/// time representation in the project
+	int numofHospitals = 0;
+	int speedofScar = 0;
+	int speedofNcar = 0;
+	int numofScars = 0;
+	int numofNcars = 0;
 
-	int numofRequests;
+	int numofRequests = 0;
 	/// temp members to store some data for each request
-	std::string tempPatienttype;
-	int tempPatientrequesttime;
-	int tempPatientid;
-	int tempPatienthospid;
-	int tempPatientdist;
-	int tempPatientSeverity;
+	std::string tempPatienttype = " ";
+	int tempPatientrequesttime = 0;
+	int tempPatientid = 0;
+	int tempPatienthospid = 0;
+	int tempPatientdist = 0;
+	int tempPatientSeverity = 0;
 
-	int numofCancelledRequests;
-	int cancelledPatientid;
-	int cancelledPatienttimestep;
+	int numofCancelledRequests = 0;
+	int cancelledPatientid = 0;
+	int cancelledPatienttimestep = 0;
 
 	/// Lists
 	LinkedQueue<Patient*> allRequests;										/// Queue for all patient requests
 	LinkedQueue<Patient*> cancelledRequests;								/// Queue for all cancelled requests	
-	Hospital* hospitalList;													/// Dyanmic Array of Hospitals
+	Hospital* hospitalList = nullptr;										/// Dyanmic Array of Hospitals
 	DerivedPriQueue<Car*> outCars;											/// PriQ for cars on their way to pick-up a patient
 	priQueue<Car*> backCars;                                                /// PriQ for returned cars
 	LinkedQueue<Patient*> finishedList;                                     /// Queue for finished patients 
 
 
 	/// 2d Distance Matrix
-	int** distanceMatrix;
+	int** distanceMatrix = nullptr;
 
 
 	/// some Ptrs
-	Patient* tempPatientPtr = new Patient;
+	Patient* tempPatientPtr = nullptr;
 
 
 	int OutCarCount = 0;
+	int numofCars = 1;													/// variable to help with the car ids uniqueness
+																		/// there is no 2 cars in the whole system with the same id
+
+	/// File name, format, & instance of class inputfilestream --> neccessary variables for loading func
+	std::string fileName = "Organizer/InputFile";
+	std::string fileFormat = ".txt";
+	std::ifstream fin;
 public:
 	/// Constructor
 	Organizer();
 
+	void incrementtimestep();
 	int gettimestep();
 
 	/// File Loading Func
@@ -59,6 +67,10 @@ public:
 	/// Simulate Func
 	void startsim();
 
-	void AddOutCars(Car*);
+	void AddOutCars(Car* car);
+
+	void AddBackCars(Car* car);
+
+	void AddFinishedList(Patient* patient);
 };
 
