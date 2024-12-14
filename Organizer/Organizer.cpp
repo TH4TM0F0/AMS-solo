@@ -132,3 +132,8 @@ void Organizer::AddBackCars(Car* car)
 	backCars.enqueue(car, -priority);		/// -ve 3ashan el beyewsal elawel 3ando timestep as8ar wel priority betemshy 
 											/// larger pri first out
 }
+
+void Organizer::AddFinishedList(Patient* patient)
+{
+	finishedList.enqueue(patient);
+}

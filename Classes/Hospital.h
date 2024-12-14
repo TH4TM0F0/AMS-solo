@@ -56,4 +56,3 @@ public:
 	// Destructor
 	~Hospital();
 };
-

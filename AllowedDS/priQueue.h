@@ -120,6 +120,5 @@ public:
         }
 		std::cout << " ]";
 		return;
-        
     }
 };

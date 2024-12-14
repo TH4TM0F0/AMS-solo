@@ -73,4 +73,3 @@ public:
 
 	void AddFinishedList(Patient* patient);
 };
-

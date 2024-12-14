@@ -61,4 +61,3 @@ public:
 	// Destructor
 	~Car();
 };
-
