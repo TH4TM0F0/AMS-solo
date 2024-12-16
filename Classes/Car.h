@@ -47,6 +47,7 @@ public:
 	std::string getType();
 	int getSpeed();
 	CarStatus getStatus();
+	int getHospitalID();
 	Patient* getAssignedPatient();
 	int getRequestTime();
 	int getAssignmentTime();

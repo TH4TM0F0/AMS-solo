@@ -9,7 +9,7 @@
 class Organizer
 {
 private:
-	int timestep = 0;															/// time representation in the project
+	int timestep = 0;														/// time representation in the project
 	int numofHospitals = 0;
 	int speedofScar = 0;
 	int speedofNcar = 0;
@@ -58,8 +58,9 @@ public:
 	/// Constructor
 	Organizer();
 
-	void incrementtimestep();
-	int gettimestep();
+	/// Timestep Funcs
+	void incrementTimestep();
+	int getTimestep();
 
 	/// File Loading Func
 	void loadInputFile();
@@ -72,4 +73,8 @@ public:
 	void AddBackCars(Car* car);
 
 	void AddFinishedList(Patient* patient);
+
+	/// Extra Funcs
+	int getNumofHospitals();
+	Hospital* getHospitalList();
 };

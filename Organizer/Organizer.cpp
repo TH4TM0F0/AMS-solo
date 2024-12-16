@@ -5,12 +5,12 @@ Organizer::Organizer()
 	timestep = 1;
 }
 
-void Organizer::incrementtimestep()
+void Organizer::incrementTimestep()
 {
 	timestep++;
 }
 
-int Organizer::gettimestep()
+int Organizer::getTimestep()
 {
 	return timestep;
 }
@@ -136,4 +136,14 @@ void Organizer::AddBackCars(Car* car)
 void Organizer::AddFinishedList(Patient* patient)
 {
 	finishedList.enqueue(patient);
+}
+
+int Organizer::getNumofHospitals()
+{
+	return numofHospitals;
+}
+
+Hospital* Organizer::getHospitalList()
+{
+	return hospitalList;
 }

@@ -70,6 +70,11 @@ CarStatus Car::getStatus()
 	return status;
 }
 
+int Car::getHospitalID()
+{
+	return hospitalId;
+}
+
 Patient* Car::getAssignedPatient()
 {
 	return assignedPatient;
@@ -103,6 +108,7 @@ int Car::getDropoffTime()
 int Car::getCarBusyTime()
 {
 	/// to be considered in PH2
+	return 0;
 }
 
 std::ostream& operator<<(std::ostream& out, Car& car)

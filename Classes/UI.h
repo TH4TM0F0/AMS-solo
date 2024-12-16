@@ -1,16 +1,24 @@
 #pragma once
 #include "../Organizer/Organizer.h"
 #include <iostream>
+#include <windows.h>
+#include <chrono>
+#include <thread>
 class UI
 {
 private:
 	Organizer* orgPtr = nullptr;
+	int mode;
 public:
-	// Constructor
+	/// Constructor
 	UI(Organizer* orgPtr);
 
-	// Printing Functions
+	/// Printing Funcs
 	void printSimStart();
-	///test
-};
+	
+	/// Delay Func 
+	void delay(int delayInSeconds);
 
+	/// Extra Funcs
+	void clearConcsole();
+};

@@ -110,6 +110,7 @@ class LinkedQueue
 protected:
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
+	int count;
 public:
 	LinkedQueue();
 	bool isEmpty() const;
@@ -135,7 +136,7 @@ LinkedQueue<T>::LinkedQueue()
 {
 	backPtr = nullptr;
 	frontPtr = nullptr;
-
+	count = 0;
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -172,6 +173,7 @@ bool LinkedQueue<T>::enqueue(const T& newEntry)
 		backPtr->setNext(newNodePtr); // The queue was not empty
 
 	backPtr = newNodePtr; // New node is the last node now
+	count++;
 	return true;
 } // end enqueue
 
@@ -201,7 +203,7 @@ bool LinkedQueue<T>::dequeue(T& frntEntry)
 
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
-
+	count--;
 	return true;
 
 }
