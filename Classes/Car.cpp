@@ -100,10 +100,10 @@ int Car::getDropoffTime()
 	return ceil(pickupTime + float(assignedPatient->getDistance() / speed));
 }
 
-int Car::getCarBusyTime()
-{
-	/// to be considered in PH2
-}
+//int Car::getCarBusyTime()
+//{
+//	/// to be considered in PH2
+//}
 
 std::ostream& operator<<(std::ostream& out, Car& car)
 {

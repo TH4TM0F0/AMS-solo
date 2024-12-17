@@ -1,10 +1,19 @@
-#include <iostream>
-#include "../Data_Solo/AllowedDS/LinkedQueue.h"
-#include "../Data_Solo/AllowedDS/priQueue.h"
-#include "../Data_Solo/DerivedDS/DerivedQueue.h"
-#include "../Data_Solo/Classes/Car.h"
-#include "../Data_Solo/Classes/Patient.h"
-#include "../Data_Solo/Organizer/Organizer.h"
+//#include <iostream>
+//#include "../Data_Solo/AllowedDS/LinkedQueue.h"
+//#include "../Data_Solo/AllowedDS/priQueue.h"
+//#include "../Data_Solo/DerivedDS/DerivedQueue.h"
+//#include "../Data_Solo/Classes/Car.h"
+//#include "../Data_Solo/Classes/Patient.h"
+//#include "../Data_Solo/Organizer/Organizer.h"
+
+#include "../AMS-solo/Classes/Patient.h"
+#include "../AMS-solo/Classes/Hospital.h"
+#include "../AMS-solo/Classes/Car.h"
+#include "../AMS-solo/DerivedDS/DerivedPriQueue.h"
+#include "../AMS-solo/AllowedDS/priQueue.h"
+#include "../AMS-solo/Organizer/Organizer.h"
+#include "../AMS-solo/AllowedDS/LinkedQueue.h"
+
 int main()
 {
 	/// testing the Car class 
@@ -52,6 +61,15 @@ int main()
 	queue.print();*/
 	/// Check
 	
+	
+	Patient p1 (1, "EP", 01, 1, 100, 5);
+
+	Hospital h1(1);
+
+	h1.add_EmergencyPatient(p1,5);
+
+
+
 
 	Organizer org;
 	org.loadInputFile();

@@ -92,6 +92,21 @@ void Hospital::assignCarsList(int startingid)
 	}
 }
 
+
+void Hospital::add_EmergencyPatient(Patient* patient, int priority)
+{
+	EmergencyPatientList.enqueue(patient, priority);
+}
+void Hospital::add_SpecialPatient(Patient* patient)
+{
+	SpecialPatientList.enqueue(patient);
+}
+void Hospital::add_NormalPatient(Patient* patient)
+{
+	NormalPatientList.enqueue(patient);
+}
+
+
 void Hospital::addNcar(Car* car)
 {
 	NormalCarList.enqueue(car);

@@ -50,6 +50,15 @@ public:
 	void addNcar(Car* car);
 	void addScar(Car* car);
 
+
+	// AddPatient Functions --> used to enqueue each patient to its list within the Hospital 
+	void add_EmergencyPatient(Patient* patient, int priority);
+	void add_SpecialPatient(Patient* patient);
+	void add_NormalPatient(Patient* patient);
+
+
+
+
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Hospital& hospital);
 
