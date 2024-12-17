@@ -137,3 +137,12 @@ void Organizer::AddFinishedList(Patient* patient)
 {
 	finishedList.enqueue(patient);
 }
+void Organizer::OutCarFailureProbability(Car* car)
+{
+
+}
+
+void Organizer::OutCarFailureAction(Car* car)
+{
+
+}

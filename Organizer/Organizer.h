@@ -6,6 +6,7 @@
 #include "../Classes/Car.h"
 #include "../Classes/Patient.h"
 #include "../Classes/Hospital.h"
+#include "../Classes/RndmGen.h"
 class Organizer
 {
 private:
@@ -72,4 +73,8 @@ public:
 	void AddBackCars(Car* car);
 
 	void AddFinishedList(Patient* patient);
+
+	void OutCarFailureProbability(Car* car);
+
+	void OutCarFailureAction(Car* car);
 };
