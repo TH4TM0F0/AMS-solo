@@ -3,7 +3,7 @@
 UI::UI(Organizer* orgPtr)
 {
 	this->orgPtr = orgPtr;
-	//hospitalPtr = orgPtr->getHospitalList();
+	hospitalPtr = orgPtr->getHospitalList();
 	mode = 0;
 }
 
@@ -31,20 +31,20 @@ void UI::printSimStart()
 		// Loop to print each timestep
 		std::cout << "Current Timestep: " << orgPtr->getTimestep() << std::endl;
 			// Loop to print each hospital --> e3mel func esmaha print current timestep w 7otaha gowa el loop ashal
-		/*std::cin.ignore();
+		std::cin.ignore();
 			for (int i = 0; i < orgPtr->getNumofHospitals(); i++)
 			{
 				hospitalPtr[i].printHosptial();
 				std::cout << "Press Enter to display the next hospital data." << std::endl;
 				std::cin.get();
-			}*/
-			std::cout << "--------------------------------------------------" << std::endl;
-			std::cout << orgPtr->getCurrentOutCars() << " ==> " << "Out Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
-			std::cout << orgPtr->getCurrentBackCars() << " <== " << "Back Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
-			
-			std::cout << "--------------------------------------------------" << std::endl;
-			std::cout << orgPtr->getCurrentFinished() << " Finished Patients: "; 
-			orgPtr->printFinishedList();
+			}
+			//std::cout << "--------------------------------------------------" << std::endl;
+			//std::cout << orgPtr->getCurrentOutCars() << " ==> " << "Out Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
+			//std::cout << orgPtr->getCurrentBackCars() << " <== " << "Back Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
+			//
+			//std::cout << "--------------------------------------------------" << std::endl;
+			//std::cout << orgPtr->getCurrentFinished() << " Finished Patients: "; 
+			//orgPtr->printFinishedList();
 			return;
 	}
 
@@ -92,3 +92,4 @@ void UI::printaMSG(std::string message)
 {
 	std::cout << message << std::endl;
 }
+

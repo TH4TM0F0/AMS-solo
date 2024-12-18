@@ -138,6 +138,22 @@ Car* Hospital::removeScar()
 	return removedCar;
 }
 
+void Hospital::printHosptial()
+{
+	std::cout << "==============" << "       " << "Hospital #" << id << " " << "start" << "       " << "==============" << std::endl;
+
+	std::cout << EmergencyPatientList.count << "EP requests: ";
+	EmergencyPatientList.print();
+
+	std::cout << SpecialPatientList.count << "SP requests: ";
+	SpecialPatientList.print();
+
+	std::cout << NormalPatientList.count << "NP requests: ";
+	NormalPatientList.print();
+
+	std::cout << "==============" << "       " << "Hospital #" << id << " " << " end " << "       " << "==============" << std::endl;
+}
+
 
 
 

@@ -58,66 +58,55 @@ int main()
 	
 	   
 	 /*1. patient queuing in their queue*/
-	Hospital h1(1);
+	//Hospital h1(1);
 
-	Patient* c1 = new Patient(1, "EP", 2, 1, 450, 5);
+	//Patient* c1 = new Patient(1, "EP", 2, 1, 450, 5);
 
-	Patient* c2 = new Patient(2, "EP", 3,1, 200, 6);
+	//Patient* c2 = new Patient(2, "EP", 3,1, 200, 6);
 
-	Car* a1 = new Car(1, "NC", 100, Ready, 1, nullptr);
+	//Car* a1 = new Car(1, "NC", 100, Ready, 1, nullptr);
 
-	Car* a2 = new Car(2, "NC", 100, Ready, 1, nullptr);
+	//Car* a2 = new Car(2, "NC", 100, Ready, 1, nullptr);
 
-	h1.addNcar(a1);
-	h1.addNcar(a2);
+	//h1.addNcar(a1);
+	//h1.addNcar(a2);
 
 
-	h1.addEpatient(c1);
-	h1.addEpatient(c2);
+	//h1.addEpatient(c1);
+	//h1.addEpatient(c2);
 
-	h1.Check_EmergencyList();  // should return 2;
+	//h1.Check_EmergencyList();  // should return 2;
 
 	// patients are enqueued succesfully inside their list time to assign cars
 
-	if ( h1.Check_NcarList() != 0)
-	{ 
-	//1.Assign a car from the n cars list to patient 	
-	
-		Car* temp = h1.removeNcar();   // this dequeues the car from the normal cars list and now this car object is stored in temporary
-		temp->setStatus(Assigned);
-		temp->setAssignedPatient(c1);
+	//if ( h1.Check_NcarList() != 0)
+	//{ 
+	////1.Assign a car from the n cars list to patient 	
+	//
+	//	Car* temp = h1.removeNcar();   // this dequeues the car from the normal cars list and now this car object is stored in temporary
+	//	temp->setStatus(Assigned);
+	//	temp->setAssignedPatient(c1);
 		
 		
 
 
 	//2.dequeue this car from the list and enqueue in the out cars list 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	}
-
-
-
-
-
-
-	
-
 	Organizer org;
 	org.loadInputFile();
+	UI ui(&org);
+	ui.printSimStart();
+	
+}
+
+
+
+
+
+
+	
+
+	
 
 	/*Organizer* org = nullptr;
 	UI ui(org);
@@ -134,8 +123,7 @@ int main()
 	//std::cin.get();
 	//std::cout << "Enter any key to proceed" << std::endl;
 	//std::cin.get();
-	Organizer* orgptr = new Organizer;
+	/*Organizer* orgptr = new Organizer;
 	UI ui(orgptr);
-	ui.printSimStart();
+	ui.printSimStart();*/
 
-}

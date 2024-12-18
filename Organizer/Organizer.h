@@ -93,4 +93,7 @@ public:
 
 	void OutCarFailureAction(Car* car);
 
+
+	
+
 };

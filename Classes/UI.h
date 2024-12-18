@@ -15,7 +15,7 @@ public:
 	UI(Organizer* orgPtr);
 
 	/// Main Print Func
-	void print();
+	//void print();
 
 	/// Printing Funcs
 	void printSimStart();
@@ -26,4 +26,6 @@ public:
 	/// Extra Funcs
 	void clearConcsole();
 	void printaMSG(std::string message);
+
+	
 };
