@@ -92,4 +92,5 @@ public:
 	void OutCarFailureProbability(Car* car);
 
 	void OutCarFailureAction(Car* car);
+
 };

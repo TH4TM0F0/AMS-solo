@@ -5,6 +5,7 @@
 #include "../Data_Solo/Classes/Car.h"
 #include "../Data_Solo/Classes/Patient.h"
 #include "../Data_Solo/Organizer/Organizer.h"
+#include "../Data_Solo/Classes/UI.h"
 int main()
 {
 	/// testing the Car class 
@@ -109,8 +110,8 @@ int main()
 	//std::cin.get();
 	//std::cout << "Enter any key to proceed" << std::endl;
 	//std::cin.get();
-	Organizer* org = new Organizer;
-	UI ui(org);
+	Organizer* orgptr = new Organizer;
+	UI ui(orgptr);
 	ui.printSimStart();
 
 }

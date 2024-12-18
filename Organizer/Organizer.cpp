@@ -138,6 +138,7 @@ void Organizer::AddFinishedList(Patient* patient)
 	finishedList.enqueue(patient);
 }
 
+
 void Organizer::createOutputFile()
 {
 	// creating an empty text file to write the required data
@@ -190,7 +191,7 @@ void Organizer::printFinishedList()
 	finishedList.print();
 }
 
-}
+
 void Organizer::OutCarFailureProbability(Car* car)
 {
 
@@ -200,3 +201,4 @@ void Organizer::OutCarFailureAction(Car* car)
 {
 
 }
+
