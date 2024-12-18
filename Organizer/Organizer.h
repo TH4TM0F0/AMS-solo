@@ -1,4 +1,5 @@
 #pragma once
+using namespace std;
 #include <fstream>
 #include <iomanip>
 #include "../AllowedDS/LinkedQueue.h"
@@ -98,6 +99,13 @@ public:
 
 	void OutCarFailureAction(Car* car);
 
+	void printaykhara() {
+		backCars.print();
+	}
+	//Car from out to Back
+	bool moveCarFromOutToBack();
+
+	
 
 	
 

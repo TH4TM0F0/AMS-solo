@@ -93,13 +93,17 @@ int main()
 	//2.dequeue this car from the list and enqueue in the out cars list 
 	
 	Organizer org;
-	org.loadInputFile();
-	UI ui(&org);
-	ui.printTimeStep();
-
-
+//	org.loadInputFile();
+//	UI ui(&org);
+//	ui.printSimStart();
 	
-	
+
+	//Test of (move Car From Out To Back)
+	/* Patient* p2 = new Patient(2, "EP", 3, 1, 200, 6);
+	Car* c2 = new Car(2, "SC", 100, Ready, 1, p2);
+	org.AddOutCars(c2);
+	org.moveCarFromOutToBack();
+	org.printaykhara(); */
 }
 
 
