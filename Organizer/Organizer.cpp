@@ -212,7 +212,7 @@ void Organizer::OutCarFailureAction(Car* car)
 bool Organizer:: moveCarFromOutToBack() {
 	Car* car;
 	int pri;
-	//Dequeue car from OUT
+	//Dequeue car from OUT (check 3ashan lw kan empty f el awl) 
 	if (outCars.dequeue(car, pri)) {
 		car->setStatus(Assigned); 	// Update the car's status to indicate it has reached its patient
 		backCars.enqueue(car, pri);     // Enqueue the car to the BACK queue
