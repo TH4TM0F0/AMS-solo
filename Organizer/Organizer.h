@@ -7,6 +7,7 @@
 #include "../Classes/Car.h"
 #include "../Classes/Patient.h"
 #include "../Classes/Hospital.h"
+#include "../Classes/RndmGen.h"
 class Organizer
 {
 private:
@@ -87,4 +88,8 @@ public:
 	int getCurrentBackCars();
 	int getCurrentFinished();
 	void printFinishedList();
+
+	void OutCarFailureProbability(Car* car);
+
+	void OutCarFailureAction(Car* car);
 };

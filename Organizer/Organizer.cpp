@@ -190,3 +190,13 @@ void Organizer::printFinishedList()
 	finishedList.print();
 }
 
+}
+void Organizer::OutCarFailureProbability(Car* car)
+{
+
+}
+
+void Organizer::OutCarFailureAction(Car* car)
+{
+
+}

@@ -136,6 +136,7 @@
     <ClInclude Include="Classes\Patient.h" />
     <ClInclude Include="AllowedDS\priQueue.h" />
     <ClInclude Include="Classes\UI.h" />
+    <ClInclude Include="Classes\RndmGen.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Car.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="Organizer\Organizer.cpp" />
     <ClCompile Include="Classes\Patient.cpp" />
     <ClCompile Include="Classes\UI.cpp" />
+    <ClCompile Include="Classes\RndmGen.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -68,6 +68,16 @@ public:
 	// Print Func --> to be used in the UI class
 	void printHosptial();
 
+
+
+	// AddPatient Functions --> used to enqueue each patient to its list within the Hospital 
+	void add_EmergencyPatient(Patient* patient, int priority);
+	void add_SpecialPatient(Patient* patient);
+	void add_NormalPatient(Patient* patient);
+
+	//Car counter functions --> purpose is to return the amount of cars "ready" to be assigned
+
+
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Hospital& hospital);
 

@@ -4,10 +4,7 @@
 #include "../Data_Solo/DerivedDS/DerivedQueue.h"
 #include "../Data_Solo/Classes/Car.h"
 #include "../Data_Solo/Classes/Patient.h"
-#include "../Data_Solo/Classes/Hospital.h"
-#include "../Data_Solo/Classes/UI.h"
 #include "../Data_Solo/Organizer/Organizer.h"
-
 int main()
 {
 	/// testing the Car class 
@@ -55,6 +52,47 @@ int main()
 	queue.print();*/
 	/// Check
 	
+	
+	// EPatient Car Assignment
+	
+	   
+	//// 1. patient queuing in their queue
+	//Hospital h1(1);
+
+	//Patient* c2 = new Patient(1, "EP", 2, 1, 450, 5);
+
+	//h1.add_EmergencyPatient(c2, 5);
+
+	////2. Check if a normal car is availabe 
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	// EP must be dealt with before the other 2 types at  the same time step 
+	// this function is for hospitals 
+
+	
+
+
+	
+
+
+
+
+	Organizer org;
+	org.loadInputFile();
 
 	/*Organizer* org = nullptr;
 	UI ui(org);
