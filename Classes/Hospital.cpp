@@ -139,25 +139,6 @@ Car* Hospital::removeScar()
 	return removedCar;
 }
 
-//void Hospital::printHosptial()
-//{
-//	std::cout << "==============" << "       " << "Hospital #" << id << " " << "start" << "       " << "==============" << std::endl;
-//
-//	std::cout << EmergencyPatientList.count << "EP requests: ";
-//	EmergencyPatientList.print();
-//	std::cout << std::endl;
-//
-//	std::cout << SpecialPatientList.count << "SP requests: ";
-//	SpecialPatientList.print();
-//	std::cout << std::endl;
-//
-//	std::cout << NormalPatientList.count << "NP requests: ";
-//	NormalPatientList.print();
-//	std::cout << std::endl;
-//
-//	std::cout << "==============" << "       " << "Hospital #" << id << " " << " end " << "       " << "==============" << std::endl;
-//}
-
 DerivedQueue<Patient*> Hospital::getNPatientList()
 {
 	return NormalPatientList;

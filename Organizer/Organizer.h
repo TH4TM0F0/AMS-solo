@@ -1,4 +1,5 @@
 #pragma once
+using namespace std;
 #include <fstream>
 #include <iomanip>
 #include "../AllowedDS/LinkedQueue.h"
@@ -70,6 +71,9 @@ public:
 	/// File Loading Func
 	void loadInputFile();
 
+	/// Assign Patients to their hospitals
+
+
 	/// Simulate Func
 	void startsim();
 
@@ -80,6 +84,8 @@ public:
 	void AddFinishedList(Patient* patient);
 
 	void createOutputFile();
+
+	bool SimEnded();
 
 	/// Extra Funcs
 	int getNumofHospitals();
@@ -93,6 +99,13 @@ public:
 
 	void OutCarFailureAction(Car* car);
 
+	void printbackkk() {
+		backCars.print();
+	}
+	//Car from out to Back
+	bool moveCarFromOutToBack();
+
+	
 
 	
 
