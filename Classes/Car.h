@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include "../Classes/Patient.h"
+#include "../Organizer/Organizer.h"
 enum CarStatus
 {
 	Ready = 0,			/// idle case
@@ -36,11 +37,11 @@ public:
 	void setHospitalID(int hospitalId);
 	void setAssignedPatient(Patient* assignedPatient);
 	void setRequestTime(int requestTime);
-	/*void setAssignmentTime();
-	void setPickupTime();
+	void setAssignmentTime();
+	void setPickupTime(int assignmentTime);
 	void setPatientWaitingTime();
 	void setDropoffTime();
-	void setCarBusyTime();*/
+	void setCarBusyTime();
 
 	// Getters
 	int getID();

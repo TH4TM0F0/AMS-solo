@@ -85,6 +85,16 @@ public:
 
 
 
+	// Patient Assignment Functions
+
+	void Assign_EP(Patient* patient);
+	/*void Assign_SP(Patient* patient);
+	void Assign_NP(Patient* patient);*/
+
+
+
+
+
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Hospital& hospital);
 
