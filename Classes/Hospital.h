@@ -14,6 +14,8 @@ private:
 	int speedofNcars = 0;
 	int speedofScars = 0;
 
+
+
 	// Patients Lists
 	DerivedQueue<Patient*> NormalPatientList;
 	LinkedQueue<Patient*> SpecialPatientList;
@@ -51,12 +53,13 @@ public:
 	void addScar(Car* car);
 
 
+
 	// AddPatient Functions --> used to enqueue each patient to its list within the Hospital 
 	void add_EmergencyPatient(Patient* patient, int priority);
 	void add_SpecialPatient(Patient* patient);
 	void add_NormalPatient(Patient* patient);
 
-
+	//Car counter functions --> purpose is to return the amount of cars "ready" to be assigned
 
 
 	// Operator Overloading

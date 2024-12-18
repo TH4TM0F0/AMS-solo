@@ -62,11 +62,40 @@ int main()
 	/// Check
 	
 	
-	Patient p1 (1, "EP", 01, 1, 100, 5);
+	// EPatient Car Assignment
+	
+	   
+	//// 1. patient queuing in their queue
+	//Hospital h1(1);
 
-	Hospital h1(1);
+	//Patient* c2 = new Patient(1, "EP", 2, 1, 450, 5);
 
-	h1.add_EmergencyPatient(p1,5);
+	//h1.add_EmergencyPatient(c2, 5);
+
+	////2. Check if a normal car is availabe 
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	// EP must be dealt with before the other 2 types at  the same time step 
+	// this function is for hospitals 
+
+	
+
+
+	
 
 
 

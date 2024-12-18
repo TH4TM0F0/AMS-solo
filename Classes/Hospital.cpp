@@ -110,12 +110,16 @@ void Hospital::add_NormalPatient(Patient* patient)
 void Hospital::addNcar(Car* car)
 {
 	NormalCarList.enqueue(car);
+
+
 }
 
 void Hospital::addScar(Car* car)
 {
 	SpecialCarList.enqueue(car);
 }
+
+
 
 std::ostream& operator<<(std::ostream& out, Hospital& hospital)
 {
