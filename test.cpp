@@ -96,6 +96,9 @@ int main()
 	org.loadInputFile();
 	UI ui(&org);
 	ui.printSimStart();
+
+
+	
 	
 }
 
