@@ -66,10 +66,10 @@ public:
 	Car* removeScar();
 
 	// Print Func --> to be used in the UI class
-	void printHosptial();
-
-
-
+	//void printHosptial();
+	DerivedQueue<Patient*> getNPatientList();
+	LinkedQueue<Patient*> getSPatientList();
+	priQueue<Patient*> getEPatientList();
 
 	// Functions to check if lists within the hospital is Empty 
 

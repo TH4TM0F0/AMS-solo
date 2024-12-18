@@ -109,7 +109,7 @@ public:
         priNode<T>* iteratorPtr = head;
         if (!iteratorPtr)
         {
-            std::cout << "[EMPTY]";
+            std::cout << "[EMPTY]" << std::endl;
             return;
         }
         std::cout << "[ ";
