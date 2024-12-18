@@ -70,6 +70,9 @@ public:
 	/// File Loading Func
 	void loadInputFile();
 
+	/// Assign Patients to their hospitals
+
+
 	/// Simulate Func
 	void startsim();
 
@@ -80,6 +83,8 @@ public:
 	void AddFinishedList(Patient* patient);
 
 	void createOutputFile();
+
+	bool SimEnded();
 
 	/// Extra Funcs
 	int getNumofHospitals();

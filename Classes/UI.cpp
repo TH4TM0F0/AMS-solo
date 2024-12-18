@@ -76,7 +76,6 @@ void UI::printTimeStep()
 	for (int i = 0; i < orgPtr->getNumofHospitals(); i++)
 	{
 		printHospital(hospitalPtr[i]);
-		//hospitalPtr[i].printHosptial();
 		std::cout << "-----------------------------------------------------------" << std::endl;
 		std::cout << orgPtr->getCurrentOutCars() << " ==> " << "Out Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
 		std::cout << orgPtr->getCurrentBackCars() << " <== " << "Back Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;

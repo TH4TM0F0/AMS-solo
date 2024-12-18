@@ -119,6 +119,32 @@ void Organizer::loadInputFile()
 	fin.close();
 }
 
+void Organizer::startsim()
+{
+	/// start with loading data from the input file
+	loadInputFile();
+	
+	/// then assign all requests to their related hospitals
+	// assignPatientstotheirrelatedhospitals();
+
+
+	/// main loop 
+	while (!SimEnded())
+	{
+		// do smthg
+
+
+
+
+		// increment the timestep at the end of each loop
+		incrementTimestep();
+	}
+
+	/// end with creating the output file
+	createOutputFile();
+
+}
+
 void Organizer::AddOutCars(Car* car)
 {
 	int priority = car->getPickupTime();	/// --> to be checked ma3 TA Nada
@@ -159,6 +185,12 @@ void Organizer::createOutputFile()
 
 
 	fout.close();
+}
+
+bool Organizer::SimEnded()
+{
+	/// true --> simulation ended , false --> simulation completes
+	return finishedList.count == allRequests.count - cancelledRequests.count;
 }
 
 int Organizer::getNumofHospitals()
