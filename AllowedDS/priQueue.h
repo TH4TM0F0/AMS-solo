@@ -48,12 +48,12 @@ class priQueue
 {
 protected:
     priNode<T>* head;
-    int count;
+    
 public:
     priQueue() : head(nullptr) {
         count = 0;
     }
-
+    int count = 0;
     ~priQueue() {
         T tmp;
         int p;
@@ -106,7 +106,7 @@ public:
 
     void print()
     {
-        Node<T>* iteratorPtr = head;
+        priNode<T>* iteratorPtr = head;
         if (!iteratorPtr)
         {
             std::cout << "[EMPTY]";
@@ -115,14 +115,15 @@ public:
         std::cout << "[ ";
         while (iteratorPtr)
         {
-			std::cout << *(iteratorPtr->getItem());
+            int pri;
+			std::cout << *(iteratorPtr->getItem(pri));
 			if (iteratorPtr->getNext())
 			{
 				std::cout << " --> ";
 			}
 			iteratorPtr = iteratorPtr->getNext();
         }
-		std::cout << " ]";
+        std::cout << " ]" << std::endl;
 		return;
     }
 };

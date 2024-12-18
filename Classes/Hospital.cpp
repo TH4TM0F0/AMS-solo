@@ -82,7 +82,6 @@ void Hospital::assignCarsList(int startingid)
 	{
 		Car* carPtr = new Car(i, "SC", this->speedofScars, Ready, this->id, nullptr);
 		SpecialCarList.enqueue(carPtr);
-		numofCurrentScars++;
 	}
 
 	/// Ncars list
@@ -90,48 +89,41 @@ void Hospital::assignCarsList(int startingid)
 	{
 		Car* carPtr = new Car(i, "NC", this->speedofNcars, Ready, this->id, nullptr);
 		NormalCarList.enqueue(carPtr);
-		numofCurrentNcars++;
 	}
 }
 
 void Hospital::addNpatient(Patient* patient)
 {
 	NormalPatientList.enqueue(patient);
-	numofCurrentNpatients++;
 }
 
 void Hospital::addSpatient(Patient* patient)
 {
 	SpecialPatientList.enqueue(patient);
-	numofCurrentSpatients++;
 }
 
 void Hospital::addEpatient(Patient* patient)
 {
 	EmergencyPatientList.enqueue(patient, patient->getSeverity());
-	numofCurrentEpatients++;
 }
 
 Patient* Hospital::removeNpatient()
 {
-	Patient* removedPatientPtr;
-	NormalPatientList.dequeue(removedPatientPtr);
-	return removedPatientPtr;
+	NormalPatientList.dequeue(removedPatient);
+	return removedPatient;
 }
 
 Patient* Hospital::removeSpatient()
 {
-	Patient* removedPatientPtr;
-	SpecialPatientList.dequeue(removedPatientPtr);
-	return removedPatientPtr;
+	SpecialPatientList.dequeue(removedPatient);
+	return removedPatient;
 }
 
 Patient* Hospital::removeEpatient()
 {
-	Patient* removedPatientPtr;
 	int pri;
-	EmergencyPatientList.dequeue(removedPatientPtr, pri);
-	return removedPatientPtr;
+	EmergencyPatientList.dequeue(removedPatient, pri);
+	return removedPatient;
 }
 
 void Hospital::addNcar(Car* car)
@@ -144,10 +136,32 @@ void Hospital::addScar(Car* car)
 	SpecialCarList.enqueue(car);
 }
 
+Car* Hospital::removeNcar()
+{
+	NormalCarList.dequeue(removedCar);
+	return removedCar;
+}
+
+Car* Hospital::removeScar()
+{
+	SpecialCarList.dequeue(removedCar);
+	return removedCar;
+}
+
 void Hospital::printHosptial()
 {
-	std::cout << "==============" << "       " << "Hospital #" << id << " " << "data" << "       " << "==============" << std::endl;
+	std::cout << "==============" << "       " << "Hospital #" << id << " " << "start" << "       " << "==============" << std::endl;
 
+	std::cout << EmergencyPatientList.count << "EP requests: ";
+	EmergencyPatientList.print();
+
+	std::cout << SpecialPatientList.count << "SP requests: ";
+	SpecialPatientList.print();
+
+	std::cout << NormalPatientList.count << "NP requests: ";
+	NormalPatientList.print();
+
+	std::cout << "==============" << "       " << "Hospital #" << id << " " << " end " << "       " << "==============" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& out, Hospital& hospital)

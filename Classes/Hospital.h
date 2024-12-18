@@ -15,12 +15,9 @@ private:
 	int speedofNcars = 0;
 	int speedofScars = 0;
 
-	// Current Counters
-	int numofCurrentNcars = 0;
-	int numofCurrentScars = 0;
-	int numofCurrentNpatients = 0;
-	int numofCurrentSpatients = 0;
-	int numofCurrentEpatients = 0;
+	// Some additional Ptrs
+	Patient* removedPatient = nullptr;
+	Car* removedCar = nullptr;
 
 	// Patients Lists
 	DerivedQueue<Patient*> NormalPatientList;
@@ -65,6 +62,8 @@ public:
 	// addReturning cars --> used only when a car was assigned to a patient and now has returned to it's hospital
 	void addNcar(Car* car);
 	void addScar(Car* car);
+	Car* removeNcar();
+	Car* removeScar();
 
 	// Print Func --> to be used in the UI class
 	void printHosptial();

@@ -138,6 +138,28 @@ void Organizer::AddFinishedList(Patient* patient)
 	finishedList.enqueue(patient);
 }
 
+void Organizer::createOutputFile()
+{
+	// creating an empty text file to write the required data
+	fout.open(outputfileName + fileFormat, std::ios::out); 
+
+	// check if the file is opened --> to start writing
+	if (fout.is_open())
+	{
+		fout << "FT"  /*e3mel beta3et std::setw() w std::setfill()*/
+			<< "PID" /*e3mel beta3et std::setw() w std::setfill()*/
+			<< "QT"  /*e3mel beta3et std::setw() w std::setfill()*/
+			<< "WT"  /*e3mel beta3et std::setw() w std::setfill()*/
+			<< std::endl;
+		/// Header Row of Output file is created
+		//for (int i = 0; i < allRequests.count )
+
+	}
+
+
+	fout.close();
+}
+
 int Organizer::getNumofHospitals()
 {
 	return numofHospitals;
@@ -147,3 +169,24 @@ Hospital* Organizer::getHospitalList()
 {
 	return hospitalList;
 }
+
+int Organizer::getCurrentOutCars()
+{
+	return outCars.count;
+}
+
+int Organizer::getCurrentBackCars()
+{
+	return backCars.count;
+}
+
+int Organizer::getCurrentFinished()
+{
+	return finishedList.count;
+}
+
+void Organizer::printFinishedList()
+{
+	finishedList.print();
+}
+

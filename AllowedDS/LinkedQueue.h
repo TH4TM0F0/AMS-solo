@@ -110,9 +110,9 @@ class LinkedQueue
 protected:
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
-	int count;
 public:
 	LinkedQueue();
+	int count = 0;
 	bool isEmpty() const;
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
@@ -124,7 +124,6 @@ public:
 	LinkedQueue(const LinkedQueue<T>& LQ);
 };
 /////////////////////////////////////////////////////////////////////////////////////////
-
 /*
 Function: Queue()
 The constructor of the Queue class.
@@ -252,7 +251,7 @@ inline void LinkedQueue<T>::print()
 		}
 		iteratorPtr = iteratorPtr->getNext();
 	}
-	std::cout << " ]";
+	std::cout << " ]" << std::endl;
 	return;
 }
 ///////////////////////////////////////////////////////////////////////////////////

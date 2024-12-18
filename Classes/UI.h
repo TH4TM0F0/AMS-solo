@@ -8,10 +8,14 @@ class UI
 {
 private:
 	Organizer* orgPtr = nullptr;
+	Hospital* hospitalPtr = nullptr;
 	int mode;
 public:
 	/// Constructor
 	UI(Organizer* orgPtr);
+
+	/// Main Print Func
+	void print();
 
 	/// Printing Funcs
 	void printSimStart();
@@ -21,4 +25,5 @@ public:
 
 	/// Extra Funcs
 	void clearConcsole();
+	void printaMSG(std::string message);
 };

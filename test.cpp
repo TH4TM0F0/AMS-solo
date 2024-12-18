@@ -56,9 +56,23 @@ int main()
 	/// Check
 	
 
-	Organizer* org = nullptr;
+	/*Organizer* org = nullptr;
+	UI ui(org);
+	ui.printSimStart();*/
+	
+	///test
+	//int x;
+	//std::cin >> x;
+	////std::cin.ignore();
+	////pause
+	//int y;
+	//std::cin >> y;
+	//std::cout << "Enter any key to proceed" << std::endl;
+	//std::cin.get();
+	//std::cout << "Enter any key to proceed" << std::endl;
+	//std::cin.get();
+	Organizer* org = new Organizer;
 	UI ui(org);
 	ui.printSimStart();
-	
 
 }

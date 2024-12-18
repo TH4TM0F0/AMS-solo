@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <iomanip>
 #include "../AllowedDS/LinkedQueue.h"
 #include "../DerivedDS/DerivedPriQueue.h"
 #include "../AllowedDS/PriQueue.h"
@@ -53,7 +54,10 @@ private:
 	/// File name, format, & instance of class inputfilestream --> neccessary variables for loading func
 	std::string fileName = "Organizer/InputFile";
 	std::string fileFormat = ".txt";
-	std::ifstream fin;
+	std::ifstream fin;		/// leh fin? --> 3ashan teb2a shabah cin (console input) , fin (file input)
+	/// name --> outputfile.txt in case of silent mode but in interactive mode user can input the name of his file
+	std::string outputfileName = "outputfile";
+	std::ofstream fout;		/// leh fout? --> 3ashan teb2a shabah cout (console output) , fout (file output)
 public:
 	/// Constructor
 	Organizer();
@@ -74,7 +78,13 @@ public:
 
 	void AddFinishedList(Patient* patient);
 
+	void createOutputFile();
+
 	/// Extra Funcs
 	int getNumofHospitals();
 	Hospital* getHospitalList();
+	int getCurrentOutCars();
+	int getCurrentBackCars();
+	int getCurrentFinished();
+	void printFinishedList();
 };
