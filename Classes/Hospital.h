@@ -70,12 +70,19 @@ public:
 
 
 
-	// AddPatient Functions --> used to enqueue each patient to its list within the Hospital 
-	void add_EmergencyPatient(Patient* patient, int priority);
-	void add_SpecialPatient(Patient* patient);
-	void add_NormalPatient(Patient* patient);
+
+	// Functions to check if lists within the hospital is Empty 
+
+	bool Check_EmergencyList();
+	bool Check_SpecialList();
+	bool Check_NormalList();
+
 
 	//Car counter functions --> purpose is to return the amount of cars "ready" to be assigned
+
+	int Check_ScarList();
+	int Check_NcarList();
+
 
 
 	// Operator Overloading

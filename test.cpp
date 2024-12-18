@@ -57,40 +57,64 @@ int main()
 	// EPatient Car Assignment
 	
 	   
-	//// 1. patient queuing in their queue
-	//Hospital h1(1);
+	 /*1. patient queuing in their queue*/
+	Hospital h1(1);
 
-	//Patient* c2 = new Patient(1, "EP", 2, 1, 450, 5);
+	Patient* c1 = new Patient(1, "EP", 2, 1, 450, 5);
 
-	//h1.add_EmergencyPatient(c2, 5);
+	Patient* c2 = new Patient(2, "EP", 3,1, 200, 6);
 
-	////2. Check if a normal car is availabe 
+	Car* a1 = new Car(1, "NC", 100, Ready, 1, nullptr);
+
+	Car* a2 = new Car(2, "NC", 100, Ready, 1, nullptr);
+
+	h1.addNcar(a1);
+	h1.addNcar(a2);
+
+
+	h1.addEpatient(c1);
+	h1.addEpatient(c2);
+
+	h1.Check_EmergencyList();  // should return 2;
+
+	// patients are enqueued succesfully inside their list time to assign cars
+
+	if ( h1.Check_NcarList() != 0)
+	{ 
+	//1.Assign a car from the n cars list to patient 	
+	
+		Car* temp = h1.removeNcar();   // this dequeues the car from the normal cars list and now this car object is stored in temporary
+		temp->setStatus(Assigned);
+		temp->setAssignedPatient(c1);
+		
+		
+
+
+	//2.dequeue this car from the list and enqueue in the out cars list 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+
+
+
 
 
 
 	
-
-
-
-
-
-
-
-
-
-
-
-
-	// EP must be dealt with before the other 2 types at  the same time step 
-	// this function is for hospitals 
-
-	
-
-
-	
-
-
-
 
 	Organizer org;
 	org.loadInputFile();

@@ -110,6 +110,54 @@ int Car::getDropoffTime()
 //	/// to be considered in PH2
 //}
 
+//void Car::setAssignmentTime()
+//{
+//
+//}
+//void Car::setPickupTime()
+//{
+//
+//}
+//void Car::setPatientWaitingTime()
+//{
+//
+//}
+//void Car::setDropoffTime()
+//{
+//
+//}
+//void Car::setCarBusyTime()
+//{
+//
+//}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 std::ostream& operator<<(std::ostream& out, Car& car)
 {
 	std::cout << car.id;

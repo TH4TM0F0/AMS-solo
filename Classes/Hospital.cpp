@@ -127,18 +127,45 @@ Patient* Hospital::removeEpatient()
 }
 
 
-void Hospital::add_EmergencyPatient(Patient* patient, int priority)
+Car* Hospital::removeNcar()
 {
-	EmergencyPatientList.enqueue(patient, priority);
+	NormalCarList.dequeue(removedCar);
+	return removedCar;
 }
-void Hospital::add_SpecialPatient(Patient* patient)
+Car* Hospital::removeScar()
 {
-	SpecialPatientList.enqueue(patient);
+	SpecialCarList.dequeue(removedCar);
+	return removedCar;
 }
-void Hospital::add_NormalPatient(Patient* patient)
+
+
+
+
+bool Hospital::Check_EmergencyList()
 {
-	NormalPatientList.enqueue(patient);
+	return EmergencyPatientList.count;
 }
+bool Hospital::Check_SpecialList()
+{
+	return SpecialCarList.count;
+}
+bool Hospital::Check_NormalList()
+{
+	return NormalPatientList.count;
+}
+
+
+int Hospital::Check_ScarList()
+{
+	return SpecialCarList.count;
+}
+
+int Hospital::Check_NcarList()
+{
+	return NormalCarList.count;
+}
+
+
 
 
 void Hospital::addNcar(Car* car)
