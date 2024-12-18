@@ -95,7 +95,7 @@ int main()
 	Organizer org;
 	org.loadInputFile();
 	UI ui(&org);
-	ui.printSimStart();
+	ui.printTimeStep();
 
 
 	
