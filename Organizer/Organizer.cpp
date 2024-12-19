@@ -194,20 +194,19 @@ void Organizer::printFinishedList()
 
 void Organizer::OutCarFailureProbability(Car* car) // update input file and add failure probability of out cars and load file 
 {     
-	LinkedQueue<int>queue; 
-	int FailureProb;                                    // if the random number falls within the range of failure probability ,a car should fail 
-	if () {
- 
-		outCars.dequeue(car);
-		queue.enqueue(FailureProb);
-	}
+	//LinkedQueue<int>queue; 
+	//int FailureProb;                                    // if the random number falls within the range of failure probability ,a car should fail 
+	//if (int x=0) {
+ //       outCars.dequeue(car);
+	//	queue.enqueue(FailureProb);
+	//}
 
 
 }
 
 void Organizer::OutCarFailureAction(Car* car)
 {
-
+	return;
 }
 
 
