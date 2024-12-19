@@ -82,6 +82,14 @@ public:
 	int Check_ScarList();
 	int Check_NcarList();
 
+	void printSClist()
+	{
+		SpecialCarList.print();
+	}
+	void printNClist()
+	{
+		NormalCarList.print();
+	}
 
 
 	// Operator Overloading

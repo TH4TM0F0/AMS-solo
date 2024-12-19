@@ -48,6 +48,8 @@ void Organizer::loadInputFile()
 		for (int i = 0; i < numofHospitals; i++)
 		{ 
 			fin >> numofScars >> numofNcars;
+			totalnumofSC += numofScars;
+			totalnumofNC += numofNcars;
 
 			/// setting unique ids for each hospital
 			hospitalList[i].setID(i + 1);
@@ -88,6 +90,19 @@ void Organizer::loadInputFile()
 			tempPatientPtr->setDistance(tempPatientdist);
 			tempPatientPtr->setSeverity(tempPatientSeverity);
 
+			if (tempPatienttype == "EP")
+			{
+				totalnumofEP++;
+			}
+			if (tempPatienttype == "SP")
+			{
+				totalnumofSP++;
+			}
+			if (tempPatienttype == "NP")
+			{
+				totalnumofNP++;
+			}
+
 			allRequests.enqueue(tempPatientPtr);
 		}
 
@@ -113,6 +128,9 @@ void Organizer::loadInputFile()
 			//tempPatientPtr->setNearestHospitalID(tempPatienthospid); --> hab2a abos 3aleeha fi PH2
 			//tempPatientPtr->setDistance(tempPatientdist); --> hab2a abos 3aleeha fi PH2
 			tempPatientPtr->setSeverity(0);
+
+			totalnumofNP--;
+
 			cancelledRequests.enqueue(tempPatientPtr);
 		}
 	}
@@ -135,7 +153,7 @@ void Organizer::startsim()
 
 
 
-
+		 
 		// increment the timestep at the end of each loop
 		incrementTimestep();
 	}
@@ -180,10 +198,19 @@ void Organizer::createOutputFile()
 			<< std::endl;
 		/// Header Row of Output file is created
 		//for (int i = 0; i < allRequests.count )
+		/*{
 
+		}*/
+		fout << "Patients: " << allRequests.count - cancelledRequests.count << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
+			<< "Hospitals = " << numofHospitals << std::endl
+			<< "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
+			<< "Average Wait Time = " /* << rakam to be calculated */ << std::endl
+			<< "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
+			<< "Average Busy Time = " /*rakam */ << std::endl
+			<< "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
 	}
 
-
+	// close the file 
 	fout.close();
 }
 

@@ -32,6 +32,14 @@ private:
 	int cancelledPatientid = 0;
 	int cancelledPatienttimestep = 0;
 
+	/// counters for patients by type --> to be used in the output file
+	int totalnumofEP = 0;
+	int totalnumofSP = 0;
+	int totalnumofNP = 0;
+	int totalnumofCancelledNP = 0;
+	int totalnumofSC = 0;
+	int totalnumofNC = 0;
+
 	/// Lists
 	LinkedQueue<Patient*> allRequests;										/// Queue for all patient requests
 	LinkedQueue<Patient*> cancelledRequests;								/// Queue for all cancelled requests	
