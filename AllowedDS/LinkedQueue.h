@@ -118,6 +118,7 @@ public:
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	void print();
+	Node<T>* getFrontPtr();
 	~LinkedQueue();
 
 	//copy constructor
@@ -253,6 +254,11 @@ inline void LinkedQueue<T>::print()
 	}
 	std::cout << " ]" << std::endl;
 	return;
+}
+template<typename T>
+inline Node<T>* LinkedQueue<T>::getFrontPtr()
+{
+	return frontPtr;
 }
 ///////////////////////////////////////////////////////////////////////////////////
 /*

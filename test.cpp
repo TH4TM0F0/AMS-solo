@@ -93,15 +93,15 @@ int main()
 	//2.dequeue this car from the list and enqueue in the out cars list 
 	
 	Organizer org;
-	/*org.loadInputFile();
+	org.loadInputFile();
 	Hospital* H;
 	H = org.getHospitalList();
 	H->printSClist();
 	H->printNClist();
 	(H + 1)->printSClist();
-	(H + 1)->printNClist();*/
-	UI ui(&org);
-	ui.printSimStart();
+	(H + 1)->printNClist();
+	/*UI ui(&org);
+	ui.printSimStart();*/
 	//org.printbackkk();
 	
 
