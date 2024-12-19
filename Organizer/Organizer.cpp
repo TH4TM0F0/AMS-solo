@@ -404,17 +404,18 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 		return;
 	}
 
-	if (car->getHospitalID() != hospital->getID()){ //make sure that its Returning the car to it its hospital 
-		return; 
+	if (car->getHospitalID() != hospital->getID()) { //make sure that its Returning the car to it its hospital 
+		return;
 	}
-
-	if (car->getType() == "NC") {
-		backCars.dequeue(car, pri);
-		hospital->getNormalCarList().enqueue(car);
-	}
-	else if (car->getType() == "SC") {
-		backCars.dequeue(car, pri);
-		hospital->getSpecialCarList().enqueue(car);
+	else {
+		if (car->getType() == "NC") {
+			backCars.dequeue(car, pri);
+			hospital->getNormalCarList().enqueue(car);
+		}
+		else if (car->getType() == "SC") {
+			backCars.dequeue(car, pri);
+			hospital->getSpecialCarList().enqueue(car);
+		}
 	}
 	car->setStatus(Ready);
 
