@@ -92,9 +92,9 @@ public:
 
 	// Patient Assignment Functions
 
-	//void Assign_EP(Patient* patient);
-	/*void Assign_SP(Patient* patient);
-	void Assign_NP(Patient* patient);*/
+	Car* Assign_EP(Patient* patient);
+	/*Car* Assign_SP(Patient* patient);
+	Car* Assign_NP(Patient* patient);*/
 
 
 	// Operator Overloading
