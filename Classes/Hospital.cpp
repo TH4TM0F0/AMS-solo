@@ -126,7 +126,6 @@ Patient* Hospital::removeEpatient()
 	return removedPatient;
 }
 
-
 Car* Hospital::removeNcar()
 {
 	NormalCarList.dequeue(removedCar);
@@ -138,24 +137,20 @@ Car* Hospital::removeScar()
 	return removedCar;
 }
 
-void Hospital::printHosptial()
+DerivedQueue<Patient*> Hospital::getNPatientList()
 {
-	std::cout << "==============" << "       " << "Hospital #" << id << " " << "start" << "       " << "==============" << std::endl;
-
-	std::cout << EmergencyPatientList.count << "EP requests: ";
-	EmergencyPatientList.print();
-
-	std::cout << SpecialPatientList.count << "SP requests: ";
-	SpecialPatientList.print();
-
-	std::cout << NormalPatientList.count << "NP requests: ";
-	NormalPatientList.print();
-
-	std::cout << "==============" << "       " << "Hospital #" << id << " " << " end " << "       " << "==============" << std::endl;
+	return NormalPatientList;
 }
 
+LinkedQueue<Patient*> Hospital::getSPatientList()
+{
+	return SpecialPatientList;
+}
 
-
+priQueue<Patient*> Hospital::getEPatientList()
+{
+	return EmergencyPatientList;
+}
 
 bool Hospital::Check_EmergencyList()
 {
@@ -170,7 +165,6 @@ bool Hospital::Check_NormalList()
 	return NormalPatientList.count;
 }
 
-
 int Hospital::Check_ScarList()
 {
 	return SpecialCarList.count;
@@ -180,9 +174,6 @@ int Hospital::Check_NcarList()
 {
 	return NormalCarList.count;
 }
-
-
-
 
 void Hospital::addNcar(Car* car)
 {
@@ -195,6 +186,46 @@ void Hospital::addScar(Car* car)
 {
 	SpecialCarList.enqueue(car);
 }
+
+//void Hospital::Assign_EP(Patient* patient)
+//{
+//	if (NormalCarList.count != 0)
+//	{
+//		Car* Ntemp = removeNcar();                
+//		Ntemp->setStatus(Assigned);
+//		Ntemp->setAssignedPatient(patient);
+//	}
+//	else if (SpecialCarList.count != 0)
+//	{
+//		Car* Stemp = removeScar();
+//		Stemp->setStatus(Assigned);
+//		Stemp->setAssignedPatient(patient);
+//	}
+//	else
+//	{
+//		//Assign Patient to another hospital (bonus)
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+//}
+//void Hospital::Assign_SP(Patient* patient)
+//{
+//
+//}
+//void Hospital::Assign_NP(Patient* patient)
+//{
+//
+//
+//}
+
 
 std::ostream& operator<<(std::ostream& out, Hospital& hospital)
 {

@@ -28,24 +28,17 @@ void UI::printSimStart()
 		delay(3);
 		clearConcsole();
 
-		// Loop to print each timestep
-		std::cout << "Current Timestep: " << orgPtr->getTimestep() << std::endl;
-			// Loop to print each hospital --> e3mel func esmaha print current timestep w 7otaha gowa el loop ashal
-		std::cin.ignore();
-			for (int i = 0; i < orgPtr->getNumofHospitals(); i++)
-			{
-				hospitalPtr[i].printHosptial();
-				std::cout << "Press Enter to display the next hospital data." << std::endl;
-				std::cin.get();
-			}
-			//std::cout << "--------------------------------------------------" << std::endl;
-			//std::cout << orgPtr->getCurrentOutCars() << " ==> " << "Out Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
-			//std::cout << orgPtr->getCurrentBackCars() << " <== " << "Back Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
-			//
-			//std::cout << "--------------------------------------------------" << std::endl;
-			//std::cout << orgPtr->getCurrentFinished() << " Finished Patients: "; 
-			//orgPtr->printFinishedList();
-			return;
+
+		//std::cin.ignore();
+		///// loop le7ad ma elsimulation ye5las --> elhowa lama a5er hospital yewsal lel finished patient list
+		////{
+		//std::cout << "Current Timestep: " << orgPtr->getTimestep() << std::endl;
+		//printTimeStep();
+		//std::cout << "Press Enter to display the next timestep." << std::endl;
+		//std::cin.get();
+		////}
+
+		return;
 	}
 
 	if (mode == 2)
@@ -74,6 +67,46 @@ void UI::printSimStart()
 		std::cout << "Simulation ends, Output File created --> outputfile.txt" << std::endl;
 		return;
 	}
+}
+
+void UI::printTimeStep()
+{
+	/// Format of 1 timestep
+	std::cin.ignore();
+	for (int i = 0; i < orgPtr->getNumofHospitals(); i++)
+	{
+		printHospital(hospitalPtr[i]);
+		std::cout << "-----------------------------------------------------------" << std::endl;
+		std::cout << orgPtr->getCurrentOutCars() << " ==> " << "Out Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
+		std::cout << orgPtr->getCurrentBackCars() << " <== " << "Back Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
+
+		std::cout << orgPtr->getCurrentFinished() << " Finished Patients: ";
+		orgPtr->printFinishedList();
+		std::cout << "-----------------------------------------------------------" << std::endl;
+
+		std::cout << "Press Enter to display the next hospital data." << std::endl;
+		std::cin.get();
+	}
+}
+
+void UI::printHospital(Hospital hospitalToPrint)
+{
+	/// Format of 1 Hospital
+	std::cout << "==============" << "       " << "Hospital #" << hospitalToPrint.getID() << " " << "start" << "       " << "==============" << std::endl;
+
+	std::cout << hospitalToPrint.getEPatientList().count << " EP requests: ";
+	hospitalToPrint.getEPatientList().print();
+	std::cout << std::endl;
+
+	std::cout << hospitalToPrint.getSPatientList().count << " SP requests: ";
+	hospitalToPrint.getSPatientList().print();
+	std::cout << std::endl;
+
+	std::cout << hospitalToPrint.getNPatientList().count << " NP requests: ";
+	hospitalToPrint.getNPatientList().print();
+	std::cout << std::endl;
+
+	std::cout << "==============" << "       " << "Hospital #" << hospitalToPrint.getID() << " " << " end " << "       " << "==============" << std::endl;
 }
 
 void UI::delay(int delayInSeconds)

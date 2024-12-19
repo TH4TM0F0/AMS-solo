@@ -19,13 +19,13 @@ public:
 
 	/// Printing Funcs
 	void printSimStart();
-	
-	/// Delay Func 
-	void delay(int delayInSeconds);
+	void printTimeStep();
+	void printHospital(Hospital hospitalToPrint);
 
 	/// Extra Funcs
-	void clearConcsole();
-	void printaMSG(std::string message);
+	void clearConcsole();							/// ==> To clear the console when needed
+	void printaMSG(std::string message);			/// ==> to print a specific msg when needed
+	void delay(int delayInSeconds);					/// ==> to delay for a certain time
 
 	
 };

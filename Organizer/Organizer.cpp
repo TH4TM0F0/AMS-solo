@@ -48,6 +48,8 @@ void Organizer::loadInputFile()
 		for (int i = 0; i < numofHospitals; i++)
 		{ 
 			fin >> numofScars >> numofNcars;
+			totalnumofSC += numofScars;
+			totalnumofNC += numofNcars;
 
 			/// setting unique ids for each hospital
 			hospitalList[i].setID(i + 1);
@@ -88,6 +90,19 @@ void Organizer::loadInputFile()
 			tempPatientPtr->setDistance(tempPatientdist);
 			tempPatientPtr->setSeverity(tempPatientSeverity);
 
+			if (tempPatienttype == "EP")
+			{
+				totalnumofEP++;
+			}
+			if (tempPatienttype == "SP")
+			{
+				totalnumofSP++;
+			}
+			if (tempPatienttype == "NP")
+			{
+				totalnumofNP++;
+			}
+
 			allRequests.enqueue(tempPatientPtr);
 		}
 
@@ -113,10 +128,39 @@ void Organizer::loadInputFile()
 			//tempPatientPtr->setNearestHospitalID(tempPatienthospid); --> hab2a abos 3aleeha fi PH2
 			//tempPatientPtr->setDistance(tempPatientdist); --> hab2a abos 3aleeha fi PH2
 			tempPatientPtr->setSeverity(0);
+
+			totalnumofNP--;
+
 			cancelledRequests.enqueue(tempPatientPtr);
 		}
 	}
 	fin.close();
+}
+
+void Organizer::startsim()
+{
+	/// start with loading data from the input file
+	loadInputFile();
+	
+	/// then assign all requests to their related hospitals
+	// assignPatientstotheirrelatedhospitals();
+
+
+	/// main loop 
+	while (!SimEnded())
+	{
+		// do smthg
+
+
+
+		 
+		// increment the timestep at the end of each loop
+		incrementTimestep();
+	}
+
+	/// end with creating the output file
+	createOutputFile();
+
 }
 
 void Organizer::AddOutCars(Car* car)
@@ -154,11 +198,26 @@ void Organizer::createOutputFile()
 			<< std::endl;
 		/// Header Row of Output file is created
 		//for (int i = 0; i < allRequests.count )
+		/*{
 
+		}*/
+		fout << "Patients: " << allRequests.count - cancelledRequests.count << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
+			<< "Hospitals = " << numofHospitals << std::endl
+			<< "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
+			<< "Average Wait Time = " /* << rakam to be calculated */ << std::endl
+			<< "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
+			<< "Average Busy Time = " /*rakam */ << std::endl
+			<< "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
 	}
 
-
+	// close the file 
 	fout.close();
+}
+
+bool Organizer::SimEnded()
+{
+	/// true --> simulation ended , false --> simulation completes
+	return finishedList.count == allRequests.count - cancelledRequests.count;
 }
 
 int Organizer::getNumofHospitals()
@@ -210,4 +269,18 @@ void Organizer::OutCarFailureAction(Car* car)
 }
 
 
+
+bool Organizer:: moveCarFromOutToBack() {
+	Car* car;
+	int pri;
+	//Dequeue car from OUT (check 3ashan lw kan empty f el awl) 
+	if (outCars.dequeue(car, pri)) {
+		car->setStatus(Assigned); 	// Update the car's status to indicate it has reached its patient
+		backCars.enqueue(car, pri);     // Enqueue the car to the BACK queue
+		return true;
+	}
+	else {
+		return false;
+	}
+}
 

@@ -238,7 +238,7 @@ inline void LinkedQueue<T>::print()
 	Node<T>* iteratorPtr = frontPtr;
 	if (!iteratorPtr)
 	{
-		std::cout << "[EMPTY]";
+		std::cout << "[EMPTY]" << std::endl;
 		return;
 	}
 	std::cout << "[ ";
