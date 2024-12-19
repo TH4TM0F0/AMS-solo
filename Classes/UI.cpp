@@ -115,53 +115,13 @@ void UI::printHospital(Hospital hospitalToPrint)
 
 void UI::printOutCars()
 {
-	priNode<Car*>* iteratorPtr = nullptr;
-	iteratorPtr = orgPtr->getOutCars().getHead();
-	if (!iteratorPtr)
-	{
-		std::cout << "[EMPTY]" << std::endl;
-		return;
-	}
-	std::cout << "[ ";
-	while (iteratorPtr)
-	{
-		int pri;
-		std::cout << iteratorPtr->getItem(pri)->getType() << *(iteratorPtr->getItem(pri))
-				  << "_H" << iteratorPtr->getItem(pri)->getHospitalID()
-				  << "_P" << iteratorPtr->getItem(pri)->getAssignedPatient()->getID();
-		if (iteratorPtr->getNext())
-		{
-			std::cout << " --> ";
-		}
-		iteratorPtr = iteratorPtr->getNext();
-	}
-	std::cout << " ]" << std::endl;
+	orgPtr->printOut();
 	return;
 }
 
 void UI::printBackCars()
 {
-	priNode<Car*>* iteratorPtr = nullptr;
-	iteratorPtr = orgPtr->getBackCars().getHead();
-	if (!iteratorPtr)
-	{
-		std::cout << "[EMPTY]" << std::endl;
-		return;
-	}
-	std::cout << "[ ";
-	while (iteratorPtr)
-	{
-		int pri;
-		std::cout << iteratorPtr->getItem(pri)->getType() << *(iteratorPtr->getItem(pri))
-			<< "_H" << iteratorPtr->getItem(pri)->getHospitalID()
-			<< "_P" << iteratorPtr->getItem(pri)->getAssignedPatient()->getID();
-		if (iteratorPtr->getNext())
-		{
-			std::cout << " --> ";
-		}
-		iteratorPtr = iteratorPtr->getNext();
-	}
-	std::cout << " ]" << std::endl;
+	orgPtr->printBackCars();
 	return;
 }
 
@@ -181,4 +141,3 @@ void UI::printaMSG(std::string message)
 {
 	std::cout << message << std::endl;
 }
-
