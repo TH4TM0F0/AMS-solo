@@ -92,22 +92,22 @@ int main()
 
 	//2.dequeue this car from the list and enqueue in the out cars list 
 	
-	Organizer* org = new Organizer;
-	org->loadInputFile();
-	UI ui(org);
-	Patient* p2 = new Patient(202, "EP", 3, 1, 200, 6);
-	Patient* p3 = new Patient(559, "EP", 3, 1, 200, 6);
-	Car* c2 = new Car(2, "SC", 100, Ready, 1, p2);
-	Car* c3 = new Car(3, "NC", 100, Ready, 4, p3);
-	org->AddBackCars(c2);
-	org->AddOutCars(c2);
-	org->AddOutCars(c3);
-	Hospital* h = org->getHospitalList();
-	h[1].addEpatient(p2);
-	h[1].addEpatient(p3);
-	//ui.printHospital(h[1]);
-	org->printa();
-	h[1].getEPatientList().print();
+	//Organizer* org = new Organizer;
+	//org->loadInputFile();
+	//UI ui(org);
+	//Patient* p2 = new Patient(202, "EP", 3, 1, 200, 6);
+	//Patient* p3 = new Patient(559, "EP", 3, 1, 200, 6);
+	//Car* c2 = new Car(2, "SC", 100, Ready, 1, p2);
+	//Car* c3 = new Car(3, "NC", 100, Ready, 4, p3);
+	//org->AddBackCars(c2);
+	//org->AddOutCars(c2);
+	//org->AddOutCars(c3);
+	//Hospital* h = org->getHospitalList();
+	//h[1].addEpatient(p2);
+	//h[1].addEpatient(p3);
+	////ui.printHospital(h[1]);
+	//org->printa();
+	//h[1].getEPatientList().print();
 	/*h[1].getEPatientList().print();
 	org->AddFinishedList(p2);
 	org->getFinishedList().print();*/
@@ -123,12 +123,24 @@ int main()
 	//org.printa();
 	/*org->printOutCars();
 	org->printBackCars();*/
+
 	//Test of (move Car From Out To Back)
-	/* Patient* p2 = new Patient(2, "EP", 3, 1, 200, 6);
+	/*Organizer* org= new Organizer();
+	Patient* p2 = new Patient(2, "EP", 3, 1, 200, 6);
 	Car* c2 = new Car(2, "SC", 100, Ready, 1, p2);
-	org.AddOutCars(c2);
-	org.moveCarFromOutToBack();
-	org.printaykhara(); */
+	org->AddOutCars(c2);
+	org->moveCarFromOutToBack();
+	org->printbackkk();*/
+
+Organizer* org = new Organizer();
+Patient* p2 = new Patient(2, "EP", 3, 1, 200, 6);
+Car* c2 = new Car(2, "SC", 100, Ready, 1, p2);
+Hospital* H = new Hospital();
+
+org->CarFreeToOut(p2, );
+
+
+
 }
 
 

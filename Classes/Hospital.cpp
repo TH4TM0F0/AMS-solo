@@ -137,6 +137,18 @@ Car* Hospital::removeScar()
 	return removedCar;
 }
 
+LinkedQueue<Car*> Hospital::getNormalCarList()
+{
+	return NormalCarList;
+}
+
+LinkedQueue<Car*> Hospital::getSpecialCarList()
+{
+	return SpecialCarList;
+}
+
+
+
 DerivedQueue<Patient*> Hospital::getNPatientList()
 {
 	return NormalPatientList;

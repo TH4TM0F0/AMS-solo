@@ -89,6 +89,9 @@ public:
 
 	void AddBackCars(Car* car);
 
+	
+
+
 	void AddFinishedList(Patient* patient);
 
 	void createOutputFile();
@@ -98,6 +101,7 @@ public:
 	/// Extra Funcs
 	int getNumofHospitals();
 	Hospital* getHospitalList();
+	Hospital hospital;
 	/*int getCurrentOutCars();
 	int getCurrentBackCars();
 	int getCurrentFinished();*/
@@ -106,6 +110,7 @@ public:
 	DerivedPriQueue<Car*> getOutCars();
 	priQueue<Car*> getBackCars();
 	LinkedQueue<Patient*> getFinishedList();
+	priQueue<Patient*> emergencyPatientList = hospital.getEPatientList();
 
 	void printOut()
 	{
@@ -163,11 +168,15 @@ public:
 	void printbackkk() {
 		backCars.print();
 	}
-	//Car from out to Back
+
+
+	//Car from Free to OUT
+	void CarFreeToOut(Patient* Patient, Hospital* hospital);
+	//Car from OUT to Back
 	bool moveCarFromOutToBack();
-
-
 	
+
+
 	void printa()
 	{
 		outCars.print();

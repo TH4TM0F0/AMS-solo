@@ -283,14 +283,111 @@ void Organizer::OutCarFailureAction(Car* car)
 	return;
 }
 
+/*
+void Organizer::CarFreeToOut(Hospital& hospital) {
+	// Access the EmergencyPatientList using the getter
+	priQueue<Patient*> emergencyPatientList = hospital.getEmergencyPatientList();
+
+	// Priority 1: Handle Emergency Patients (EP)
+	if (emergencyPatientList && !emergencyPatientList->isEmpty()) {
+		Patient* epPatient = emergencyPatientList->peekFront();
+		Car* selectedCar = nullptr;
+
+		if (!NormalCarList.isEmpty()) {
+			selectedCar = NormalCarList.dequeue();
+		}
+		else if (!SpecialCarList.isEmpty()) {
+			selectedCar = SpecialCarList.dequeue();
+		}
+
+		if (selectedCar) {
+			// Assign car to patient
+			selectedCar->assignPatient(epPatient);
+			epPatient->setRequestTime(getTimestep());
+			emergencyPatientList->dequeue(); // Remove the patient from the list
+
+			// Calculate travel time and update car state
+			int travelTime = epPatient->getDistance() / selectedCar->getSpeed();
+			selectedCar->setDispatchTime(getTimestep() + travelTime);
+			selectedCar->setStatus(CarStatus::Assigned);
+
+			// Add to outCars priority queue
+			outCars.enqueue(selectedCar, selectedCar->getDispatchTime());
+		}
+		return; // Exit after handling one EP
+	}
+
+	// Priority 2: Handle Special Patients (SP)
+	if (!SpecialPatientList.isEmpty() && !SpecialCarList.isEmpty()) {
+		Patient* spPatient = SpecialPatientList.dequeue();
+		Car* selectedCar = SpecialCarList.dequeue();
+
+		// Assign car to patient
+		selectedCar->assignPatient(spPatient);
+		spPatient->setRequestTime(getTimestep());
+
+		// Calculate travel time and update car state
+		int travelTime = spPatient->getDistance() / selectedCar->getSpeed();
+		selectedCar->setDispatchTime(getTimestep() + travelTime);
+		selectedCar->setStatus(CarStatus::Assigned);
+
+		// Add to outCars priority queue
+		outCars.enqueue(selectedCar, selectedCar->getDispatchTime());
+		return;
+	}
+
+	// Priority 3: Handle Normal Patients (NP)
+	if (!NormalPatientList.isEmpty() && !NormalCarList.isEmpty()) {
+		Patient* npPatient = NormalPatientList.dequeue();
+		Car* selectedCar = NormalCarList.dequeue();
+
+		// Assign car to patient
+		selectedCar->assignPatient(npPatient);
+		npPatient->setRequestTime(getTimestep());
+
+		// Calculate travel time and update car state
+		int travelTime = npPatient->getDistance() / selectedCar->getSpeed();
+		selectedCar->setDispatchTime(getTimestep() + travelTime);
+		selectedCar->setStatus(CarStatus::Assigned);
+
+		// Add to outCars priority queue
+		outCars.enqueue(selectedCar, selectedCar->getDispatchTime());
+	}
+}
+*/
 
 
-bool Organizer:: moveCarFromOutToBack() {
+
+
+void Organizer::CarFreeToOut(Patient* Patient, Hospital* hospital)
+{
+	Car* car;
+	
+	if (Patient->getType() == "NP") {
+		hospital->getNormalCarList().dequeue(car); 
+		outCars.enqueue(car, 0);
+	} else if (Patient->getType() == "SP") {
+		hospital->getSpecialCarList().dequeue(car);
+		outCars.enqueue(car, 0);
+	}else if (Patient->getType() == "EP") {
+		if (hospital->getNormalCarList().isEmpty()) {
+			hospital->getSpecialCarList().dequeue(car);
+			outCars.enqueue(car, 0);
+		}
+		else {
+			hospital->getNormalCarList().dequeue(car);
+			outCars.enqueue(car, 0);
+		}
+	}
+	car->setStatus(Assigned);
+}
+
+bool Organizer::moveCarFromOutToBack() {
 	Car* car;
 	int pri;
 	//Dequeue car from OUT (check 3ashan lw kan empty f el awl) 
 	if (outCars.dequeue(car, pri)) {
-		car->setStatus(Assigned); 	// Update the car's status to indicate it has reached its patient
+		car->setStatus(Loaded); 	// Update the car's status to indicate it has reached its patient
 		backCars.enqueue(car, pri);     // Enqueue the car to the BACK queue
 		return true;
 	}
@@ -298,4 +395,6 @@ bool Organizer:: moveCarFromOutToBack() {
 		return false;
 	}
 }
+
+
 
