@@ -1,5 +1,6 @@
 #include "Car.h"
 
+
 Car::Car()
 {
 
@@ -112,51 +113,34 @@ int Car::getDropoffTime()
 
 //void Car::setAssignmentTime()
 //{
-//
+//	Organizer o;
+//	assignmentTime = o.getTimestep();
 //}
-//void Car::setPickupTime()
+//
+//void Car::setPickupTime(int assignmentTime)
 //{
-//
+//	pickupTime = assignmentTime + (assignedPatient->getDistance() / getSpeed());
 //}
+//
 //void Car::setPatientWaitingTime()
 //{
-//
+//	patientwaitingTime = pickupTime - requestTime;
 //}
+//
 //void Car::setDropoffTime()
 //{
-//
+//	dropoffTime = pickupTime + (assignedPatient->getDistance() / getSpeed());
 //}
+//
 //void Car::setCarBusyTime()
 //{
-//
+//	carbusyTime = dropoffTime - assignmentTime;
 //}
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//
+//int Car::getCarBusyTime()
+//{
+//	return carbusyTime;
+//}
 
 std::ostream& operator<<(std::ostream& out, Car& car)
 {

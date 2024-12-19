@@ -68,13 +68,13 @@ void Hospital::assignCarsList(int startingid)
 	///		starting id --> starting id (passed parameter)
 	///		ending id --> num of scars + starting of scars
 	int scarsinitialID = startingid;
-	int scarsendingID = numofScars + startingid + 1;
+	int scarsendingID = numofScars + startingid;
 
 	/// ncars list
 	///		starting id --> scar ending id + 1
 	///		ending id --> num of ncars + starting of ncars
 	int ncarsinitialID = scarsendingID;
-	int ncarsendingID = numofScars + ncarsinitialID + 1;
+	int ncarsendingID = numofNcars + ncarsinitialID;
 
 
 	/// Scars list
@@ -126,7 +126,6 @@ Patient* Hospital::removeEpatient()
 	return removedPatient;
 }
 
-
 Car* Hospital::removeNcar()
 {
 	NormalCarList.dequeue(removedCar);
@@ -153,9 +152,6 @@ priQueue<Patient*> Hospital::getEPatientList()
 	return EmergencyPatientList;
 }
 
-
-
-
 bool Hospital::Check_EmergencyList()
 {
 	return EmergencyPatientList.count;
@@ -169,7 +165,6 @@ bool Hospital::Check_NormalList()
 	return NormalPatientList.count;
 }
 
-
 int Hospital::Check_ScarList()
 {
 	return SpecialCarList.count;
@@ -179,9 +174,6 @@ int Hospital::Check_NcarList()
 {
 	return NormalCarList.count;
 }
-
-
-
 
 void Hospital::addNcar(Car* car)
 {
@@ -194,6 +186,46 @@ void Hospital::addScar(Car* car)
 {
 	SpecialCarList.enqueue(car);
 }
+
+//void Hospital::Assign_EP(Patient* patient)
+//{
+//	if (NormalCarList.count != 0)
+//	{
+//		Car* Ntemp = removeNcar();                
+//		Ntemp->setStatus(Assigned);
+//		Ntemp->setAssignedPatient(patient);
+//	}
+//	else if (SpecialCarList.count != 0)
+//	{
+//		Car* Stemp = removeScar();
+//		Stemp->setStatus(Assigned);
+//		Stemp->setAssignedPatient(patient);
+//	}
+//	else
+//	{
+//		//Assign Patient to another hospital (bonus)
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+//}
+//void Hospital::Assign_SP(Patient* patient)
+//{
+//
+//}
+//void Hospital::Assign_NP(Patient* patient)
+//{
+//
+//
+//}
+
 
 std::ostream& operator<<(std::ostream& out, Hospital& hospital)
 {

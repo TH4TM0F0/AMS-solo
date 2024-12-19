@@ -126,4 +126,9 @@ public:
         std::cout << " ]" << std::endl;
 		return;
     }
+
+    priNode<T>* getHead()
+    {
+        return head;
+    }
 };

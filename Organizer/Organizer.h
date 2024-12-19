@@ -32,6 +32,14 @@ private:
 	int cancelledPatientid = 0;
 	int cancelledPatienttimestep = 0;
 
+	/// counters for patients by type --> to be used in the output file
+	int totalnumofEP = 0;
+	int totalnumofSP = 0;
+	int totalnumofNP = 0;
+	int totalnumofCancelledNP = 0;
+	int totalnumofSC = 0;
+	int totalnumofNC = 0;
+
 	/// Lists
 	LinkedQueue<Patient*> allRequests;										/// Queue for all patient requests
 	LinkedQueue<Patient*> cancelledRequests;								/// Queue for all cancelled requests	
@@ -90,10 +98,63 @@ public:
 	/// Extra Funcs
 	int getNumofHospitals();
 	Hospital* getHospitalList();
-	int getCurrentOutCars();
+	/*int getCurrentOutCars();
 	int getCurrentBackCars();
-	int getCurrentFinished();
-	void printFinishedList();
+	int getCurrentFinished();*/
+	//void printFinishedList(); ==> to be deleted
+	/// Formatted print --> for out & back cars lists
+	DerivedPriQueue<Car*> getOutCars();
+	priQueue<Car*> getBackCars();
+	LinkedQueue<Patient*> getFinishedList();
+
+	void printOut()
+	{
+		priNode<Car*>* iteratorPtr = nullptr;
+		iteratorPtr = outCars.getHead();
+		if (!iteratorPtr)
+		{
+			std::cout << "[EMPTY]" << std::endl;
+			return;
+		}
+		std::cout << "[ ";
+		while (iteratorPtr)
+		{
+			int pri;
+			std::cout << iteratorPtr->getItem(pri)->getType() << *(iteratorPtr->getItem(pri))
+				<< "_H" << iteratorPtr->getItem(pri)->getHospitalID()
+				<< "_P" << iteratorPtr->getItem(pri)->getAssignedPatient()->getID();
+			if (iteratorPtr->getNext())
+			{
+				std::cout << " --> ";
+			}
+			iteratorPtr = iteratorPtr->getNext();
+		}
+		std::cout << " ]" << std::endl;
+	}
+	void printBackCars()
+	{
+		priNode<Car*>* iteratorPtr = nullptr;
+		iteratorPtr = backCars.getHead();
+		if (!iteratorPtr)
+		{
+			std::cout << "[EMPTY]" << std::endl;
+			return;
+		}
+		std::cout << "[ ";
+		while (iteratorPtr)
+		{
+			int pri;
+			std::cout << iteratorPtr->getItem(pri)->getType() << *(iteratorPtr->getItem(pri))
+				<< "_H" << iteratorPtr->getItem(pri)->getHospitalID()
+				<< "_P" << iteratorPtr->getItem(pri)->getAssignedPatient()->getID();
+			if (iteratorPtr->getNext())
+			{
+				std::cout << " --> ";
+			}
+			iteratorPtr = iteratorPtr->getNext();
+		}
+		std::cout << " ]" << std::endl;
+	}
 
 	void OutCarFailureProbability(Car* car);
 
@@ -107,7 +168,10 @@ public:
 
 
 	
-
+	void printa()
+	{
+		outCars.print();
+	}
 	
 
 };

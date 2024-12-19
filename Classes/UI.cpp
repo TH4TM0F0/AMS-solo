@@ -77,11 +77,15 @@ void UI::printTimeStep()
 	{
 		printHospital(hospitalPtr[i]);
 		std::cout << "-----------------------------------------------------------" << std::endl;
-		std::cout << orgPtr->getCurrentOutCars() << " ==> " << "Out Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
-		std::cout << orgPtr->getCurrentBackCars() << " <== " << "Back Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
 
-		std::cout << orgPtr->getCurrentFinished() << " Finished Patients: ";
-		orgPtr->printFinishedList();
+		std::cout << orgPtr->getOutCars().count << " ==> " << "Out Cars: "; 
+		printOutCars();
+
+		std::cout << orgPtr->getBackCars().count << " <== " << "Back Cars: ";
+		printBackCars();
+
+		std::cout << orgPtr->getFinishedList().count << " Finished Patients: ";
+		orgPtr->getFinishedList().print();
 		std::cout << "-----------------------------------------------------------" << std::endl;
 
 		std::cout << "Press Enter to display the next hospital data." << std::endl;
@@ -109,6 +113,18 @@ void UI::printHospital(Hospital hospitalToPrint)
 	std::cout << "==============" << "       " << "Hospital #" << hospitalToPrint.getID() << " " << " end " << "       " << "==============" << std::endl;
 }
 
+void UI::printOutCars()
+{
+	orgPtr->printOut();
+	return;
+}
+
+void UI::printBackCars()
+{
+	orgPtr->printBackCars();
+	return;
+}
+
 void UI::delay(int delayInSeconds)
 {
 	// Wait for the specified delay
@@ -125,4 +141,3 @@ void UI::printaMSG(std::string message)
 {
 	std::cout << message << std::endl;
 }
-

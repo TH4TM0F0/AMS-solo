@@ -9,5 +9,5 @@ public:
     void cancelRequest(/* Patient* cancelled_Ptr */)
     {
         /// PH2 isa
-    }
+    }   
 };

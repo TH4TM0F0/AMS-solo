@@ -46,6 +46,10 @@ public:
 	int getNumofScars();
 	int getSpeedofNcars();
 	int getSpeedofScars();
+	/// to be used in the UI printing funcs
+	DerivedQueue<Patient*> getNPatientList();
+	LinkedQueue<Patient*> getSPatientList();
+	priQueue<Patient*> getEPatientList();
 
 	// Assign car lists funcs --> used when reading the input file
 	void assignCarsList(int startingid);
@@ -65,10 +69,8 @@ public:
 	Car* removeNcar();
 	Car* removeScar();
 
-	// Print Func --> to be used in the UI class
-	DerivedQueue<Patient*> getNPatientList();
-	LinkedQueue<Patient*> getSPatientList();
-	priQueue<Patient*> getEPatientList();
+	
+	
 
 	// Functions to check if lists within the hospital is Empty 
 
@@ -82,6 +84,12 @@ public:
 	int Check_ScarList();
 	int Check_NcarList();
 
+
+	// Patient Assignment Functions
+
+	//void Assign_EP(Patient* patient);
+	/*void Assign_SP(Patient* patient);
+	void Assign_NP(Patient* patient);*/
 
 
 	// Operator Overloading

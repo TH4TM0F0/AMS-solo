@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include "../Classes/Patient.h"
+
 enum CarStatus
 {
 	Ready = 0,			/// idle case
@@ -37,7 +38,7 @@ public:
 	void setAssignedPatient(Patient* assignedPatient);
 	void setRequestTime(int requestTime);
 	/*void setAssignmentTime();
-	void setPickupTime();
+	void setPickupTime(int assignmentTime);
 	void setPatientWaitingTime();
 	void setDropoffTime();
 	void setCarBusyTime();*/
@@ -54,7 +55,7 @@ public:
 	int getPickupTime();
 	int getPatientWaitingTime();
 	int getDropoffTime();
-	int getCarBusyTime();
+	//int getCarBusyTime();
 
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Car& car);

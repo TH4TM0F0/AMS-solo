@@ -48,6 +48,8 @@ void Organizer::loadInputFile()
 		for (int i = 0; i < numofHospitals; i++)
 		{ 
 			fin >> numofScars >> numofNcars;
+			totalnumofSC += numofScars;
+			totalnumofNC += numofNcars;
 
 			/// setting unique ids for each hospital
 			hospitalList[i].setID(i + 1);
@@ -88,6 +90,19 @@ void Organizer::loadInputFile()
 			tempPatientPtr->setDistance(tempPatientdist);
 			tempPatientPtr->setSeverity(tempPatientSeverity);
 
+			if (tempPatienttype == "EP")
+			{
+				totalnumofEP++;
+			}
+			if (tempPatienttype == "SP")
+			{
+				totalnumofSP++;
+			}
+			if (tempPatienttype == "NP")
+			{
+				totalnumofNP++;
+			}
+
 			allRequests.enqueue(tempPatientPtr);
 		}
 
@@ -113,6 +128,9 @@ void Organizer::loadInputFile()
 			//tempPatientPtr->setNearestHospitalID(tempPatienthospid); --> hab2a abos 3aleeha fi PH2
 			//tempPatientPtr->setDistance(tempPatientdist); --> hab2a abos 3aleeha fi PH2
 			tempPatientPtr->setSeverity(0);
+
+			totalnumofNP--;
+
 			cancelledRequests.enqueue(tempPatientPtr);
 		}
 	}
@@ -135,7 +153,7 @@ void Organizer::startsim()
 
 
 
-
+		 
 		// increment the timestep at the end of each loop
 		incrementTimestep();
 	}
@@ -174,16 +192,25 @@ void Organizer::createOutputFile()
 	if (fout.is_open())
 	{
 		fout << "FT"  /*e3mel beta3et std::setw() w std::setfill()*/
-			<< "PID" /*e3mel beta3et std::setw() w std::setfill()*/
-			<< "QT"  /*e3mel beta3et std::setw() w std::setfill()*/
-			<< "WT"  /*e3mel beta3et std::setw() w std::setfill()*/
-			<< std::endl;
+			 << "PID" /*e3mel beta3et std::setw() w std::setfill()*/
+			 << "QT"  /*e3mel beta3et std::setw() w std::setfill()*/
+			 << "WT"  /*e3mel beta3et std::setw() w std::setfill()*/
+			 << std::endl;
 		/// Header Row of Output file is created
 		//for (int i = 0; i < allRequests.count )
+		/*{
 
+		}*/
+		fout << "Patients: " << allRequests.count - cancelledRequests.count << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
+			 << "Hospitals = " << numofHospitals << std::endl
+			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
+			 << "Average Wait Time = " /* << rakam to be calculated */ << std::endl
+			 << "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
+			 << "Average Busy Time = " /*rakam */ << std::endl
+			 << "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
 	}
 
-
+	// close the file 
 	fout.close();
 }
 
@@ -203,40 +230,57 @@ Hospital* Organizer::getHospitalList()
 	return hospitalList;
 }
 
-int Organizer::getCurrentOutCars()
+//int Organizer::getCurrentOutCars()
+//{
+//	return outCars.count;
+//}
+//
+//int Organizer::getCurrentBackCars()
+//{
+//	return backCars.count;
+//}
+//
+//int Organizer::getCurrentFinished()
+//{
+//	return finishedList.count;
+//}
+//
+//void Organizer::printFinishedList()
+//{
+//	finishedList.print();
+//}
+
+DerivedPriQueue<Car*> Organizer::getOutCars()
 {
-	return outCars.count;
+	return outCars;
 }
 
-int Organizer::getCurrentBackCars()
+priQueue<Car*> Organizer::getBackCars()
 {
-	return backCars.count;
+	return backCars;
 }
 
-int Organizer::getCurrentFinished()
+LinkedQueue<Patient*> Organizer::getFinishedList()
 {
-	return finishedList.count;
-}
-
-void Organizer::printFinishedList()
-{
-	finishedList.print();
+	return finishedList;
 }
 
 
 void Organizer::OutCarFailureProbability(Car* car) // update input file and add failure probability of out cars and load file 
-{                                               // if the random number falls within the range of failure probability ,a car should fail 
-//{
-//	if () {
-//		outCars.dequeue(car);
-//	}
-//
+{     
+	//LinkedQueue<int>queue; 
+	//int FailureProb;                                    // if the random number falls within the range of failure probability ,a car should fail 
+	//if (int x=0) {
+ //       outCars.dequeue(car);
+	//	queue.enqueue(FailureProb);
+	//}
+
 
 }
 
 void Organizer::OutCarFailureAction(Car* car)
 {
-
+	return;
 }
 
 
