@@ -171,10 +171,11 @@ public:
 
 
 	//Car from Free to OUT
-	void CarFreeToOut(Patient* Patient, Hospital* hospital);
+	void moveCarFromFreeToOut(Patient* Patient, Hospital* hospital);
 	//Car from OUT to Back
 	bool moveCarFromOutToBack();
-	
+	//Car from Back to Free
+	void moveCarFromBackToFree(Hospital* hospital); 
 
 
 	void printa()

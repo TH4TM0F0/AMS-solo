@@ -359,7 +359,7 @@ void Organizer::CarFreeToOut(Hospital& hospital) {
 
 
 
-void Organizer::CarFreeToOut(Patient* Patient, Hospital* hospital)
+void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 {
 	Car* car;
 	
@@ -394,6 +394,31 @@ bool Organizer::moveCarFromOutToBack() {
 	else {
 		return false;
 	}
+}
+
+void Organizer::moveCarFromBackToFree(Hospital* hospital)
+{
+	Car* car; 
+	int pri;
+	if (car->getStatus() != Assigned) {  //make sure car is not in OUt State
+		return;
+	}
+
+	if (car->getHospitalID() != hospital->getID()){ //make sure that its Returning the car to it its hospital 
+		return; 
+	}
+
+	if (car->getType() == "NC") {
+		backCars.dequeue(car, pri);
+		hospital->getNormalCarList().enqueue(car);
+	}
+	else if (car->getType() == "SC") {
+		backCars.dequeue(car, pri);
+		hospital->getSpecialCarList().enqueue(car);
+	}
+	car->setStatus(Ready);
+
+
 }
 
 
