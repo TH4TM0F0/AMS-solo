@@ -398,28 +398,27 @@ bool Organizer::moveCarFromOutToBack() {
 
 void Organizer::moveCarFromBackToFree(Hospital* hospital)
 {
-	Car* car; 
+	Car* car = nullptr; 
 	int pri;
+	backCars.dequeue(car, pri);
 	if (car->getStatus() != Assigned) {  //make sure car is not in OUt State
 		return;
 	}
 
-	if (car->getHospitalID() != hospital->getID()) { //make sure that its Returning the car to it its hospital 
-		return;
+	if (car) {
+		int id = car->getHospitalID();
+		string type = car->getType();
+		if (type == "NC") {
+			(hospitalList + id - 1)->addNcar(car); 
+		}
+		else {
+			(hospitalList + id - 1)->addScar(car);
+		}
+		car->setStatus(Ready);
 	}
 	else {
-		if (car->getType() == "NC") {
-			backCars.dequeue(car, pri);
-			hospital->getNormalCarList().enqueue(car);
-		}
-		else if (car->getType() == "SC") {
-			backCars.dequeue(car, pri);
-			hospital->getSpecialCarList().enqueue(car);
-		}
+		return;
 	}
-	car->setStatus(Ready);
-
-
 }
 
 
