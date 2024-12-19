@@ -94,15 +94,15 @@ int main()
 	
 	Organizer org;
 	org.loadInputFile();
-	Hospital* H;
+	/*Hospital* H;
 	H = org.getHospitalList();
 	H->printSClist();
 	H->printNClist();
 	(H + 1)->printSClist();
-	(H + 1)->printNClist();
-	/*UI ui(&org);
-	ui.printSimStart();*/
-	//org.printbackkk();
+	(H + 1)->printNClist();*/
+	UI ui(&org);
+	ui.printTimeStep();
+	/*org.printbackkk();*/
 	
 
 	//Test of (move Car From Out To Back)

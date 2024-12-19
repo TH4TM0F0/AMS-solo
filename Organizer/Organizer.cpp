@@ -230,24 +230,39 @@ Hospital* Organizer::getHospitalList()
 	return hospitalList;
 }
 
-int Organizer::getCurrentOutCars()
+//int Organizer::getCurrentOutCars()
+//{
+//	return outCars.count;
+//}
+//
+//int Organizer::getCurrentBackCars()
+//{
+//	return backCars.count;
+//}
+//
+//int Organizer::getCurrentFinished()
+//{
+//	return finishedList.count;
+//}
+//
+//void Organizer::printFinishedList()
+//{
+//	finishedList.print();
+//}
+
+DerivedPriQueue<Car*> Organizer::getOutCars()
 {
-	return outCars.count;
+	return outCars;
 }
 
-int Organizer::getCurrentBackCars()
+priQueue<Car*> Organizer::getBackCars()
 {
-	return backCars.count;
+	return backCars;
 }
 
-int Organizer::getCurrentFinished()
+LinkedQueue<Patient*> Organizer::getFinishedList()
 {
-	return finishedList.count;
-}
-
-void Organizer::printFinishedList()
-{
-	finishedList.print();
+	return finishedList;
 }
 
 

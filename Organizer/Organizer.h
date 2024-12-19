@@ -98,10 +98,15 @@ public:
 	/// Extra Funcs
 	int getNumofHospitals();
 	Hospital* getHospitalList();
-	int getCurrentOutCars();
+	/*int getCurrentOutCars();
 	int getCurrentBackCars();
-	int getCurrentFinished();
-	void printFinishedList();
+	int getCurrentFinished();*/
+	//void printFinishedList(); ==> to be deleted
+	/// Formatted print --> for out & back cars lists
+	DerivedPriQueue<Car*> getOutCars();
+	priQueue<Car*> getBackCars();
+	LinkedQueue<Patient*> getFinishedList();
+
 
 	void OutCarFailureProbability(Car* car);
 

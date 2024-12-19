@@ -77,11 +77,15 @@ void UI::printTimeStep()
 	{
 		printHospital(hospitalPtr[i]);
 		std::cout << "-----------------------------------------------------------" << std::endl;
-		std::cout << orgPtr->getCurrentOutCars() << " ==> " << "Out Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
-		std::cout << orgPtr->getCurrentBackCars() << " <== " << "Back Cars: "  /*e3mel print bel format beta3hom S13_H2_P2*/ << std::endl;
 
-		std::cout << orgPtr->getCurrentFinished() << " Finished Patients: ";
-		orgPtr->printFinishedList();
+		std::cout << orgPtr->getOutCars().count << " ==> " << "Out Cars: "; 
+		printOutCars();
+
+		std::cout << orgPtr->getBackCars().count << " <== " << "Back Cars: ";
+		printBackCars();
+
+		std::cout << orgPtr->getFinishedList().count << " Finished Patients: ";
+		orgPtr->getFinishedList().print();
 		std::cout << "-----------------------------------------------------------" << std::endl;
 
 		std::cout << "Press Enter to display the next hospital data." << std::endl;
@@ -107,6 +111,58 @@ void UI::printHospital(Hospital hospitalToPrint)
 	std::cout << std::endl;
 
 	std::cout << "==============" << "       " << "Hospital #" << hospitalToPrint.getID() << " " << " end " << "       " << "==============" << std::endl;
+}
+
+void UI::printOutCars()
+{
+	priNode<Car*>* iteratorPtr = nullptr;
+	iteratorPtr = orgPtr->getOutCars().getHead();
+	if (!iteratorPtr)
+	{
+		std::cout << "[EMPTY]" << std::endl;
+		return;
+	}
+	std::cout << "[ ";
+	while (iteratorPtr)
+	{
+		int pri;
+		std::cout << iteratorPtr->getItem(pri)->getType() << *(iteratorPtr->getItem(pri))
+				  << "_H" << iteratorPtr->getItem(pri)->getHospitalID()
+				  << "_P" << iteratorPtr->getItem(pri)->getAssignedPatient()->getID();
+		if (iteratorPtr->getNext())
+		{
+			std::cout << " --> ";
+		}
+		iteratorPtr = iteratorPtr->getNext();
+	}
+	std::cout << " ]" << std::endl;
+	return;
+}
+
+void UI::printBackCars()
+{
+	priNode<Car*>* iteratorPtr = nullptr;
+	iteratorPtr = orgPtr->getBackCars().getHead();
+	if (!iteratorPtr)
+	{
+		std::cout << "[EMPTY]" << std::endl;
+		return;
+	}
+	std::cout << "[ ";
+	while (iteratorPtr)
+	{
+		int pri;
+		std::cout << iteratorPtr->getItem(pri)->getType() << *(iteratorPtr->getItem(pri))
+			<< "_H" << iteratorPtr->getItem(pri)->getHospitalID()
+			<< "_P" << iteratorPtr->getItem(pri)->getAssignedPatient()->getID();
+		if (iteratorPtr->getNext())
+		{
+			std::cout << " --> ";
+		}
+		iteratorPtr = iteratorPtr->getNext();
+	}
+	std::cout << " ]" << std::endl;
+	return;
 }
 
 void UI::delay(int delayInSeconds)

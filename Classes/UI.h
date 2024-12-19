@@ -21,6 +21,10 @@ public:
 	void printSimStart();
 	void printTimeStep();
 	void printHospital(Hospital hospitalToPrint);
+	void printOutCars();
+	void printBackCars();
+	
+
 
 	/// Extra Funcs
 	void clearConcsole();							/// ==> To clear the console when needed
