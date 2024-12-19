@@ -1,4 +1,5 @@
 #include "Car.h"
+#include "../Organizer/Organizer.h"
 
 Car::Car()
 {
@@ -110,26 +111,36 @@ int Car::getDropoffTime()
 //	/// to be considered in PH2
 //}
 
-//void Car::setAssignmentTime()
-//{
-//
-//}
-//void Car::setPickupTime()
-//{
-//
-//}
-//void Car::setPatientWaitingTime()
-//{
-//
-//}
-//void Car::setDropoffTime()
-//{
-//
-//}
-//void Car::setCarBusyTime()
-//{
-//
-//}
+void Car::setAssignmentTime()
+{
+	Organizer o;
+	assignmentTime = o.getTimestep();
+}
+
+void Car::setPickupTime(int assignmentTime)
+{
+	pickupTime = assignmentTime + (assignedPatient->getDistance() / getSpeed());
+}
+
+void Car::setPatientWaitingTime()
+{
+	patientwaitingTime = pickupTime - requestTime;
+}
+
+void Car::setDropoffTime()
+{
+	dropoffTime = pickupTime + (assignedPatient->getDistance() / getSpeed());
+}
+
+void Car::setCarBusyTime()
+{
+	carbusyTime = dropoffTime - assignmentTime;
+}
+
+int Car::getCarBusyTime()
+{
+	return carbusyTime;
+}
 	
 
 
