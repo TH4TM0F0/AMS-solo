@@ -82,19 +82,10 @@ public:
 	int Check_ScarList();
 	int Check_NcarList();
 
-	void printSClist()
-	{
-		SpecialCarList.print();
-	}
-	void printNClist()
-	{
-		NormalCarList.print();
-	}
-
 
 	// Patient Assignment Functions
 
-	void Assign_EP(Patient* patient);
+	//void Assign_EP(Patient* patient);
 	/*void Assign_SP(Patient* patient);
 	void Assign_NP(Patient* patient);*/
 

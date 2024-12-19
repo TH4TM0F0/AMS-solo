@@ -37,11 +37,11 @@ public:
 	void setHospitalID(int hospitalId);
 	void setAssignedPatient(Patient* assignedPatient);
 	void setRequestTime(int requestTime);
-	void setAssignmentTime();
+	/*void setAssignmentTime();
 	void setPickupTime(int assignmentTime);
 	void setPatientWaitingTime();
 	void setDropoffTime();
-	void setCarBusyTime();
+	void setCarBusyTime();*/
 
 	// Getters
 	int getID();
@@ -55,7 +55,7 @@ public:
 	int getPickupTime();
 	int getPatientWaitingTime();
 	int getDropoffTime();
-	int getCarBusyTime();
+	//int getCarBusyTime();
 
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Car& car);
