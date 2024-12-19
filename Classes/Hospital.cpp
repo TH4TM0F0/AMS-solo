@@ -187,40 +187,36 @@ void Hospital::addScar(Car* car)
 	SpecialCarList.enqueue(car);
 }
 
-//void Hospital::Assign_EP(Patient* patient)
-//{
-//	if (NormalCarList.count != 0)
-//	{
-//		Car* Ntemp = removeNcar();                
-//		Ntemp->setStatus(Assigned);
-//		Ntemp->setAssignedPatient(patient);
-//	}
-//	else if (SpecialCarList.count != 0)
-//	{
-//		Car* Stemp = removeScar();
-//		Stemp->setStatus(Assigned);
-//		Stemp->setAssignedPatient(patient);
-//	}
-//	else
-//	{
-//		//Assign Patient to another hospital (bonus)
-//	}
-//
-//
-//
-//
-//
-//
-//
-//
-//
+Car* Hospital::Assign_EP(Patient* patient)
+{
+	if (NormalCarList.count != 0)
+	{
+		Car* Ntemp = removeNcar();                
+		Ntemp->setStatus(Assigned);
+		Ntemp->setAssignedPatient(patient);
+		return Ntemp;
+		
+	}
+	else if (SpecialCarList.count != 0)
+	{
+		Car* Stemp = removeScar();
+		Stemp->setStatus(Assigned);
+		Stemp->setAssignedPatient(patient);
+		return Stemp;
+	}
+	else
+	{
+		//Assign Patient to another hospital (bonus)
+	}
 
-//}
-//void Hospital::Assign_SP(Patient* patient)
+}
+
+
+//Car* Hospital::Assign_SP(Patient* patient)
 //{
 //
 //}
-//void Hospital::Assign_NP(Patient* patient)
+//Car* Hospital::Assign_NP(Patient* patient)
 //{
 //
 //

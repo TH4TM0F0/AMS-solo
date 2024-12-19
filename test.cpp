@@ -97,17 +97,59 @@ int main()
 	UI ui(org);
 	Patient* p2 = new Patient(202, "EP", 3, 1, 200, 6);
 	Patient* p3 = new Patient(559, "EP", 3, 1, 200, 6);
-	Car* c2 = new Car(2, "SC", 100, Ready, 1, p2);
-	Car* c3 = new Car(3, "NC", 100, Ready, 4, p3);
-	org->AddBackCars(c2);
+	Patient* p4 = new Patient(222, "Ep", 3, 1, 250, 9);
+	Car* c2 = new Car(2, "SC", 100, Ready, 1, nullptr);
+	Car* c3 = new Car(3, "NC", 100, Ready, 1, nullptr);
+	Car* c4 = new Car(1, "NC", 100, Ready, 1, nullptr);
+
+	/*org->AddBackCars(c2);
 	org->AddOutCars(c2);
-	org->AddOutCars(c3);
+	org->AddOutCars(c3);*/
+
 	Hospital* h = org->getHospitalList();
 	h[1].addEpatient(p2);
 	h[1].addEpatient(p3);
+	h[1].addEpatient(p4);
+	h[1].addNcar(c3);
+	h[1].addScar(c2);
+	h[1].addNcar(c4);
+
+
+	   
+	h[1].getEPatientList().print();   //222-->559-->202
+
+	
+
+	org->AddOutCars(h[1].Assign_EP(p2));
+	org->AddOutCars(h[1].Assign_EP(p3));
+	org->AddOutCars(h[1].Assign_EP(p4));
+	
+
+
+
+
+	org->printa();  //3-->2
+
+
+
+
+
 	//ui.printHospital(h[1]);
-	org->printa();
-	h[1].getEPatientList().print();
+
+
+
+
+
+
+
+
+
+
+
+
+	//org->printa();
+	//h[1].getEPatientList().print();
+
 	/*h[1].getEPatientList().print();
 	org->AddFinishedList(p2);
 	org->getFinishedList().print();*/
