@@ -90,7 +90,14 @@ public:
 	void Assign_NP(Patient* patient);*/
 
 
-
+	void printNClist()
+	{
+		NormalCarList.print();
+	}
+	void printSClist()
+	{
+		SpecialCarList.print();
+	}
 
 
 	// Operator Overloading

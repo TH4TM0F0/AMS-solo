@@ -68,13 +68,13 @@ void Hospital::assignCarsList(int startingid)
 	///		starting id --> starting id (passed parameter)
 	///		ending id --> num of scars + starting of scars
 	int scarsinitialID = startingid;
-	int scarsendingID = numofScars + startingid + 1;
+	int scarsendingID = numofScars + startingid;
 
 	/// ncars list
 	///		starting id --> scar ending id + 1
 	///		ending id --> num of ncars + starting of ncars
 	int ncarsinitialID = scarsendingID;
-	int ncarsendingID = numofScars + ncarsinitialID + 1;
+	int ncarsendingID = numofNcars + ncarsinitialID;
 
 
 	/// Scars list

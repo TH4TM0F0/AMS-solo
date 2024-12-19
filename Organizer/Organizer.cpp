@@ -192,22 +192,22 @@ void Organizer::createOutputFile()
 	if (fout.is_open())
 	{
 		fout << "FT"  /*e3mel beta3et std::setw() w std::setfill()*/
-			<< "PID" /*e3mel beta3et std::setw() w std::setfill()*/
-			<< "QT"  /*e3mel beta3et std::setw() w std::setfill()*/
-			<< "WT"  /*e3mel beta3et std::setw() w std::setfill()*/
-			<< std::endl;
+			 << "PID" /*e3mel beta3et std::setw() w std::setfill()*/
+			 << "QT"  /*e3mel beta3et std::setw() w std::setfill()*/
+			 << "WT"  /*e3mel beta3et std::setw() w std::setfill()*/
+			 << std::endl;
 		/// Header Row of Output file is created
 		//for (int i = 0; i < allRequests.count )
 		/*{
 
 		}*/
 		fout << "Patients: " << allRequests.count - cancelledRequests.count << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
-			<< "Hospitals = " << numofHospitals << std::endl
-			<< "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
-			<< "Average Wait Time = " /* << rakam to be calculated */ << std::endl
-			<< "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
-			<< "Average Busy Time = " /*rakam */ << std::endl
-			<< "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
+			 << "Hospitals = " << numofHospitals << std::endl
+			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
+			 << "Average Wait Time = " /* << rakam to be calculated */ << std::endl
+			 << "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
+			 << "Average Busy Time = " /*rakam */ << std::endl
+			 << "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
 	}
 
 	// close the file 
