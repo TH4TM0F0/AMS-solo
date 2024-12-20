@@ -359,42 +359,67 @@ void Organizer::CarFreeToOut(Hospital& hospital) {
 
 
 
-//void Organizer::CarFreeToOut(Patient* Patient, Hospital* hospital)
-//{
-//	Car* car;
-//	
-//	if (Patient->getType() == "NP") {
-//		hospital->getNormalCarList().dequeue(car); 
-//		outCars.enqueue(car, 0);
-//	} else if (Patient->getType() == "SP") {
-//		hospital->getSpecialCarList().dequeue(car);
-//		outCars.enqueue(car, 0);
-//	}else if (Patient->getType() == "EP") {
-//		if (hospital->getNormalCarList().isEmpty()) {
-//			hospital->getSpecialCarList().dequeue(car);
-//			outCars.enqueue(car, 0);
-//		}
-//		else {
-//			hospital->getNormalCarList().dequeue(car);
-//			outCars.enqueue(car, 0);
-//		}
-//	}
-//	car->setStatus(Assigned);
-//}
+void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
+{
+	Car* car;
+	
+	if (Patient->getType() == "NP") {
+		hospital->getNormalCarList().dequeue(car); 
+		outCars.enqueue(car, 0);
+	} else if (Patient->getType() == "SP") {
+		hospital->getSpecialCarList().dequeue(car);
+		outCars.enqueue(car, 0);
+	}else if (Patient->getType() == "EP") {
+		if (hospital->getNormalCarList().isEmpty()) {
+			hospital->getSpecialCarList().dequeue(car);
+			outCars.enqueue(car, 0);
+		}
+		else {
+			hospital->getNormalCarList().dequeue(car);
+			outCars.enqueue(car, 0);
+		}
+	}
+	car->setStatus(Assigned);
+}
 
-//bool Organizer::moveCarFromOutToBack() {
-//	Car* car;
-//	int pri;
-//	//Dequeue car from OUT (check 3ashan lw kan empty f el awl) 
-//	if (outCars.dequeue(car, pri)) {
-//		car->setStatus(Loaded); 	// Update the car's status to indicate it has reached its patient
-//		backCars.enqueue(car, pri);     // Enqueue the car to the BACK queue
-//		return true;
-//	}
-//	else {
-//		return false;
-//	}
-//}
+bool Organizer::moveCarFromOutToBack() {
+	Car* car;
+	int pri;
+	//Dequeue car from OUT (check 3ashan lw kan empty f el awl) 
+	if (outCars.dequeue(car, pri)) {
+		car->setStatus(Loaded); 	// Update the car's status to indicate it has reached its patient
+		backCars.enqueue(car, pri);     // Enqueue the car to the BACK queue
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void Organizer::moveCarFromBackToFree(Hospital* hospital)
+{
+	Car* car = nullptr; 
+	int pri;
+	backCars.dequeue(car, pri);
+	if (car->getStatus() != Assigned) {  //make sure car is not in OUt State
+		return;
+	}
+
+	if (car) {
+		int id = car->getHospitalID();
+		string type = car->getType();
+		if (type == "NC") {
+			(hospitalList + id - 1)->addNcar(car); 
+		}
+		else {
+			(hospitalList + id - 1)->addScar(car);
+		}
+		car->setStatus(Ready);
+	}
+	else {
+		return;
+	}
+}
 
 
 
