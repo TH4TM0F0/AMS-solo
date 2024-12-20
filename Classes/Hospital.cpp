@@ -199,7 +199,7 @@ void Hospital::addScar(Car* car)
 	SpecialCarList.enqueue(car);
 }
 
-Car* Hospital::Assign_EP(Patient* patient)
+Car* Hospital::Assign_EP(Patient* patient, Organizer* org)
 {
 	if (NormalCarList.count != 0)
 	{
@@ -218,21 +218,101 @@ Car* Hospital::Assign_EP(Patient* patient)
 	}
 	else
 	{
-		//Assign Patient to another hospital (bonus)
-	}
+		int num = org->getNumofHospitals();
+		int length = 100;
+		Hospital* H = org->getHospitalList();
+		int Hid = H->getID();
+		int id = 0;
+		int q = 0;
+		int count = 0;
+		int* ID_array = new int[num]; // dynamically allocating an array to store ids of hospital with equal lists
 
+		for (int i = 0; i < num; i++)
+		{
+			if (H[i].getID() != Hid)  // to prevent looping on that particular hospital 
+			{
+				// if true that means there another hospital with the same shortest list in the hospital list
+				
+				if (H[i].EmergencyPatientList.count == length)
+				{
+
+					if(ID_array[0] == ID_array[1])
+					{
+						q++;
+						ID_array[q + 0] = H[i].getID();
+						id = H[i].getID();
+						count++;
+					}
+					else
+					{
+						for (int j = 0; j <= count; j++)
+						{
+							ID_array[j] = NULL;
+						}
+						q = 0;
+						q++;
+						ID_array[q + 0] = H[i].getID();
+						id = H[i].getID();
+						count++;
+
+					}
+				}
+				if (H[i].EmergencyPatientList.count < length)
+				{
+					length = H[i].EmergencyPatientList.count;
+					id = H[i].getID();
+					ID_array[0] = H[i].getID();
+				}
+			}
+		}
+		//if(H[ID_array[0]].EmergencyPatientList.count <  H[ID_array[1]].EmergencyPatientList.count)  // if this = true it means that the first element is smaller than the second 
+
+
+
+		// now if the ID_array has more than 1 list we need to find which one is closer but first we need 
+
+		
+		
+
+
+
+
+
+
+	}
 }
 
 
-//Car* Hospital::Assign_SP(Patient* patient)
-//{
-//
-//}
-//Car* Hospital::Assign_NP(Patient* patient)
-//{
-//
-//
-//}
+Car* Hospital::Assign_SP(Patient* patient)
+{
+	if (SpecialCarList.isEmpty())
+	{
+		return nullptr;
+	}
+	else
+	{
+		Car* temps = removeScar();
+		temps->setStatus(Assigned);
+		temps->setAssignedPatient(patient);
+		return temps;
+	}
+}
+
+
+Car* Hospital::Assign_NP(Patient* patient)
+{
+	if (NormalCarList.isEmpty())
+	{
+		return nullptr;
+	}
+	else
+	{
+		Car* tempn = removeNcar();
+		tempn->setStatus(Assigned);
+		tempn->setAssignedPatient(patient);
+		return tempn;
+	}
+}
 
 
 std::ostream& operator<<(std::ostream& out, Hospital& hospital)

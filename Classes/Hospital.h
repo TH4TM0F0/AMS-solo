@@ -5,6 +5,7 @@
 #include "../AllowedDS/priQueue.h"
 #include "../DerivedDS/DerivedQueue.h"
 #include "../DerivedDS/DerivedPriQueue.h"
+#include "../Organizer/Organizer.h"
 class Hospital
 {
 private:
@@ -92,9 +93,9 @@ public:
 
 	// Patient Assignment Functions
 
-	Car* Assign_EP(Patient* patient);
-	/*Car* Assign_SP(Patient* patient);
-	Car* Assign_NP(Patient* patient);*/
+	Car* Assign_EP(Patient* patient, Organizer* org);
+	Car* Assign_SP(Patient* patient);
+	Car* Assign_NP(Patient* patient);
 
 
 	// Operator Overloading

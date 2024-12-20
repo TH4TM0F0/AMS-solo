@@ -359,42 +359,42 @@ void Organizer::CarFreeToOut(Hospital& hospital) {
 
 
 
-void Organizer::CarFreeToOut(Patient* Patient, Hospital* hospital)
-{
-	Car* car;
-	
-	if (Patient->getType() == "NP") {
-		hospital->getNormalCarList().dequeue(car); 
-		outCars.enqueue(car, 0);
-	} else if (Patient->getType() == "SP") {
-		hospital->getSpecialCarList().dequeue(car);
-		outCars.enqueue(car, 0);
-	}else if (Patient->getType() == "EP") {
-		if (hospital->getNormalCarList().isEmpty()) {
-			hospital->getSpecialCarList().dequeue(car);
-			outCars.enqueue(car, 0);
-		}
-		else {
-			hospital->getNormalCarList().dequeue(car);
-			outCars.enqueue(car, 0);
-		}
-	}
-	car->setStatus(Assigned);
-}
+//void Organizer::CarFreeToOut(Patient* Patient, Hospital* hospital)
+//{
+//	Car* car;
+//	
+//	if (Patient->getType() == "NP") {
+//		hospital->getNormalCarList().dequeue(car); 
+//		outCars.enqueue(car, 0);
+//	} else if (Patient->getType() == "SP") {
+//		hospital->getSpecialCarList().dequeue(car);
+//		outCars.enqueue(car, 0);
+//	}else if (Patient->getType() == "EP") {
+//		if (hospital->getNormalCarList().isEmpty()) {
+//			hospital->getSpecialCarList().dequeue(car);
+//			outCars.enqueue(car, 0);
+//		}
+//		else {
+//			hospital->getNormalCarList().dequeue(car);
+//			outCars.enqueue(car, 0);
+//		}
+//	}
+//	car->setStatus(Assigned);
+//}
 
-bool Organizer::moveCarFromOutToBack() {
-	Car* car;
-	int pri;
-	//Dequeue car from OUT (check 3ashan lw kan empty f el awl) 
-	if (outCars.dequeue(car, pri)) {
-		car->setStatus(Loaded); 	// Update the car's status to indicate it has reached its patient
-		backCars.enqueue(car, pri);     // Enqueue the car to the BACK queue
-		return true;
-	}
-	else {
-		return false;
-	}
-}
+//bool Organizer::moveCarFromOutToBack() {
+//	Car* car;
+//	int pri;
+//	//Dequeue car from OUT (check 3ashan lw kan empty f el awl) 
+//	if (outCars.dequeue(car, pri)) {
+//		car->setStatus(Loaded); 	// Update the car's status to indicate it has reached its patient
+//		backCars.enqueue(car, pri);     // Enqueue the car to the BACK queue
+//		return true;
+//	}
+//	else {
+//		return false;
+//	}
+//}
 
 
 
