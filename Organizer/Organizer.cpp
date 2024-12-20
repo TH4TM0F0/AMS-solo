@@ -287,7 +287,7 @@ void Organizer::OutCarFailureAction(Car* car)
 
 void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 {
-	Car* car;
+	/*Car* car;
 	
 	if (Patient->getType() == "NP") {
 		hospital->getNormalCarList().dequeue(car); 
@@ -305,6 +305,7 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 			outCars.enqueue(car, 0);
 		}
 	}
+	car->setStatus(Assigned);*/
 	car->setStatus(Assigned);
 	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
 }
