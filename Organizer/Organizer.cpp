@@ -306,7 +306,6 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 		}
 	}
 	car->setStatus(Assigned);*/
-	car->setStatus(Assigned);
 	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
 }
 

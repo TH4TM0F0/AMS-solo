@@ -101,7 +101,7 @@ public:
 	/// Extra Funcs
 	int getNumofHospitals();
 	Hospital* getHospitalList();
-	Hospital hospital;
+	// Hospital hospital;
 	/*int getCurrentOutCars();
 	int getCurrentBackCars();
 	int getCurrentFinished();*/
@@ -110,7 +110,7 @@ public:
 	DerivedPriQueue<Car*> getOutCars();
 	priQueue<Car*> getBackCars();
 	LinkedQueue<Patient*> getFinishedList();
-	priQueue<Patient*> emergencyPatientList = hospital.getEPatientList();
+	// priQueue<Patient*> emergencyPatientList = hospital.getEPatientList();
 
 	void OutCarFailureProbability(Car* car);
 
