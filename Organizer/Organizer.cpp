@@ -281,28 +281,53 @@ DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
 {
 	return failedoutCars;
 }
+//handling the random number related to a certain car or not?
 // if the random number falls within the range of failure probability ,a car should fail 
-int Organizer::OutCarFailureProbability(LinkedQueue<Car>& car) // update input file and add failure probability of out cars and load file 
+int Organizer::OutCarFailureProbability(Car*outcar) // update input file and add failure probability of out cars and load file 
 {
 	int pri;
-	int count = getCurrentOutCars();
 	double failureprobability = 0.9;//el mafrood between zero w 1
 	RndmGen rndmgen;//object to acces function
-	while (!car.isEmpty()) {
-		for (int i = 0; i < count; i++) {
-			/*Car CurrentOutcars = car.dequeue(car, pri);*/
+	while (!outCars.isEmpty()) {
+		outCars.dequeue(outcar, pri);
+		if (rndmgen.generate(100) <= failureprobability * 100) {//check lw el generated random num is less than failure probability 
+			outcar->getID();
+			if (outcar->getID()) {//this might be removed later
+				failedoutCars.enqueue(outcar, pri); //add the removed car to the failed out cars list 
+			}
 		}
-		if (rndmgen.generate(100) <= failureprobability * 100) {
-
-
-
+		else {
+			outCars.enqueue(outcar,pri);//if not re add it to the outcars
+		}
+		
 		}
 	}
-}
-
-void Organizer::OutCarFailureAction(Car* car , LinkedQueue<int>& Failedcars) // checkup list queue
+//does it mean a new backlist or backcarlist?
+void Organizer::OutCarFailureAction(Car*Failedcars) // checkup list queue
 {
-	LinkedQueue<int>backlist;
+	DerivedPriQueue<int>backlist;
+	int pri;
+	while (!failedoutCars.isEmpty()) { //check if the failed outcars is empty 
+		failedoutCars.dequeue(Failedcars, pri);
+		backlist.enqueue(Failedcars->getID(),pri);
+
+	}
+
+}
+//another way w hakhtar
+DerivedPriQueue<Car*> Organizer::OUTTOBACK(Car* Failedcars)
+{
+	DerivedPriQueue<int> checkuplist;
+	int pri;
+	while (!failedoutCars.isEmpty()) {
+		Failedcars->getID();
+		failedoutCars.dequeue(Failedcars, pri);//removes the car from the failedoutcars list
+		backCars.enqueue(Failedcars, pri);//add it to the backCars list
+	}
+	while (!backCars.isEmpty()) {
+
+		
+	}
 }
 
 void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
