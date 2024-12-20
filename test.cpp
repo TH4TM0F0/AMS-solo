@@ -137,7 +137,6 @@ Patient* p2 = new Patient(2, "EP", 3, 1, 200, 6);
 Car* c2 = new Car(2, "SC", 100, Ready, 1, p2);
 Hospital* H = new Hospital();
 
-org->CarFreeToOut(p2, );
 
 
 

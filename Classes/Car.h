@@ -7,7 +7,8 @@ enum CarStatus
 {
 	Ready = 0,			/// idle case
 	Assigned = 1,		/// going to a patient
-	Loaded = 2			/// driving back the patient
+	Loaded = 2, 		/// driving back the patient
+	Cancelled = 3       /// Cancelled Car (sarah)
 };
 class Car
 {
