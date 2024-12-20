@@ -79,10 +79,12 @@ void UI::printTimeStep()
 		std::cout << "-----------------------------------------------------------" << std::endl;
 
 		std::cout << orgPtr->getOutCars().count << " ==> " << "Out Cars: "; 
-		printOutCars();
+		//printOutCars(); ==> darba error lesa ha7awel afham leh
+		//orgPtr->printOut();
 
 		std::cout << orgPtr->getBackCars().count << " <== " << "Back Cars: ";
-		printBackCars();
+		//printBackCars(); ==> darba error lesa ha7awel afham leh
+
 
 		std::cout << orgPtr->getFinishedList().count << " Finished Patients: ";
 		orgPtr->getFinishedList().print();

@@ -91,26 +91,30 @@ int main()
 
 
 	//2.dequeue this car from the list and enqueue in the out cars list 
-	
 	Organizer* org = new Organizer;
 	org->loadInputFile();
 	UI ui(org);
 	Patient* p2 = new Patient(202, "EP", 3, 1, 200, 6);
+	org->AddFinishedList(p2);
+	org->getFinishedList().print();
+	/*
 	Patient* p3 = new Patient(559, "EP", 3, 1, 200, 6);
-	Car* c2 = new Car(2, "SC", 100, Ready, 1, p2);
-	Car* c3 = new Car(3, "NC", 100, Ready, 4, p3);
+	Car* c2 = new Car(2, "SC", 100, Ready, 1, nullptr);
+	Car* c3 = new Car(3, "NC", 100, Ready, 4, nullptr);
+	c2->setAssignedPatient(p2);
+	c3->setAssignedPatient(p3);
 	org->AddBackCars(c2);
 	org->AddOutCars(c2);
 	org->AddOutCars(c3);
 	Hospital* h = org->getHospitalList();
 	h[1].addEpatient(p2);
 	h[1].addEpatient(p3);
+	ui.printTimeStep();*/
 	//ui.printHospital(h[1]);
-	org->printa();
-	h[1].getEPatientList().print();
+	/*org->printa();
+	h[1].getEPatientList().print();*/
 	/*h[1].getEPatientList().print();
-	org->AddFinishedList(p2);
-	org->getFinishedList().print();*/
+	*/
 	/*Hospital* H;
 	H = org.getHospitalList();
 	H->printSClist();
