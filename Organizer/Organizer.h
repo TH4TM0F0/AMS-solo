@@ -112,62 +112,10 @@ public:
 	LinkedQueue<Patient*> getFinishedList();
 	priQueue<Patient*> emergencyPatientList = hospital.getEPatientList();
 
-	void printOut()
-	{
-		priNode<Car*>* iteratorPtr = nullptr;
-		iteratorPtr = outCars.getHead();
-		if (!iteratorPtr)
-		{
-			std::cout << "[EMPTY]" << std::endl;
-			return;
-		}
-		std::cout << "[ ";
-		while (iteratorPtr)
-		{
-			int pri;
-			std::cout << iteratorPtr->getItem(pri)->getType() << *(iteratorPtr->getItem(pri))
-				<< "_H" << iteratorPtr->getItem(pri)->getHospitalID()
-				<< "_P" << iteratorPtr->getItem(pri)->getAssignedPatient()->getID();
-			if (iteratorPtr->getNext())
-			{
-				std::cout << " --> ";
-			}
-			iteratorPtr = iteratorPtr->getNext();
-		}
-		std::cout << " ]" << std::endl;
-	}
-	void printBackCars()
-	{
-		priNode<Car*>* iteratorPtr = nullptr;
-		iteratorPtr = backCars.getHead();
-		if (!iteratorPtr)
-		{
-			std::cout << "[EMPTY]" << std::endl;
-			return;
-		}
-		std::cout << "[ ";
-		while (iteratorPtr)
-		{
-			int pri;
-			std::cout << iteratorPtr->getItem(pri)->getType() << *(iteratorPtr->getItem(pri))
-				<< "_H" << iteratorPtr->getItem(pri)->getHospitalID()
-				<< "_P" << iteratorPtr->getItem(pri)->getAssignedPatient()->getID();
-			if (iteratorPtr->getNext())
-			{
-				std::cout << " --> ";
-			}
-			iteratorPtr = iteratorPtr->getNext();
-		}
-		std::cout << " ]" << std::endl;
-	}
-
 	void OutCarFailureProbability(Car* car);
 
 	void OutCarFailureAction(Car* car);
 
-	void printbackkk() {
-		backCars.print();
-	}
 
 
 	//Car from Free to OUT
@@ -177,11 +125,5 @@ public:
 	//Car from Back to Free
 	void moveCarFromBackToFree(Hospital* hospital); 
 
-
-	void printa()
-	{
-		outCars.print();
-	}
-	
 
 };

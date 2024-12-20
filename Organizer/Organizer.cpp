@@ -361,7 +361,7 @@ void Organizer::CarFreeToOut(Hospital& hospital) {
 
 void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 {
-	Car* car;
+	/*Car* car;
 	
 	if (Patient->getType() == "NP") {
 		hospital->getNormalCarList().dequeue(car); 
@@ -379,7 +379,7 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 			outCars.enqueue(car, 0);
 		}
 	}
-	car->setStatus(Assigned);
+	car->setStatus(Assigned);*/
 }
 
 bool Organizer::moveCarFromOutToBack() {

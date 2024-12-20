@@ -79,11 +79,10 @@ void UI::printTimeStep()
 		std::cout << "-----------------------------------------------------------" << std::endl;
 
 		std::cout << orgPtr->getOutCars().count << " ==> " << "Out Cars: "; 
-		//printOutCars(); ==> darba error lesa ha7awel afham leh
-		//orgPtr->printOut();
+		orgPtr->getOutCars().print();
 
 		std::cout << orgPtr->getBackCars().count << " <== " << "Back Cars: ";
-		//printBackCars(); ==> darba error lesa ha7awel afham leh
+		orgPtr->getBackCars().print();
 
 
 		std::cout << orgPtr->getFinishedList().count << " Finished Patients: ";
@@ -98,7 +97,7 @@ void UI::printTimeStep()
 void UI::printHospital(Hospital hospitalToPrint)
 {
 	/// Format of 1 Hospital
-	std::cout << "==============" << "       " << "Hospital #" << hospitalToPrint.getID() << " " << "start" << "       " << "==============" << std::endl;
+	std::cout << "==============" << "       " << "Hospital #" << hospitalToPrint << " " << "start" << "       " << "==============" << std::endl;
 
 	std::cout << hospitalToPrint.getEPatientList().count << " EP requests: ";
 	hospitalToPrint.getEPatientList().print();
@@ -112,20 +111,9 @@ void UI::printHospital(Hospital hospitalToPrint)
 	hospitalToPrint.getNPatientList().print();
 	std::cout << std::endl;
 
-	std::cout << "==============" << "       " << "Hospital #" << hospitalToPrint.getID() << " " << " end " << "       " << "==============" << std::endl;
+	std::cout << "==============" << "       " << "Hospital #" << hospitalToPrint << " " << " end " << "       " << "==============" << std::endl;
 }
 
-void UI::printOutCars()
-{
-	orgPtr->printOut();
-	return;
-}
-
-void UI::printBackCars()
-{
-	orgPtr->printBackCars();
-	return;
-}
 
 void UI::delay(int delayInSeconds)
 {

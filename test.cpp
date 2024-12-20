@@ -93,12 +93,20 @@ int main()
 	//2.dequeue this car from the list and enqueue in the out cars list 
 	 
 	
-	Organizer* org = new Organizer;
-	org->loadInputFile();
-	UI ui(org);
-	Patient* p2 = new Patient(202, "EP", 3, 1, 200, 6);
-	org->AddFinishedList(p2);
-	org->getFinishedList().print();
+	//Organizer* org = new Organizer;
+	//org->loadInputFile();
+	//UI ui(org);
+	//Patient* p2 = new Patient(202, "EP", 3, 1, 200, 6);
+	//Car* c2 = new Car(2, "SC", 100, Ready, 1, nullptr);
+	//Car* c3 = new Car(6, "SC", 100, Ready, 1, p2);
+	////c2->setRequestTime(3);
+	//c3->setRequestTime(3);
+	////org->AddOutCars(c2);
+	//org->AddOutCars(c3);
+	//org->getOutCars().print();
+	//ui.printTimeStep();
+	/*org->AddFinishedList(p2);
+	org->getFinishedList().print();*/
 	/*
 	Patient* p3 = new Patient(559, "EP", 3, 1, 200, 6);
 	Car* c2 = new Car(2, "SC", 100, Ready, 1, nullptr);
@@ -116,25 +124,25 @@ int main()
 	org->AddOutCars(c3);*/
 
 
-	Hospital* h = org->getHospitalList();
-	h[1].addEpatient(p2);
-	h[1].addEpatient(p3);
-	ui.printTimeStep();*/
-	h[1].addSpatient(p2);
-	h[1].addNpatient(p3);
+	//Hospital* h = org->getHospitalList();
+	//h[1].addEpatient(p2);
+	//h[1].addEpatient(p3);
+	//ui.printTimeStep();*/
+	//h[1].addSpatient(p2);
+	//h[1].addNpatient(p3);
 
-	h[1].addNcar(c3);
-	h[1].addScar(c2);
+	//h[1].addNcar(c3);
+	//h[1].addScar(c2);
 
 
 
-	h[1].getNPatientList().print();  // 559
-	h[1].getSPatientList().print();  // 202
+	//h[1].getNPatientList().print();  // 559
+	//h[1].getSPatientList().print();  // 202
 
-	org->AddOutCars(h[1].Assign_NP(p3));
-	org->AddOutCars(h[1].Assign_SP(p2));
+	//org->AddOutCars(h[1].Assign_NP(p3));
+	//org->AddOutCars(h[1].Assign_SP(p2));
 
-	org->printa();
+	//org->printa();
 
 
 
