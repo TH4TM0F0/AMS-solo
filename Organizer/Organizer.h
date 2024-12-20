@@ -47,8 +47,7 @@ private:
 	DerivedPriQueue<Car*> outCars;											/// PriQ for cars on their way to pick-up a patient
 	priQueue<Car*> backCars;                                                /// PriQ for returned cars
 	LinkedQueue<Patient*> finishedList;                                     /// Queue for finished patients 
-
-
+	DerivedPriQueue<Car*> failedoutCars;
 	/// 2d Distance Matrix
 	int** distanceMatrix = nullptr;
 
@@ -103,9 +102,11 @@ public:
 	int getCurrentFinished();
 	void printFinishedList();
 
-	void OutCarFailureProbability(Car* car);
+	int OutCarFailureProbability(LinkedQueue<Car>& car);
 
-	void OutCarFailureAction(Car* car);
+    DerivedPriQueue<Car*> getCurrentFailedOutCars();
+
+	void OutCarFailureAction(Car* car, LinkedQueue<int>& Failedcars);
 
 	void printbackkk() {
 		backCars.print();

@@ -3,6 +3,7 @@
 #include <cmath>
 #include "../Classes/Patient.h"
 #include "../Organizer/Organizer.h"
+
 enum CarStatus
 {
 	Ready = 0,			/// idle case

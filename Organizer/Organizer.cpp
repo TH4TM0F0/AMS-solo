@@ -1,4 +1,16 @@
+
 #include "Organizer.h"
+#pragma once
+using namespace std;
+#include <fstream>
+#include <iomanip>
+#include "../AllowedDS/LinkedQueue.h"
+#include "../DerivedDS/DerivedPriQueue.h"
+#include "../AllowedDS/PriQueue.h"
+#include "../Classes/Car.h"
+#include "../Classes/Patient.h"
+#include "../Classes/Hospital.h"
+#include "../Classes/RndmGen.h"
 
 Organizer::Organizer()
 {
@@ -250,25 +262,33 @@ void Organizer::printFinishedList()
 	finishedList.print();
 }
 
-
-void Organizer::OutCarFailureProbability(Car* car) // update input file and add failure probability of out cars and load file 
-{     
-	//LinkedQueue<int>queue; 
-	//int FailureProb;                                    // if the random number falls within the range of failure probability ,a car should fail 
-	//if (int x=0) {
- //       outCars.dequeue(car);
-	//	queue.enqueue(FailureProb);
-	//}
-
-
-}
-
-void Organizer::OutCarFailureAction(Car* car)
+DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
 {
-	return;
+	return failedoutCars;
+}
+// if the random number falls within the range of failure probability ,a car should fail 
+int Organizer::OutCarFailureProbability(LinkedQueue<Car>& car) // update input file and add failure probability of out cars and load file 
+{
+	int pri;
+	int count = getCurrentOutCars();
+	double failureprobability = 0.9;//el mafrood between zero w 1
+	RndmGen rndmgen;//object to acces function
+	while (!car.isEmpty()) {
+		for (int i = 0; i < count; i++) {
+			/*Car CurrentOutcars = car.dequeue(car, pri);*/
+		}
+		if (rndmgen.generate(100) <= failureprobability * 100) {
+
+
+
+		}
+	}
 }
 
-
+void Organizer::OutCarFailureAction(Car* car , LinkedQueue<int>& Failedcars) // checkup list queue
+{
+	LinkedQueue<int>backlist;
+}
 
 bool Organizer:: moveCarFromOutToBack() {
 	Car* car;
