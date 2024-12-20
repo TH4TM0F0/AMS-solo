@@ -5,6 +5,7 @@
 #include "../AllowedDS/priQueue.h"
 #include "../DerivedDS/DerivedQueue.h"
 #include "../DerivedDS/DerivedPriQueue.h"
+#include "../Organizer/Organizer.h"
 class Hospital
 {
 private:
@@ -69,8 +70,10 @@ public:
 	Car* removeNcar();
 	Car* removeScar();
 
-	
-	
+	//Getters for the cars lists in the hospitals
+	LinkedQueue<Car*> getNormalCarList();
+	LinkedQueue<Car*> getSpecialCarList();
+
 
 	// Functions to check if lists within the hospital is Empty 
 
@@ -84,12 +87,15 @@ public:
 	int Check_ScarList();
 	int Check_NcarList();
 
+	priQueue<Patient*>* getEmergencyPatientList() {
+		return &EmergencyPatientList;
+	}
 
 	// Patient Assignment Functions
 
-	//void Assign_EP(Patient* patient);
-	/*void Assign_SP(Patient* patient);
-	void Assign_NP(Patient* patient);*/
+	Car* Assign_EP(Patient* patient, Organizer* org);
+	Car* Assign_SP(Patient* patient);
+	Car* Assign_NP(Patient* patient);
 
 
 	// Operator Overloading
