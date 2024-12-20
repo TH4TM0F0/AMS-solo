@@ -88,6 +88,9 @@ public:
 
 	void AddBackCars(Car* car);
 
+	
+
+
 	void AddFinishedList(Patient* patient);
 
 	void createOutputFile();
@@ -97,10 +100,16 @@ public:
 	/// Extra Funcs
 	int getNumofHospitals();
 	Hospital* getHospitalList();
-	int getCurrentOutCars();
+	// Hospital hospital;
+	/*int getCurrentOutCars();
 	int getCurrentBackCars();
-	int getCurrentFinished();
-	void printFinishedList();
+	int getCurrentFinished();*/
+	//void printFinishedList(); ==> to be deleted
+	/// Formatted print --> for out & back cars lists
+	DerivedPriQueue<Car*> getOutCars();
+	priQueue<Car*> getBackCars();
+	LinkedQueue<Patient*> getFinishedList();
+	// priQueue<Patient*> emergencyPatientList = hospital.getEPatientList();
 
 	int OutCarFailureProbability(LinkedQueue<Car>& car);
 
@@ -108,14 +117,16 @@ public:
 
 	void OutCarFailureAction(Car* car, LinkedQueue<int>& Failedcars);
 
-	void printbackkk() {
-		backCars.print();
-	}
-	//Car from out to Back
+
+
+	//Car from Free to OUT
+	void moveCarFromFreeToOut(Patient* Patient, Hospital* hospital);
+	//Car from OUT to Back
 	bool moveCarFromOutToBack();
+	//Car from Back to Free
+	void moveCarFromBackToFree(Hospital* hospital); 
 
-	
-
-	
+	//cancel Request 
+	void CancelRequest(int PatientID, int CancelTime, Patient* patient, Car* car);
 
 };

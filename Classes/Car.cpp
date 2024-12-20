@@ -1,5 +1,5 @@
 #include "Car.h"
-#include "../Organizer/Organizer.h"
+
 
 Car::Car()
 {
@@ -144,7 +144,11 @@ int Car::getDropoffTime()
 
 std::ostream& operator<<(std::ostream& out, Car& car)
 {
-	std::cout << car.id;
+	std::cout << car.type << car.id << "_H" << car.hospitalId;
+	if (car.assignedPatient)
+	{
+		std::cout << "_P" << *car.assignedPatient;
+	}
 	return out;
 }
 

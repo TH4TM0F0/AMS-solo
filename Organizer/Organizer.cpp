@@ -204,22 +204,22 @@ void Organizer::createOutputFile()
 	if (fout.is_open())
 	{
 		fout << "FT"  /*e3mel beta3et std::setw() w std::setfill()*/
-			<< "PID" /*e3mel beta3et std::setw() w std::setfill()*/
-			<< "QT"  /*e3mel beta3et std::setw() w std::setfill()*/
-			<< "WT"  /*e3mel beta3et std::setw() w std::setfill()*/
-			<< std::endl;
+			 << "PID" /*e3mel beta3et std::setw() w std::setfill()*/
+			 << "QT"  /*e3mel beta3et std::setw() w std::setfill()*/
+			 << "WT"  /*e3mel beta3et std::setw() w std::setfill()*/
+			 << std::endl;
 		/// Header Row of Output file is created
 		//for (int i = 0; i < allRequests.count )
 		/*{
 
 		}*/
 		fout << "Patients: " << allRequests.count - cancelledRequests.count << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
-			<< "Hospitals = " << numofHospitals << std::endl
-			<< "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
-			<< "Average Wait Time = " /* << rakam to be calculated */ << std::endl
-			<< "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
-			<< "Average Busy Time = " /*rakam */ << std::endl
-			<< "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
+			 << "Hospitals = " << numofHospitals << std::endl
+			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
+			 << "Average Wait Time = " /* << rakam to be calculated */ << std::endl
+			 << "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
+			 << "Average Busy Time = " /*rakam */ << std::endl
+			 << "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
 	}
 
 	// close the file 
@@ -242,24 +242,39 @@ Hospital* Organizer::getHospitalList()
 	return hospitalList;
 }
 
-int Organizer::getCurrentOutCars()
+//int Organizer::getCurrentOutCars()
+//{
+//	return outCars.count;
+//}
+//
+//int Organizer::getCurrentBackCars()
+//{
+//	return backCars.count;
+//}
+//
+//int Organizer::getCurrentFinished()
+//{
+//	return finishedList.count;
+//}
+//
+//void Organizer::printFinishedList()
+//{
+//	finishedList.print();
+//}
+
+DerivedPriQueue<Car*> Organizer::getOutCars()
 {
-	return outCars.count;
+	return outCars;
 }
 
-int Organizer::getCurrentBackCars()
+priQueue<Car*> Organizer::getBackCars()
 {
-	return backCars.count;
+	return backCars;
 }
 
-int Organizer::getCurrentFinished()
+LinkedQueue<Patient*> Organizer::getFinishedList()
 {
-	return finishedList.count;
-}
-
-void Organizer::printFinishedList()
-{
-	finishedList.print();
+	return finishedList;
 }
 
 DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
@@ -290,12 +305,36 @@ void Organizer::OutCarFailureAction(Car* car , LinkedQueue<int>& Failedcars) // 
 	LinkedQueue<int>backlist;
 }
 
-bool Organizer:: moveCarFromOutToBack() {
+void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
+{
+	/*Car* car;
+	
+	if (Patient->getType() == "NP") {
+		hospital->getNormalCarList().dequeue(car); 
+		outCars.enqueue(car, 0);
+	} else if (Patient->getType() == "SP") {
+		hospital->getSpecialCarList().dequeue(car);
+		outCars.enqueue(car, 0);
+	}else if (Patient->getType() == "EP") {
+		if (hospital->getNormalCarList().isEmpty()) {
+			hospital->getSpecialCarList().dequeue(car);
+			outCars.enqueue(car, 0);
+		}
+		else {
+			hospital->getNormalCarList().dequeue(car);
+			outCars.enqueue(car, 0);
+		}
+	}
+	car->setStatus(Assigned);*/
+	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
+}
+
+bool Organizer::moveCarFromOutToBack() {
 	Car* car;
 	int pri;
 	//Dequeue car from OUT (check 3ashan lw kan empty f el awl) 
 	if (outCars.dequeue(car, pri)) {
-		car->setStatus(Assigned); 	// Update the car's status to indicate it has reached its patient
+		car->setStatus(Loaded); 	// Update the car's status to indicate it has reached its patient
 		backCars.enqueue(car, pri);     // Enqueue the car to the BACK queue
 		return true;
 	}
@@ -303,4 +342,44 @@ bool Organizer:: moveCarFromOutToBack() {
 		return false;
 	}
 }
+
+void Organizer::moveCarFromBackToFree(Hospital* hospital)
+{
+	Car* car = nullptr; 
+	int pri;
+	backCars.dequeue(car, pri);
+	if (car->getStatus() != Assigned) {  //make sure car is not in OUt State
+		return;
+	}
+
+	if (car) {
+		int id = car->getHospitalID();
+		string type = car->getType();
+		if (type == "NC") {
+			(hospitalList + id - 1)->addNcar(car); 
+		}
+		else {
+			(hospitalList + id - 1)->addScar(car);
+		}
+		car->setStatus(Ready);
+	}
+	else {
+		return;
+	}
+}
+
+void Organizer::CancelRequest(int PatientID, int CancelTime, Patient* patient, Car* car)
+{
+	if (patient->getType() == "NP") {
+		if (car->getStatus() == Assigned && CancelTime < patient->getPickupTime()) { 
+			cancelledRequests.enqueue(patient);
+			numofCancelledRequests++;
+			car->setStatus(Cancelled); 
+		}
+	}
+	//awl ma el request ye7sal car is back 
+	//from back to free lma nafs 3dd el time steps y3ady 
+}
+
+
 

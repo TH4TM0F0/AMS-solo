@@ -2,13 +2,13 @@
 #include <iostream>
 #include <cmath>
 #include "../Classes/Patient.h"
-#include "../Organizer/Organizer.h"
 
 enum CarStatus
 {
 	Ready = 0,			/// idle case
 	Assigned = 1,		/// going to a patient
-	Loaded = 2			/// driving back the patient
+	Loaded = 2, 		/// driving back the patient
+	Cancelled = 3       /// Cancelled Car (sarah)
 };
 class Car
 {
@@ -57,6 +57,8 @@ public:
 	int getPatientWaitingTime();
 	int getDropoffTime();
 	//int getCarBusyTime();
+
+	
 
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Car& car);

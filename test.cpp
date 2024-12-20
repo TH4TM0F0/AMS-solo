@@ -91,26 +91,128 @@ int main()
 
 
 	//2.dequeue this car from the list and enqueue in the out cars list 
+	 
 	
-	/*Organizer org;
-	org.loadInputFile();
-	Hospital* H;
+	//Organizer* org = new Organizer;
+	//org->loadInputFile();
+	//UI ui(org);
+	//Patient* p2 = new Patient(202, "EP", 3, 1, 200, 6);
+	//Car* c2 = new Car(2, "SC", 100, Ready, 1, nullptr);
+	//Car* c3 = new Car(6, "SC", 100, Ready, 1, p2);
+	////c2->setRequestTime(3);
+	//c3->setRequestTime(3);
+	////org->AddOutCars(c2);
+	//org->AddOutCars(c3);
+	//org->getOutCars().print();
+	//ui.printTimeStep();
+	/*org->AddFinishedList(p2);
+	org->getFinishedList().print();*/
+	/*
+	Patient* p3 = new Patient(559, "EP", 3, 1, 200, 6);
+	Car* c2 = new Car(2, "SC", 100, Ready, 1, nullptr);
+	Car* c3 = new Car(3, "NC", 100, Ready, 4, nullptr);
+	c2->setAssignedPatient(p2);
+	c3->setAssignedPatient(p3);
+	org->AddBackCars(c2);
+	Patient* p2 = new Patient(202, "SP", 3, 1, 200, 0);
+	Patient* p3 = new Patient(559, "NP", 3, 1, 200, 0);
+	Car* c2 = new Car(2, "SC", 100, Ready, 1, p2);
+	Car* c3 = new Car(3, "NC", 100, Ready, 4, p3);
+
+	/*org->AddBackCars(c2);
+	org->AddOutCars(c2);
+	org->AddOutCars(c3);*/
+
+
+	//Hospital* h = org->getHospitalList();
+	//h[1].addEpatient(p2);
+	//h[1].addEpatient(p3);
+	//ui.printTimeStep();*/
+	//h[1].addSpatient(p2);
+	//h[1].addNpatient(p3);
+
+	//h[1].addNcar(c3);
+	//h[1].addScar(c2);
+
+
+
+	//h[1].getNPatientList().print();  // 559
+	//h[1].getSPatientList().print();  // 202
+
+	//org->AddOutCars(h[1].Assign_NP(p3));
+	//org->AddOutCars(h[1].Assign_SP(p2));
+
+	//org->printa();
+
+
+
+
+
+
+
+
+
+	//ui.printHospital(h[1]);
+	/*org->printa();
+	h[1].getEPatientList().print();*/
+
+	/*org->printa();
+	h[1].getEPatientList().print();*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*h[1].getEPatientList().print();
+	*/
+	/*Hospital* H;
 	H = org.getHospitalList();
 	H->printSClist();
 	H->printNClist();
 	(H + 1)->printSClist();
 	(H + 1)->printNClist();*/
-	//UI ui(&org);
 	//ui.printTimeStep();
-	//org.printbackkk();
-	
+	//org.getOutCars().print();
+	/*org.printbackkk();*/
+	//org.printa();
+	/*org->printOutCars();
+	org->printBackCars();*/
 
 	//Test of (move Car From Out To Back)
-	/* Patient* p2 = new Patient(2, "EP", 3, 1, 200, 6);
+	/*Organizer* org= new Organizer();
+	Patient* p2 = new Patient(2, "EP", 3, 1, 200, 6);
 	Car* c2 = new Car(2, "SC", 100, Ready, 1, p2);
-	org.AddOutCars(c2);
-	org.moveCarFromOutToBack();
-	org.printaykhara(); */
+	org->AddOutCars(c2);
+	org->moveCarFromOutToBack();
+	org->printbackkk();*/
+
+//Organizer* org = new Organizer();
+//Patient* p2 = new Patient(2, "EP", 3, 1, 200, 6);
+//Car* c2 = new Car(2, "SC", 100, Ready, 1, p2);
+//Hospital* H = new Hospital();
+
+
+
+
+
+
+
+
+
+
+//org->CarFreeToOut(p2, );
+
+
+
 }
 
 
