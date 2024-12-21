@@ -56,6 +56,10 @@ void Car::setAssignmentTime(int assignmentTime)
 	this->assignmentTime = assignmentTime;
 }
 
+void Car::setCarBusy(int carbusyTime)
+{
+	assignedPatient->setCarBusyTime(carbusyTime);
+}
 
 int Car::getID()
 {
@@ -109,8 +113,8 @@ int Car::getPatientWaitingTime()
 
 int Car::getDropoffTime()
 {
-	return ceil(pickupTime + float(assignedPatient->getDistance() / speed));
 	assignedPatient->setDropOffTime(ceil(pickupTime + float(assignedPatient->getDistance() / speed)));
+	return ceil(pickupTime + float(assignedPatient->getDistance() / speed));
 }
 
 int Car::getCarBusyTime()
@@ -118,10 +122,7 @@ int Car::getCarBusyTime()
 	return   getDropoffTime() - assignmentTime;
 }
 
-int Car::setCarBusy(int carbusyTime)
-{
-	assignedPatient->setCarBusyTime(carbusyTime);
-}
+
 
 
 
