@@ -41,6 +41,8 @@ public:
 	int getSeverity();
 	int getCancelTime();
 	int getWaitingTime();
+	int getDropOffTime();
+
 
 	void setCarBusyTime(int busytime);
 

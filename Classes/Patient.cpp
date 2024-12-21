@@ -119,6 +119,15 @@ int Patient::getCancelTime()
 	return cancelTime;
 }
 
+int Patient::getDropOffTime()
+{
+	 //ceil(pickupTime + float(assignedPatient->getDistance() / speed));
+
+	return pickupTime + float( getDistance()
+}
+
+
+
 std::ostream& operator<<(std::ostream& out, Patient& patient)
 {
 	std::cout << patient.id;
