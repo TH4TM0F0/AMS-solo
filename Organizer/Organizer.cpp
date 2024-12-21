@@ -293,7 +293,7 @@ DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
 }
 //handling the random number related to a certain car or not?
 // if the random number falls within the range of failure probability ,a car should fail 
-int Organizer::OutCarFailureProbability(Car*outcar) // update input file and add failure probability of out cars and load file 
+int Organizer::OutCarFailureProbability(Car* outcar) // update input file and add failure probability of out cars and load file 
 {
 	int pri;
 	double failureprobability = 0.9;//el mafrood between zero w 1
@@ -307,11 +307,11 @@ int Organizer::OutCarFailureProbability(Car*outcar) // update input file and add
 			}
 		}
 		else {
-			outCars.enqueue(outcar,pri);//if not re add it to the outcars
+			outCars.enqueue(outcar, pri);//if not re add it to the outcars
 		}
 		incrementTimestep();//for each timestep
-		}
 	}
+}
 DerivedPriQueue<Car*> Organizer::OutCarFailureAction(Car* Failedcars) //checkuplist queue
 {
 	/*DerivedPriQueue<int> checkuplist;*/
