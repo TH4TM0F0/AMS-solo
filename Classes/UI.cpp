@@ -29,14 +29,15 @@ void UI::printSimStart()
 		clearConcsole();
 
 
-		//std::cin.ignore();
-		///// loop le7ad ma elsimulation ye5las --> elhowa lama a5er hospital yewsal lel finished patient list
-		////{
-		//std::cout << "Current Timestep: " << orgPtr->getTimestep() << std::endl;
-		//printTimeStep();
-		//std::cout << "Press Enter to display the next timestep." << std::endl;
-		//std::cin.get();
-		////}
+		std::cin.ignore();
+		//loop le7ad ma elsimulation ye5las --> elhowa lama a5er hospital yewsal lel finished patient list
+		while (!orgPtr->SimEnded())
+		{
+			std::cout << "Current Timestep: " << orgPtr->getTimestep() << std::endl;
+			printTimeStep();
+			std::cout << "Press Enter to display the next timestep." << std::endl;
+			std::cin.get();
+		}
 	}
 
 	if (mode == 2)
@@ -76,12 +77,13 @@ void UI::printTimeStep()
 		printHospital(&hospitalPtr[i]);
 		std::cout << "-----------------------------------------------------------" << std::endl;
 
-		std::cout << orgPtr->getOutCars().count << " ==> " << "Out Cars: "; 
-		orgPtr->getOutCars().print();
+		priQueue<Car*> oclist = orgPtr->getOutCars();
+		std::cout << oclist.count << " ==> " << "Out Cars: ";
+		oclist.print();
 
-		std::cout << orgPtr->getBackCars().count << " <== " << "Back Cars: ";
-		orgPtr->getBackCars().print();
-
+		priQueue<Car*> bclist = orgPtr->getBackCars();
+		std::cout << bclist.count << " <== " << "Back Cars: ";
+		bclist.print();
 
 		std::cout << orgPtr->getFinishedList().count << " Finished Patients: ";
 		orgPtr->getFinishedList().print();

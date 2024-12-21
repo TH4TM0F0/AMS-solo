@@ -9,6 +9,10 @@ using namespace std;
 #include "../Classes/Patient.h"
 #include "../Classes/Hospital.h"
 #include "../Classes/RndmGen.h"
+
+
+class UI;
+
 class Organizer
 {
 private:
@@ -55,11 +59,11 @@ private:
 
 	/// some Ptrs
 	Patient* tempPatientPtr = nullptr;
-
+	//UI* uiPtr = new UI(this);
 
 	int OutCarCount = 0;
-	int numofCars = 1;													/// variable to help with the car ids uniqueness
-																		/// there is no 2 cars in the whole system with the same id
+	int numofCars = 1;														/// variable to help with the car ids uniqueness
+																			/// there is no 2 cars in the whole system with the same id
 
 	/// File name, format, & instance of class inputfilestream --> neccessary variables for loading func
 	std::string fileName = "Organizer/InputFile";
