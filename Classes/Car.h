@@ -38,11 +38,7 @@ public:
 	void setHospitalID(int hospitalId);
 	void setAssignedPatient(Patient* assignedPatient);
 	void setRequestTime(int requestTime);
-	/*void setAssignmentTime();
-	void setPickupTime(int assignmentTime);
-	void setPatientWaitingTime();
-	void setDropoffTime();
-	void setCarBusyTime();*/
+
 
 	// Getters
 	int getID();
@@ -56,7 +52,7 @@ public:
 	int getPickupTime();
 	int getPatientWaitingTime();
 	int getDropoffTime();
-	//int getCarBusyTime();
+
 
 	
 

@@ -171,7 +171,7 @@ void Organizer::startsim()
 	//{
 	//	// do smthg
 	
-	uiPtr->printSimStart();
+	//uiPtr->printSimStart();
 
 
 	//	 
@@ -220,7 +220,11 @@ void Organizer::createOutputFile()
 		for (int i = 0; i < numofRequests - numofCancelledRequests; i++)
 		{
 			finishedList.dequeue(tempPatientPtr);
-			//fout << 
+			fout << std::left << setw(6)/*<< tempPatientPtr.getFinishTime()*/
+				 << std::left << setw(6) << *tempPatientPtr
+				 << std::left << setw(6) << tempPatientPtr->getRequestTime()
+				 << std::left << setw(6) << tempPatientPtr->getPickupTime() - tempPatientPtr->getRequestTime()
+				 << std::endl;
 		}
 		fout << "Patients: " << numofRequests - numofCancelledRequests << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
 			 << "Hospitals = " << numofHospitals << std::endl
