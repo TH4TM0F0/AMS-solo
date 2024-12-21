@@ -171,7 +171,7 @@ void Organizer::startsim()
 	//{
 	//	// do smthg
 	
-	uiPtr->printSimStart();
+//	uiPtr->printSimStart();
 
 
 	//	 
