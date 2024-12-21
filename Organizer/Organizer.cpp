@@ -341,7 +341,7 @@ void Organizer::OutCarFailureAction(Car*Failedcars) // checkup list queue
 
 void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 {
-	/*Car* car;
+	Car* car;
 	
 	if (Patient->getType() == "NP") {
 		hospital->getNormalCarList().dequeue(car); 
@@ -359,7 +359,8 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 			outCars.enqueue(car, 0);
 		}
 	}
-	car->setStatus(Assigned);*/
+//	car->setStatus(Assigned);
+	
 	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
 }
 
@@ -402,18 +403,7 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 	}
 }
 
-void Organizer::CancelRequest(int PatientID, int CancelTime, Patient* patient, Car* car)
-{
-	if (patient->getType() == "NP") {
-		if (car->getStatus() == Assigned && CancelTime < patient->getPickupTime()) { 
-			cancelledRequests.enqueue(patient);
-			numofCancelledRequests++;
-			car->setStatus(Cancelled); 
-		}
-	}
-	//awl ma el request ye7sal car is back 
-	//from back to free lma nafs 3dd el time steps y3ady 
-}
+
 
 
 
