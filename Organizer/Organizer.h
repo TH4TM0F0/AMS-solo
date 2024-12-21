@@ -55,6 +55,8 @@ private:
 	LinkedQueue<Patient*> finishedList;                                     /// Queue for finished patients 
 	DerivedPriQueue<Car*> failedoutCars;                                    /// PriQ for failed out cars
 	DerivedPriQueue<Car*> checkuplist;                                      /// PriQ for checkup list of out cars
+	Hospital* freelist;
+
 	/// 2d Distance Matrix
 	int** distanceMatrix = nullptr;
 
@@ -118,11 +120,19 @@ public:
 	LinkedQueue<Patient*> getFinishedList();
 	
 
+	//failureprobability 
 	int OutCarFailureProbability(Car*outcar);
 
     DerivedPriQueue<Car*> getCurrentFailedOutCars();
+	
+	//failureAction
+	//DerivedPriQueue<Car*> OutCarFailureAction(Car* Failedcars);
 
-	void OutCarFailureAction(Car* Failedcars);
+	DerivedPriQueue<Car*>  OutCarFailureAction(Car* Failedcars);
+	//when checkup is done
+	void moveCarFromCheckupToFreeList(Car* checkedcar);
+
+	//void OutCarFailureAction(Car* Failedcars);
 
 	//DerivedPriQueue<Car*>  OUTTOBACK(Car* Failedcars);
 
