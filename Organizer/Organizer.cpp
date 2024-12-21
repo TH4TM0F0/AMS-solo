@@ -312,7 +312,6 @@ int Organizer::OutCarFailureProbability(Car*outcar) // update input file and add
 		incrementTimestep();//for each timestep
 		}
 	}
-//another way w hakhtar
 DerivedPriQueue<Car*> Organizer::OutCarFailureAction(Car* Failedcars) //checkuplist queue
 {
 	/*DerivedPriQueue<int> checkuplist;*/
