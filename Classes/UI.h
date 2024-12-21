@@ -20,9 +20,8 @@ public:
 	/// Printing Funcs
 	void printSimStart();
 	void printTimeStep();
-	void printHospital(Hospital hospitalToPrint);
-	void printOutCars();
-	void printBackCars();
+	void printHospital(Hospital *hospitalToPrint);
+
 	
 
 

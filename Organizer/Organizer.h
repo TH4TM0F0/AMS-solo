@@ -43,12 +43,12 @@ private:
 	/// Lists
 	LinkedQueue<Patient*> allRequests;										/// Queue for all patient requests
 	LinkedQueue<Patient*> cancelledRequests;								/// Queue for all cancelled requests	
-	Hospital* hospitalList = nullptr;										/// Dyanmic Array of Hospitals
+	Hospital* hospitalList = nullptr;										/// Dynamic Array of Hospitals
 	DerivedPriQueue<Car*> outCars;											/// PriQ for cars on their way to pick-up a patient
 	priQueue<Car*> backCars;                                                /// PriQ for returned cars
 	LinkedQueue<Patient*> finishedList;                                     /// Queue for finished patients 
-
-
+	DerivedPriQueue<Car*> failedoutCars;                                    /// PriQ for failed out cars
+	DerivedPriQueue<Car*> checkuplist;                                      /// PriQ for checkup list of out cars
 	/// 2d Distance Matrix
 	int** distanceMatrix = nullptr;
 
@@ -80,7 +80,7 @@ public:
 	void loadInputFile();
 
 	/// Assign Patients to their hospitals
-
+	void loadPatients();
 
 	/// Simulate Func
 	void startsim();
@@ -101,22 +101,20 @@ public:
 	/// Extra Funcs
 	int getNumofHospitals();
 	Hospital* getHospitalList();
-	// Hospital hospital;
-	/*int getCurrentOutCars();
-	int getCurrentBackCars();
-	int getCurrentFinished();*/
-	//void printFinishedList(); ==> to be deleted
+
 	/// Formatted print --> for out & back cars lists
 	DerivedPriQueue<Car*> getOutCars();
 	priQueue<Car*> getBackCars();
 	LinkedQueue<Patient*> getFinishedList();
-	// priQueue<Patient*> emergencyPatientList = hospital.getEPatientList();
+	
 
-	void OutCarFailureProbability(Car* car);
+	int OutCarFailureProbability(Car*outcar);
 
-	void OutCarFailureAction(Car* car);
+    DerivedPriQueue<Car*> getCurrentFailedOutCars();
 
+	void OutCarFailureAction(Car* Failedcars);
 
+	//DerivedPriQueue<Car*>  OUTTOBACK(Car* Failedcars);
 
 	//Car from Free to OUT
 	void moveCarFromFreeToOut(Patient* Patient, Hospital* hospital);
@@ -128,4 +126,10 @@ public:
 	//cancel Request 
 	void CancelRequest(int PatientID, int CancelTime, Patient* patient, Car* car);
 
+
+
+	Car* AssignEP( Patient* patient);
+	
+
+	
 };

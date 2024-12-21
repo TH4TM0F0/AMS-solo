@@ -137,11 +137,32 @@ void Organizer::loadInputFile()
 	fin.close();
 }
 
+void Organizer::loadPatients()
+{
+	while (!allRequests.isEmpty())
+	{
+		allRequests.dequeue(tempPatientPtr);
+		if (tempPatientPtr->getType() == "NP")
+		{
+			hospitalList[tempPatientPtr->getNearestHospitalID() - 1].addNpatient(tempPatientPtr);
+		}
+		else if (tempPatientPtr->getType() == "SP")
+		{
+			hospitalList[tempPatientPtr->getNearestHospitalID() - 1].addSpatient(tempPatientPtr);
+		}
+		else if (tempPatientPtr->getType() == "EP")
+		{
+			hospitalList[tempPatientPtr->getNearestHospitalID() - 1].addEpatient(tempPatientPtr);
+		}
+	}
+	return;
+}
+
 void Organizer::startsim()
 {
 	/// start with loading data from the input file
 	loadInputFile();
-	
+	loadPatients();
 	/// then assign all requests to their related hospitals
 	// assignPatientstotheirrelatedhospitals();
 
@@ -201,7 +222,7 @@ void Organizer::createOutputFile()
 		/*{
 
 		}*/
-		fout << "Patients: " << allRequests.count - cancelledRequests.count << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
+		fout << "Patients: " << numofRequests - numofCancelledRequests << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
 			 << "Hospitals = " << numofHospitals << std::endl
 			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
 			 << "Average Wait Time = " /* << rakam to be calculated */ << std::endl
@@ -217,7 +238,7 @@ void Organizer::createOutputFile()
 bool Organizer::SimEnded()
 {
 	/// true --> simulation ended , false --> simulation completes
-	return finishedList.count == allRequests.count - cancelledRequests.count;
+	return finishedList.count == numofRequests - numofCancelledRequests;
 }
 
 int Organizer::getNumofHospitals()
@@ -265,25 +286,58 @@ LinkedQueue<Patient*> Organizer::getFinishedList()
 	return finishedList;
 }
 
-
-void Organizer::OutCarFailureProbability(Car* car) // update input file and add failure probability of out cars and load file 
-{     
-	//LinkedQueue<int>queue; 
-	//int FailureProb;                                    // if the random number falls within the range of failure probability ,a car should fail 
-	//if (int x=0) {
- //       outCars.dequeue(car);
-	//	queue.enqueue(FailureProb);
-	//}
-
-
-}
-
-void Organizer::OutCarFailureAction(Car* car)
+DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
 {
-	return;
+	return failedoutCars;
 }
+//handling the random number related to a certain car or not?
+// if the random number falls within the range of failure probability ,a car should fail 
+//int Organizer::OutCarFailureProbability(Car*outcar) // update input file and add failure probability of out cars and load file 
+//{
+//	int pri;
+//	double failureprobability = 0.9;//el mafrood between zero w 1
+//	RndmGen rndmgen;//object to acces function
+//	while (!outCars.isEmpty()) {
+//		outCars.dequeue(outcar, pri);
+//		if (rndmgen.generate(100) <= failureprobability * 100) {//check lw el generated random num is less than failure probability 
+//			outcar->getID();
+//			if (outcar->getID()) {//this might be removed later
+//				failedoutCars.enqueue(outcar, pri); //add the removed car to the failed out cars list 
+//			}
+//		}
+//		else {
+//			outCars.enqueue(outcar,pri);//if not re add it to the outcars
+//		}
+//		
+//		}
+//	}
+//does it mean a new backlist or backcarlist?
+void Organizer::OutCarFailureAction(Car*Failedcars) // checkup list queue
+{
+	DerivedPriQueue<int>backlist;
+	int pri;
+	while (!failedoutCars.isEmpty()) { //check if the failed outcars is empty 
+		failedoutCars.dequeue(Failedcars, pri);
+		backlist.enqueue(Failedcars->getID(),pri);
 
+	}
 
+}
+////another way w hakhtar
+//DerivedPriQueue<Car*> Organizer::OUTTOBACK(Car* Failedcars)
+//{
+//	DerivedPriQueue<int> checkuplist;
+//	int pri;
+//	while (!failedoutCars.isEmpty()) {
+//		Failedcars->getID();
+//		failedoutCars.dequeue(Failedcars, pri);//removes the car from the failedoutcars list
+//		backCars.enqueue(Failedcars, pri);//add it to the backCars list
+//	}
+//	while (!backCars.isEmpty()) {
+//
+//		
+//	}
+//}
 
 void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 {
@@ -353,3 +407,72 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 
 
 
+Car* Organizer::AssignEP(Patient* patient)
+{
+
+	
+
+	//{
+	//	if (QID.isEmpty())      // if the queue is empty enqueue 3latool 
+	//	{
+	//		QID.enqueue(hospitalList[i].getID());
+	//		minimum = hospitalList[i].getEmergencyPatientList()->count;
+	//	}
+	//	else                   // the queue is not empty --> empy it then fill 3la nadafa 
+	//	{
+	//		while (!QID.isEmpty())
+	//		{
+	//			int temp = 0;
+	//			QID.peek(temp);
+	//			QID.dequeue(temp);
+
+	//		}
+	//		QID.enqueue(hospitalList[i].getID());
+	//		minimum = hospitalList[i].getEmergencyPatientList()->count;
+	//	}
+	//}
+	//		else if (hospitalList[i].getEmergencyPatientList()->count == minimum)
+	//		{
+	//			QID.enqueue(hospitalList[i].getID());
+	//			}
+
+
+	int current_id = 0;
+	current_id = patient->getNearestHospitalID();
+	int minimum = INT_MAX;
+	int idOfShortest = 0;
+
+
+	for (int i = 0; i < numofHospitals; i++)
+	{
+		if (hospitalList[i].getID() != current_id)   // to avoid looping on this particular hospital 
+		{
+			if (hospitalList[i].getEPatientList().count < minimum)
+			{
+				minimum = hospitalList[i].getEPatientList().count;
+				idOfShortest = i;
+			}
+			else if (hospitalList[i].getEPatientList().count == minimum)
+			{
+				for (int j = 0; j < numofHospitals; j++)
+				{
+					distanceMatrix[current_id][i];
+					distanceMatrix[current_id][j];
+					if (distanceMatrix[current_id][i] > distanceMatrix[current_id][j])
+					{
+						idOfShortest = j;
+					}
+					else
+					{
+						idOfShortest = i;
+					}
+
+				}
+
+			}
+		}
+	}
+
+	return hospitalList[idOfShortest].Assign_EP(patient);
+	
+}
