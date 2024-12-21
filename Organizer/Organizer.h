@@ -80,7 +80,7 @@ public:
 	void loadInputFile();
 
 	/// Assign Patients to their hospitals
-
+	void loadPatients();
 
 	/// Simulate Func
 	void startsim();
@@ -101,16 +101,12 @@ public:
 	/// Extra Funcs
 	int getNumofHospitals();
 	Hospital* getHospitalList();
-	// Hospital hospital;
-	/*int getCurrentOutCars();
-	int getCurrentBackCars();
-	int getCurrentFinished();*/
-	//void printFinishedList(); ==> to be deleted
+
 	/// Formatted print --> for out & back cars lists
 	DerivedPriQueue<Car*> getOutCars();
 	priQueue<Car*> getBackCars();
 	LinkedQueue<Patient*> getFinishedList();
-	// priQueue<Patient*> emergencyPatientList = hospital.getEPatientList();
+	
 
 	int OutCarFailureProbability(Car*outcar);
 

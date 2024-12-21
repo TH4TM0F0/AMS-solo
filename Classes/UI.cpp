@@ -37,8 +37,6 @@ void UI::printSimStart()
 		//std::cout << "Press Enter to display the next timestep." << std::endl;
 		//std::cin.get();
 		////}
-
-		return;
 	}
 
 	if (mode == 2)
@@ -65,8 +63,8 @@ void UI::printSimStart()
 
 		std::cout << std::endl << std::endl;
 		std::cout << "Simulation ends, Output File created --> outputfile.txt" << std::endl;
-		return;
 	}
+	return;
 }
 
 void UI::printTimeStep()
@@ -75,7 +73,7 @@ void UI::printTimeStep()
 	std::cin.ignore();
 	for (int i = 0; i < orgPtr->getNumofHospitals(); i++)
 	{
-		printHospital(hospitalPtr[i]);
+		printHospital(&hospitalPtr[i]);
 		std::cout << "-----------------------------------------------------------" << std::endl;
 
 		std::cout << orgPtr->getOutCars().count << " ==> " << "Out Cars: "; 
@@ -94,24 +92,24 @@ void UI::printTimeStep()
 	}
 }
 
-void UI::printHospital(Hospital hospitalToPrint)
+void UI::printHospital(Hospital *hospitalToPrint)
 {
 	/// Format of 1 Hospital
-	std::cout << "==============" << "       " << "Hospital #" << hospitalToPrint << " " << "start" << "       " << "==============" << std::endl;
+	std::cout << "==============" << "       " << "Hospital #" << *hospitalToPrint << " " << "start" << "       " << "==============" << std::endl;
 
-	std::cout << hospitalToPrint.getEPatientList().count << " EP requests: ";
-	hospitalToPrint.getEPatientList().print();
+	std::cout << hospitalToPrint->getEPatientList().count << " EP requests: ";
+	//hospitalToPrint->getEPatientList().print();
 	std::cout << std::endl;
 
-	std::cout << hospitalToPrint.getSPatientList().count << " SP requests: ";
-	hospitalToPrint.getSPatientList().print();
-	std::cout << std::endl;
+	std::cout << hospitalToPrint->getSPatientList().count << " SP requests: ";
+	hospitalToPrint->getSPatientList().print();
+	//std::cout << std::endl;
 
-	std::cout << hospitalToPrint.getNPatientList().count << " NP requests: ";
-	hospitalToPrint.getNPatientList().print();
-	std::cout << std::endl;
+	std::cout << hospitalToPrint->getNPatientList().count << " NP requests: ";
+	hospitalToPrint->getNPatientList().print();
+	//std::cout << std::endl;
 
-	std::cout << "==============" << "       " << "Hospital #" << hospitalToPrint << " " << " end " << "       " << "==============" << std::endl;
+	std::cout << "==============" << "       " << "Hospital #" << *hospitalToPrint << " " << " end " << "       " << "==============" << std::endl;
 }
 
 

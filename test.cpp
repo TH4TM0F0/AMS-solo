@@ -213,6 +213,22 @@ int main()
 
 
 
+
+
+///////////////////////// File loading & loading patients to their related hospitals
+Organizer* orgPtr = new Organizer;
+orgPtr->loadInputFile();
+orgPtr->loadPatients();
+UI ui(orgPtr);
+//ui.printTimeStep();
+//orgPtr->getHospitalList()->getEPatientList().print();
+Hospital* h;
+h = orgPtr->getHospitalList();
+h->getEmergencyPatientList()->print();
+(h + 1)->getEmergencyPatientList()->print();
+(h + 2)->getEmergencyPatientList()->print();
+(h + 3)->getEmergencyPatientList()->print();
+(h + 4)->getEmergencyPatientList()->print();
 }
 
 
