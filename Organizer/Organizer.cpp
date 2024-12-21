@@ -185,6 +185,7 @@ void Organizer::startsim()
 
 void Organizer::AddOutCars(Car* car)
 {
+	
 	int priority = car->getPickupTime();	/// --> to be checked ma3 TA Nada
 	outCars.enqueue(car, -priority);		/// -ve 3ashan el hayo5rog elawel 3ando timestep as8ar wel priority betemshy 
 											/// larger pri first out
@@ -392,6 +393,12 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 	}
 
 	if (car) {
+
+		// Added by belal 
+		//car->setCarBusy(car->getCarBusyTime());  
+
+		TotalBusyTime = TotalBusyTime + car->getCarBusyTime();
+
 		int id = car->getHospitalID();
 		string type = car->getType();
 		if (type == "NC") {
@@ -479,4 +486,66 @@ Car* Organizer::AssignEP(Patient* patient)
 
 	return hospitalList[idOfShortest].Assign_EP(patient);
 	
+}
+
+int Organizer:: Calculatewaiting()
+{
+
+	int TotalWaiting = 0;
+	Node<Patient*> *dump = finishedList.getFrontPtr();
+
+
+
+    while (!finishedList.isEmpty())
+	{
+		TotalWaiting = dump->getItem()->getWaitingTime() + TotalWaiting;
+		dump = dump->getNext();
+	}
+
+	return ceil(float(TotalWaiting) / finishedList.count);
+
+}
+
+//int Organizer::CalculateCarBusy()
+//{
+//	int TotalBusy = 0;
+//	Node<Patient*>* temp = finishedList.getFrontPtr();
+//
+//	while (!finishedList.isEmpty())
+//	{
+//	
+//		TotalBusy = temp->getItem()->getCarBusy() + TotalBusy;
+//		temp = temp->getNext();
+//	}
+//
+//	return ceil(float(TotalBusy) / finishedList.count);
+//}
+
+int Organizer::CalculateAVG_Busy()
+{
+	
+}
+
+int Organizer::TotalBusyTime()
+{
+	return 0;
+}
+
+//int Organizer::TotalBusyTime()
+//{
+//	return TotalBusyTime;
+//}
+
+void Organizer::setBusyTime(int busytime)
+{
+
+}
+
+//int Organizer::CalculateUtilization()
+////{
+////	return ceil(CalculateCarBusy() / timestep);
+//}
+
+
+
 }
