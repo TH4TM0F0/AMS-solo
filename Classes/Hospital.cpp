@@ -207,17 +207,20 @@ Car* Hospital::Assign_EP(Patient* patient)
 
 Car* Hospital::Assign_SP(Patient* patient)
 {
-	if (SpecialCarList.isEmpty())
-	{
-		return nullptr;
-	}
-	else
-	{
-		Car* temps = removeScar();
-		temps->setStatus(Assigned);
-		temps->setAssignedPatient(patient);
-		return temps;
-	}
+	
+	
+		if (SpecialCarList.isEmpty())
+		{
+			return nullptr;
+		}
+		else
+		{
+			Car* temps = removeScar();
+			temps->setStatus(Assigned);
+			temps->setAssignedPatient(patient);
+			return temps;
+		}
+	
 }
 
 

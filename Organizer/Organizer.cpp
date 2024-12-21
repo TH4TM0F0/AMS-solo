@@ -169,6 +169,17 @@ void Organizer::startsim()
 	/// main loop 
 	//while (!SimEnded())
 	//{
+	  
+
+
+
+
+
+
+
+
+
+
 	//	// do smthg
 	
 	uiPtr->printSimStart();
@@ -393,12 +404,12 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 		return;
 	}
 
-	if (car) {
+	if (car) 
+	{
 
-		// Added by belal 
-		//car->setCarBusy(car->getCarBusyTime());  
+		// added by belal this part helps in calculating average busy time 
 
-		TotalBusyTime = TotalBusyTime + car->getCarBusyTime();
+		setBusy(car->getCarBusyTime());    // passes the busy time of the car to the fn set busy 
 
 		int id = car->getHospitalID();
 		string type = car->getType();
@@ -507,6 +518,30 @@ int Organizer:: Calculatewaiting()
 
 }
 
+void Organizer::setBusy(int busytime)
+{
+	BusyTime = busytime + BusyTime;
+}
+
+int Organizer::getBusy()
+{
+	return BusyTime;
+}
+
+int Organizer::AvgBusy()
+{
+	return ceil(float(BusyTime) /  timestep);
+}
+
+int Organizer::AvgUtilization()
+{
+	return ceil(AvgBusy() / timestep) *100 ; // needed as percentage
+}
+
+
+
+
+
 //int Organizer::CalculateCarBusy()
 //{
 //	int TotalBusy = 0;
@@ -522,31 +557,4 @@ int Organizer:: Calculatewaiting()
 //	return ceil(float(TotalBusy) / finishedList.count);
 //}
 
-int Organizer::CalculateAVG_Busy()
-{
-	
-}
 
-int Organizer::TotalBusyTime()
-{
-	return 0;
-}
-
-//int Organizer::TotalBusyTime()
-//{
-//	return TotalBusyTime;
-//}
-
-void Organizer::setBusyTime(int busytime)
-{
-
-}
-
-//int Organizer::CalculateUtilization()
-////{
-////	return ceil(CalculateCarBusy() / timestep);
-//}
-
-
-
-}
