@@ -218,8 +218,12 @@ int main()
 ///////////////////////// File loading & loading patients to their related hospitals
 Organizer* orgPtr = new Organizer;
 orgPtr->startsim();
-UI ui(orgPtr);
-ui.printSimStart();
+
+
+
+
+//UI ui(orgPtr);
+//ui.printSimStart();
 //orgPtr->loadInputFile();
 //orgPtr->loadPatients();
 //UI ui();

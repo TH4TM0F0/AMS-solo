@@ -15,7 +15,6 @@ public:
 	UI(Organizer* orgPtr);
 
 	/// Main Print Func
-	//void print();
 
 	/// Printing Funcs
 	void printSimStart();

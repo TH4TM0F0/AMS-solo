@@ -11,6 +11,8 @@ using namespace std;
 #include "../Classes/RndmGen.h"
 
 
+class UI;
+
 class Organizer
 {
 private:
