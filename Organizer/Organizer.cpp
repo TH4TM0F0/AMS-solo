@@ -321,23 +321,24 @@ DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
 //			outCars.enqueue(outcar,pri);//if not re add it to the outcars
 //		}
 //		
+//		}
 //	}
-//}
 //does it mean a new backlist or backcarlist?
-//void Organizer::OutCarFailureAction(Car*Failedcars) // checkup list queue
-//{
-//	DerivedPriQueue<int>backlist;
-//	int pri;
-//	while (!failedoutCars.isEmpty()) { //check if the failed outcars is empty 
-//		failedoutCars.dequeue(Failedcars, pri);
-//		backlist.enqueue(Failedcars->getID(),pri);
-//
-//	}
-//
-//}
-//another way w hakhtar
+void Organizer::OutCarFailureAction(Car*Failedcars) // checkup list queue
+{
+	DerivedPriQueue<int>backlist;
+	int pri;
+	while (!failedoutCars.isEmpty()) { //check if the failed outcars is empty 
+		failedoutCars.dequeue(Failedcars, pri);
+		backlist.enqueue(Failedcars->getID(),pri);
+
+	}
+
+}
+////another way w hakhtar
 //DerivedPriQueue<Car*> Organizer::OUTTOBACK(Car* Failedcars)
 //{
+//	DerivedPriQueue<int> checkuplist;
 //	int pri;
 //	while (!failedoutCars.isEmpty()) {
 //		Failedcars->getID();
@@ -348,7 +349,6 @@ DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
 //
 //		
 //	}
-//	
 //}
 
 void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
@@ -426,6 +426,80 @@ void Organizer::CancelRequest(int PatientID, int CancelTime, Patient* patient, C
 	//awl ma el request ye7sal car is back 
 	//from back to free lma nafs 3dd el time steps y3ady 
 }
+
+
+
+Car* Organizer::AssignEP(Patient* patient)
+{
+
+	
+
+	//{
+	//	if (QID.isEmpty())      // if the queue is empty enqueue 3latool 
+	//	{
+	//		QID.enqueue(hospitalList[i].getID());
+	//		minimum = hospitalList[i].getEmergencyPatientList()->count;
+	//	}
+	//	else                   // the queue is not empty --> empy it then fill 3la nadafa 
+	//	{
+	//		while (!QID.isEmpty())
+	//		{
+	//			int temp = 0;
+	//			QID.peek(temp);
+	//			QID.dequeue(temp);
+
+	//		}
+	//		QID.enqueue(hospitalList[i].getID());
+	//		minimum = hospitalList[i].getEmergencyPatientList()->count;
+	//	}
+	//}
+	//		else if (hospitalList[i].getEmergencyPatientList()->count == minimum)
+	//		{
+	//			QID.enqueue(hospitalList[i].getID());
+	//			}
+
+
+	int current_id = 0;
+	current_id = patient->getNearestHospitalID();
+	int minimum = INT_MAX;
+	int idOfShortest = 0;
+
+
+	for (int i = 0; i < numofHospitals; i++)
+	{
+		if (hospitalList[i].getID() != current_id)   // to avoid looping on this particular hospital 
+		{
+			if (hospitalList[i].getEPatientList().count < minimum)
+			{
+				minimum = hospitalList[i].getEPatientList().count;
+				idOfShortest = i;
+			}
+			else if (hospitalList[i].getEPatientList().count == minimum)
+			{
+				for (int j = 0; j < numofHospitals; j++)
+				{
+					distanceMatrix[current_id][i];
+					distanceMatrix[current_id][j];
+					if (distanceMatrix[current_id][i] > distanceMatrix[current_id][j])
+					{
+						idOfShortest = j;
+					}
+					else
+					{
+						idOfShortest = i;
+					}
+
+				}
+
+			}
+		}
+	}
+
+	return hospitalList[idOfShortest].Assign_EP(patient);
+	
+}
+
+
 
 
 

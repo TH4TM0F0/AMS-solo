@@ -229,6 +229,50 @@ h->getEmergencyPatientList()->print();
 (h + 2)->getEmergencyPatientList()->print();
 (h + 3)->getEmergencyPatientList()->print();
 (h + 4)->getEmergencyPatientList()->print();
+
+
+Organizer* org = new Organizer();
+org->loadInputFile();
+
+
+
+
+//Patient* p2 = new Patient(2, "EP", 3, 1, 200, 6);
+//Patient* p3 = new Patient(559, "EP", 3, 1, 200, 6);
+//Patient* c1 = new Patient(1, "EP", 2, 1, 450, 5);
+//Patient* c2 = new Patient(2, "EP", 3,1, 200, 6);
+//
+//Hospital* h = org->getHospitalList();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
