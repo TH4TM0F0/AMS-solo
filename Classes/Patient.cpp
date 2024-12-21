@@ -55,6 +55,30 @@ void Patient::setCancelTime(int cancelTime)
 	this->cancelTime = cancelTime;
 }
 
+
+void Patient::setWaitingTime()
+{
+	waitingTime = getPickupTime() - getRequestTime();
+}
+
+int Patient::getWaitingTime()
+{
+	return waitingTime;
+}
+
+void Patient::setCarBusyTime(int busytime)
+{
+	AssignedCarBusyTime = busytime;
+
+}
+
+int Patient::getCarBusy()
+{
+	return AssignedCarBusyTime;
+}
+
+
+
 int Patient::getID()
 {
 	return id;
@@ -94,6 +118,15 @@ int Patient::getCancelTime()
 {
 	return cancelTime;
 }
+
+int Patient::getDropOffTime()
+{
+	 //ceil(pickupTime + float(assignedPatient->getDistance() / speed));
+
+	return pickupTime + float( getDistance()
+}
+
+
 
 std::ostream& operator<<(std::ostream& out, Patient& patient)
 {
