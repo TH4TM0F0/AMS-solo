@@ -170,7 +170,8 @@ void Organizer::startsim()
 	//while (!SimEnded())
 	//{
 	//	// do smthg
-	//	//uiPtr->printSimStart();
+	
+	uiPtr->printSimStart();
 
 
 	//	 
