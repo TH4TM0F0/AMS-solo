@@ -125,6 +125,9 @@ public:
 	DerivedPriQueue<Car*>  OutCarFailureAction(Car* Failedcars);
 	//when checkup is done
 	void moveCarFromCheckupToFreeList(Car* checkedcar);
+
+	//void OutCarFailureAction(Car* Failedcars);
+
 	//DerivedPriQueue<Car*>  OUTTOBACK(Car* Failedcars);
 
 	//Car from Free to OUT

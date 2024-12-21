@@ -294,7 +294,7 @@ DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
 int Organizer::OutCarFailureProbability(Car*outcar) // update input file and add failure probability of out cars and load file 
 {
 	int pri;
-	double failureprobability=0.9;//el mafrood between zero w 1
+	double failureprobability = 0.9;//el mafrood between zero w 1
 	RndmGen rndmgen;//object to acces function
 	while (!outCars.isEmpty()) {
 		outCars.dequeue(outcar, pri);
