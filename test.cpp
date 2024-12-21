@@ -213,6 +213,50 @@ int main()
 
 
 
+
+
+Organizer* org = new Organizer();
+org->loadInputFile();
+
+
+
+
+//Patient* p2 = new Patient(2, "EP", 3, 1, 200, 6);
+//Patient* p3 = new Patient(559, "EP", 3, 1, 200, 6);
+//Patient* c1 = new Patient(1, "EP", 2, 1, 450, 5);
+//Patient* c2 = new Patient(2, "EP", 3,1, 200, 6);
+//
+//Hospital* h = org->getHospitalList();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

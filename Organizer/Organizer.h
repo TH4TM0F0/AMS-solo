@@ -130,4 +130,10 @@ public:
 	//cancel Request 
 	void CancelRequest(int PatientID, int CancelTime, Patient* patient, Car* car);
 
+
+
+	Car* AssignEP( Patient* patient);
+
+	
+		
 };

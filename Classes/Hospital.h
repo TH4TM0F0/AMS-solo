@@ -75,11 +75,7 @@ public:
 	LinkedQueue<Car*> getSpecialCarList();
 
 
-	// Functions to check if lists within the hospital is Empty 
-
-	bool Check_EmergencyList();
-	bool Check_SpecialList();
-	bool Check_NormalList();
+	
 
 
 	//Car counter functions --> purpose is to return the amount of cars "ready" to be assigned
@@ -87,15 +83,13 @@ public:
 	int Check_ScarList();
 	int Check_NcarList();
 
-	priQueue<Patient*>* getEmergencyPatientList() {
-		return &EmergencyPatientList;
-	}
+	
 
 	// Patient Assignment Functions
 
-	/*Car* Assign_EP(Patient* patient, Organizer* org);
+	Car* Assign_EP(Patient* patient);
 	Car* Assign_SP(Patient* patient);
-	Car* Assign_NP(Patient* patient);*/
+	Car* Assign_NP(Patient* patient);
 
 
 	// Operator Overloading
