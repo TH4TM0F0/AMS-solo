@@ -12,6 +12,7 @@ private:
 	int severity = 0;			/// for EP only
 	int cancelTime = 0;			/// for NP only
 	int waitingTime = 0;
+	int dropOffTime = 0;
 
 	int AssignedCarBusyTime = 0;
 
@@ -30,6 +31,7 @@ public:
 	void setSeverity(int severity);
 	void setCancelTime(int cancelTime);
 	void setWaitingTime();
+	void setDropOffTime(int dropTime);
 
 	// Getters
 	int getID();

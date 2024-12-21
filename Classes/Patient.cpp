@@ -61,6 +61,11 @@ void Patient::setWaitingTime()
 	waitingTime = getPickupTime() - getRequestTime();
 }
 
+void Patient::setDropOffTime(int dropTime)
+{
+	dropOffTime = dropTime;
+}
+
 int Patient::getWaitingTime()
 {
 	return waitingTime;
@@ -122,8 +127,7 @@ int Patient::getCancelTime()
 int Patient::getDropOffTime()
 {
 	 //ceil(pickupTime + float(assignedPatient->getDistance() / speed));
-
-	return pickupTime + float( getDistance()
+	return dropOffTime;
 }
 
 

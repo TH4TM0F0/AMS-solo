@@ -51,6 +51,7 @@ void Car::setRequestTime(int requestTime)
 	this->requestTime = requestTime;
 }
 
+
 int Car::getID()
 {
 	return id;
@@ -104,6 +105,7 @@ int Car::getPatientWaitingTime()
 int Car::getDropoffTime()
 {
 	return ceil(pickupTime + float(assignedPatient->getDistance() / speed));
+	assignedPatient->setDropOffTime(ceil(pickupTime + float(assignedPatient->getDistance() / speed)));
 }
 
 int Car::getCarBusyTime()

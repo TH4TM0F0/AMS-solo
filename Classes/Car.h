@@ -44,6 +44,10 @@ public:
 	void setRequestTime(int requestTime);
 	
 
+
+	
+	
+
 	// Getters
 	int getID();
 	std::string getType();
