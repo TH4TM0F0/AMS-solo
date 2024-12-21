@@ -114,7 +114,7 @@ public:
 
 	void OutCarFailureAction(Car* Failedcars);
 
-	DerivedPriQueue<Car*>  OUTTOBACK(Car* Failedcars);
+	//DerivedPriQueue<Car*>  OUTTOBACK(Car* Failedcars);
 
 	//Car from Free to OUT
 	void moveCarFromFreeToOut(Patient* Patient, Hospital* hospital);
@@ -129,7 +129,7 @@ public:
 
 
 	Car* AssignEP( Patient* patient);
+	
 
 	
-		
 };

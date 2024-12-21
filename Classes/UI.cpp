@@ -96,18 +96,18 @@ void UI::printHospital(Hospital *hospitalToPrint)
 {
 	/// Format of 1 Hospital
 	std::cout << "==============" << "       " << "Hospital #" << *hospitalToPrint << " " << "start" << "       " << "==============" << std::endl;
-
-	std::cout << hospitalToPrint->getEPatientList().count << " EP requests: ";
-	//hospitalToPrint->getEPatientList().print();
+	priQueue<Patient*> eplist = hospitalToPrint->getEPatientList();
+	std::cout << eplist.count << " EP requests: ";
+	eplist.print();
 	std::cout << std::endl;
 
 	std::cout << hospitalToPrint->getSPatientList().count << " SP requests: ";
 	hospitalToPrint->getSPatientList().print();
-	//std::cout << std::endl;
+	std::cout << std::endl;
 
 	std::cout << hospitalToPrint->getNPatientList().count << " NP requests: ";
 	hospitalToPrint->getNPatientList().print();
-	//std::cout << std::endl;
+	std::cout << std::endl;
 
 	std::cout << "==============" << "       " << "Hospital #" << *hospitalToPrint << " " << " end " << "       " << "==============" << std::endl;
 }

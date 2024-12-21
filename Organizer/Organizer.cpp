@@ -1,16 +1,4 @@
-
 #include "Organizer.h"
-#pragma once
-using namespace std;
-#include <fstream>
-#include <iomanip>
-#include "../AllowedDS/LinkedQueue.h"
-#include "../DerivedDS/DerivedPriQueue.h"
-#include "../AllowedDS/PriQueue.h"
-#include "../Classes/Car.h"
-#include "../Classes/Patient.h"
-#include "../Classes/Hospital.h"
-#include "../Classes/RndmGen.h"
 
 Organizer::Organizer()
 {
@@ -498,8 +486,3 @@ Car* Organizer::AssignEP(Patient* patient)
 	return hospitalList[idOfShortest].Assign_EP(patient);
 	
 }
-
-
-
-
-

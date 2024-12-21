@@ -147,8 +147,6 @@ LinkedQueue<Car*> Hospital::getSpecialCarList()
 	return SpecialCarList;
 }
 
-
-
 DerivedQueue<Patient*> Hospital::getNPatientList()
 {
 	return NormalPatientList;
@@ -163,8 +161,6 @@ priQueue<Patient*> Hospital::getEPatientList()
 {
 	return EmergencyPatientList;
 }
-
-
 
 int Hospital::Check_ScarList()
 {

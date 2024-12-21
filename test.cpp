@@ -220,19 +220,20 @@ Organizer* orgPtr = new Organizer;
 orgPtr->loadInputFile();
 orgPtr->loadPatients();
 UI ui(orgPtr);
-//ui.printTimeStep();
+ui.printTimeStep();
+//std::cout << orgPtr->getHospitalList()->getEPatientList().getHead();
 //orgPtr->getHospitalList()->getEPatientList().print();
-Hospital* h;
-h = orgPtr->getHospitalList();
-h->getEmergencyPatientList()->print();
-(h + 1)->getEmergencyPatientList()->print();
-(h + 2)->getEmergencyPatientList()->print();
-(h + 3)->getEmergencyPatientList()->print();
-(h + 4)->getEmergencyPatientList()->print();
+//Hospital* h;
+//h = orgPtr->getHospitalList();
+//h->getEPatientList().print();
+//(h + 1)->getEPatientList().print();
+//(h + 2)->getEPatientList().print();
+//(h + 3)->getEPatientList().print();
+//(h + 4)->getEPatientList().print();
 
 
-Organizer* org = new Organizer();
-org->loadInputFile();
+//Organizer* org = new Organizer();
+//org->loadInputFile();
 
 
 
