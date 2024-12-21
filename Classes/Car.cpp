@@ -51,6 +51,11 @@ void Car::setRequestTime(int requestTime)
 	this->requestTime = requestTime;
 }
 
+void Car::setAssignmentTime(int assignmentTime)
+{
+	this->assignmentTime = assignmentTime;
+}
+
 
 int Car::getID()
 {
@@ -132,9 +137,7 @@ int Car::setCarBusy(int carbusyTime)
 //	return car_out;
 //}
 
-int Car::
-
-
+ 
 std::ostream& operator<<(std::ostream& out, Car& car)
 {
 	std::cout << car.type << car.id << "_H" << car.hospitalId;
