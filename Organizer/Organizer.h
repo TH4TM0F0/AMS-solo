@@ -9,6 +9,10 @@ using namespace std;
 #include "../Classes/Patient.h"
 #include "../Classes/Hospital.h"
 #include "../Classes/RndmGen.h"
+
+
+class UI;
+
 class Organizer
 {
 private:
@@ -57,11 +61,11 @@ private:
 
 	/// some Ptrs
 	Patient* tempPatientPtr = nullptr;
-
+	//UI* uiPtr = new UI(this);
 
 	int OutCarCount = 0;
-	int numofCars = 1;													/// variable to help with the car ids uniqueness
-																		/// there is no 2 cars in the whole system with the same id
+	int numofCars = 1;														/// variable to help with the car ids uniqueness
+																			/// there is no 2 cars in the whole system with the same id
 
 	/// File name, format, & instance of class inputfilestream --> neccessary variables for loading func
 	std::string fileName = "Organizer/InputFile";
@@ -82,7 +86,7 @@ public:
 	void loadInputFile();
 
 	/// Assign Patients to their hospitals
-
+	void loadPatients();
 
 	/// Simulate Func
 	void startsim();
@@ -103,16 +107,12 @@ public:
 	/// Extra Funcs
 	int getNumofHospitals();
 	Hospital* getHospitalList();
-	// Hospital hospital;
-	/*int getCurrentOutCars();
-	int getCurrentBackCars();
-	int getCurrentFinished();*/
-	//void printFinishedList(); ==> to be deleted
+
 	/// Formatted print --> for out & back cars lists
 	DerivedPriQueue<Car*> getOutCars();
 	priQueue<Car*> getBackCars();
 	LinkedQueue<Patient*> getFinishedList();
-	// priQueue<Patient*> emergencyPatientList = hospital.getEPatientList();
+	
 
 	//failureprobability 
 	int OutCarFailureProbability(Car*outcar);
@@ -125,6 +125,7 @@ public:
 	DerivedPriQueue<Car*>  OutCarFailureAction(Car* Failedcars);
 	//when checkup is done
 	void moveCarFromCheckupToFreeList(Car* checkedcar);
+	//DerivedPriQueue<Car*>  OUTTOBACK(Car* Failedcars);
 
 	//Car from Free to OUT
 	void moveCarFromFreeToOut(Patient* Patient, Hospital* hospital);
@@ -136,4 +137,10 @@ public:
 	//cancel Request 
 	void CancelRequest(int PatientID, int CancelTime, Patient* patient, Car* car);
 
+
+
+	Car* AssignEP( Patient* patient);
+	
+
+	
 };

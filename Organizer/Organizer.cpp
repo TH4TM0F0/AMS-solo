@@ -1,16 +1,4 @@
-
 #include "Organizer.h"
-#pragma once
-using namespace std;
-#include <fstream>
-#include <iomanip>
-#include "../AllowedDS/LinkedQueue.h"
-#include "../DerivedDS/DerivedPriQueue.h"
-#include "../AllowedDS/PriQueue.h"
-#include "../Classes/Car.h"
-#include "../Classes/Patient.h"
-#include "../Classes/Hospital.h"
-#include "../Classes/RndmGen.h"
 
 Organizer::Organizer()
 {
@@ -149,30 +137,49 @@ void Organizer::loadInputFile()
 	fin.close();
 }
 
+void Organizer::loadPatients()
+{
+	while (!allRequests.isEmpty())
+	{
+		allRequests.dequeue(tempPatientPtr);
+		if (tempPatientPtr->getType() == "NP")
+		{
+			hospitalList[tempPatientPtr->getNearestHospitalID() - 1].addNpatient(tempPatientPtr);
+		}
+		else if (tempPatientPtr->getType() == "SP")
+		{
+			hospitalList[tempPatientPtr->getNearestHospitalID() - 1].addSpatient(tempPatientPtr);
+		}
+		else if (tempPatientPtr->getType() == "EP")
+		{
+			hospitalList[tempPatientPtr->getNearestHospitalID() - 1].addEpatient(tempPatientPtr);
+		}
+	}
+	return;
+}
+
 void Organizer::startsim()
 {
 	/// start with loading data from the input file
 	loadInputFile();
-	
-	/// then assign all requests to their related hospitals
-	// assignPatientstotheirrelatedhospitals();
 
+	/// then assign all requests to their related hospitals
+	loadPatients();
 
 	/// main loop 
-	while (!SimEnded())
-	{
-		// do smthg
+	//while (!SimEnded())
+	//{
+	//	// do smthg
+	//	//uiPtr->printSimStart();
 
 
-
-		 
-		// increment the timestep at the end of each loop
-		incrementTimestep();
-	}
+	//	 
+	//	// increment the timestep at the end of each loop
+	//	incrementTimestep();
+	//}
 
 	/// end with creating the output file
 	createOutputFile();
-
 }
 
 void Organizer::AddOutCars(Car* car)
@@ -203,17 +210,18 @@ void Organizer::createOutputFile()
 	// check if the file is opened --> to start writing
 	if (fout.is_open())
 	{
-		fout << "FT"  /*e3mel beta3et std::setw() w std::setfill()*/
-			 << "PID" /*e3mel beta3et std::setw() w std::setfill()*/
-			 << "QT"  /*e3mel beta3et std::setw() w std::setfill()*/
-			 << "WT"  /*e3mel beta3et std::setw() w std::setfill()*/
+		fout << std::left << setw(6) << "FT"
+			 << std::left << setw(6) << "PID"
+			 << std::left << setw(6) << "QT"
+			 << std::left << setw(6) << "WT"
 			 << std::endl;
 		/// Header Row of Output file is created
-		//for (int i = 0; i < allRequests.count )
-		/*{
-
-		}*/
-		fout << "Patients: " << allRequests.count - cancelledRequests.count << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
+		for (int i = 0; i < numofRequests - numofCancelledRequests; i++)
+		{
+			finishedList.dequeue(tempPatientPtr);
+			fout << 
+		}
+		fout << "Patients: " << numofRequests - numofCancelledRequests << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
 			 << "Hospitals = " << numofHospitals << std::endl
 			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
 			 << "Average Wait Time = " /* << rakam to be calculated */ << std::endl
@@ -229,7 +237,7 @@ void Organizer::createOutputFile()
 bool Organizer::SimEnded()
 {
 	/// true --> simulation ended , false --> simulation completes
-	return finishedList.count == allRequests.count - cancelledRequests.count;
+	return finishedList.count == numofRequests - numofCancelledRequests;
 }
 
 int Organizer::getNumofHospitals()
@@ -337,7 +345,7 @@ void Organizer::moveCarFromCheckupToFreeList(Car* checkedcar)
 
 void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 {
-	/*Car* car;
+	Car* car;
 	
 	if (Patient->getType() == "NP") {
 		hospital->getNormalCarList().dequeue(car); 
@@ -355,7 +363,8 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 			outCars.enqueue(car, 0);
 		}
 	}
-	car->setStatus(Assigned);*/
+//	car->setStatus(Assigned);
+	
 	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
 }
 
@@ -398,18 +407,76 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 	}
 }
 
-void Organizer::CancelRequest(int PatientID, int CancelTime, Patient* patient, Car* car)
+
+
+
+
+Car* Organizer::AssignEP(Patient* patient)
 {
-	if (patient->getType() == "NP") {
-		if (car->getStatus() == Assigned && CancelTime < patient->getPickupTime()) { 
-			cancelledRequests.enqueue(patient);
-			numofCancelledRequests++;
-			car->setStatus(Cancelled); 
+
+	
+
+	//{
+	//	if (QID.isEmpty())      // if the queue is empty enqueue 3latool 
+	//	{
+	//		QID.enqueue(hospitalList[i].getID());
+	//		minimum = hospitalList[i].getEmergencyPatientList()->count;
+	//	}
+	//	else                   // the queue is not empty --> empy it then fill 3la nadafa 
+	//	{
+	//		while (!QID.isEmpty())
+	//		{
+	//			int temp = 0;
+	//			QID.peek(temp);
+	//			QID.dequeue(temp);
+
+	//		}
+	//		QID.enqueue(hospitalList[i].getID());
+	//		minimum = hospitalList[i].getEmergencyPatientList()->count;
+	//	}
+	//}
+	//		else if (hospitalList[i].getEmergencyPatientList()->count == minimum)
+	//		{
+	//			QID.enqueue(hospitalList[i].getID());
+	//			}
+
+
+	int current_id = 0;
+	current_id = patient->getNearestHospitalID();
+	int minimum = INT_MAX;
+	int idOfShortest = 0;
+
+
+	for (int i = 0; i < numofHospitals; i++)
+	{
+		if (hospitalList[i].getID() != current_id)   // to avoid looping on this particular hospital 
+		{
+			if (hospitalList[i].getEPatientList().count < minimum)
+			{
+				minimum = hospitalList[i].getEPatientList().count;
+				idOfShortest = i;
+			}
+			else if (hospitalList[i].getEPatientList().count == minimum)
+			{
+				for (int j = 0; j < numofHospitals; j++)
+				{
+					distanceMatrix[current_id][i];
+					distanceMatrix[current_id][j];
+					if (distanceMatrix[current_id][i] > distanceMatrix[current_id][j])
+					{
+						idOfShortest = j;
+					}
+					else
+					{
+						idOfShortest = i;
+					}
+
+				}
+
+			}
 		}
 	}
-	//awl ma el request ye7sal car is back 
-	//from back to free lma nafs 3dd el time steps y3ady 
+
+	return hospitalList[idOfShortest].Assign_EP(patient);
+	
 }
-
-
-

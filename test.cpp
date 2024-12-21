@@ -213,6 +213,48 @@ int main()
 
 
 
+
+
+///////////////////////// File loading & loading patients to their related hospitals
+Organizer* orgPtr = new Organizer;
+orgPtr->startsim();
+
+
+
+
+//UI ui(orgPtr);
+//ui.printSimStart();
+//orgPtr->loadInputFile();
+//orgPtr->loadPatients();
+//UI ui();
+
+//std::cout << orgPtr->getHospitalList()->getEPatientList().getHead();
+//orgPtr->getHospitalList()->getEPatientList().print();
+//Hospital* h;
+//h = orgPtr->getHospitalList();
+//h->getEPatientList().print();
+//(h + 1)->getEPatientList().print();
+//(h + 2)->getEPatientList().print();
+//(h + 3)->getEPatientList().print();
+//(h + 4)->getEPatientList().print();
+
+
+//Organizer* org = new Organizer();
+//org->loadInputFile();
+
+
+
+//Patient* p2 = new Patient(2, "EP", 3, 1, 200, 6);
+//Patient* p3 = new Patient(559, "EP", 3, 1, 200, 6);
+//Patient* c1 = new Patient(1, "EP", 2, 1, 450, 5);
+//Patient* c2 = new Patient(2, "EP", 3,1, 200, 6);
+//
+//Hospital* h = org->getHospitalList();
+
+
+
+
+
 }
 
 

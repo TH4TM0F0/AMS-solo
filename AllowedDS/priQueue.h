@@ -48,7 +48,6 @@ class priQueue
 {
 protected:
     priNode<T>* head;
-    
 public:
     priQueue() : head(nullptr) {
         count = 0;
@@ -131,4 +130,5 @@ public:
     {
         return head;
     }
+
 };
