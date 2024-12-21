@@ -25,6 +25,10 @@ private:
 	int patientwaitingTime = 0;
 	int dropoffTime = 0;					/// time when the car arrives back with the patient
 	int carbusyTime = 0;					/// total time a car is not free
+	 
+	int car_out = 0;                        // total time the car was out ( hospital to patient)
+	int car_back = 0;                       // total time the car was back ( patient to hospital)
+
 public:
 	// Constructor
 	Car();
@@ -38,11 +42,11 @@ public:
 	void setHospitalID(int hospitalId);
 	void setAssignedPatient(Patient* assignedPatient);
 	void setRequestTime(int requestTime);
-	/*void setAssignmentTime();
-	void setPickupTime(int assignmentTime);
-	void setPatientWaitingTime();
-	void setDropoffTime();
-	void setCarBusyTime();*/
+	
+
+
+	
+	
 
 	// Getters
 	int getID();
@@ -56,7 +60,13 @@ public:
 	int getPickupTime();
 	int getPatientWaitingTime();
 	int getDropoffTime();
-	//int getCarBusyTime();
+	int getCarBusyTime();
+
+	/*int get_outTime();
+	int get_backTime();*/
+
+	int setCarBusy(int carbusyTime);
+
 
 	
 

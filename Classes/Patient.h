@@ -11,6 +11,11 @@ private:
 	int distance = 0;			/// dis between patient and nearest hospital
 	int severity = 0;			/// for EP only
 	int cancelTime = 0;			/// for NP only
+	int waitingTime = 0;
+	int dropOffTime = 0;
+
+	int AssignedCarBusyTime = 0;
+
 public:
 	// Constructor
 	Patient();
@@ -25,6 +30,8 @@ public:
 	void setDistance(int distance);
 	void setSeverity(int severity);
 	void setCancelTime(int cancelTime);
+	void setWaitingTime();
+	void setDropOffTime(int dropTime);
 
 	// Getters
 	int getID();
@@ -35,6 +42,15 @@ public:
 	int getDistance();
 	int getSeverity();
 	int getCancelTime();
+	int getWaitingTime();
+	int getDropOffTime();
+
+
+	void setCarBusyTime(int busytime);
+
+	int getCarBusy();
+
+
 
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Patient& patient);

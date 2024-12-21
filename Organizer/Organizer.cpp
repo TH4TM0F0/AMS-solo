@@ -185,6 +185,7 @@ void Organizer::startsim()
 
 void Organizer::AddOutCars(Car* car)
 {
+	
 	int priority = car->getPickupTime();	/// --> to be checked ma3 TA Nada
 	outCars.enqueue(car, -priority);		/// -ve 3ashan el hayo5rog elawel 3ando timestep as8ar wel priority betemshy 
 											/// larger pri first out
@@ -292,52 +293,57 @@ DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
 }
 //handling the random number related to a certain car or not?
 // if the random number falls within the range of failure probability ,a car should fail 
-//int Organizer::OutCarFailureProbability(Car*outcar) // update input file and add failure probability of out cars and load file 
-//{
-//	int pri;
-//	double failureprobability = 0.9;//el mafrood between zero w 1
-//	RndmGen rndmgen;//object to acces function
-//	while (!outCars.isEmpty()) {
-//		outCars.dequeue(outcar, pri);
-//		if (rndmgen.generate(100) <= failureprobability * 100) {//check lw el generated random num is less than failure probability 
-//			outcar->getID();
-//			if (outcar->getID()) {//this might be removed later
-//				failedoutCars.enqueue(outcar, pri); //add the removed car to the failed out cars list 
-//			}
-//		}
-//		else {
-//			outCars.enqueue(outcar,pri);//if not re add it to the outcars
-//		}
-//		
-//		}
-//	}
-//does it mean a new backlist or backcarlist?
-void Organizer::OutCarFailureAction(Car*Failedcars) // checkup list queue
+int Organizer::OutCarFailureProbability(Car*outcar) // update input file and add failure probability of out cars and load file 
 {
-	DerivedPriQueue<int>backlist;
 	int pri;
-	while (!failedoutCars.isEmpty()) { //check if the failed outcars is empty 
-		failedoutCars.dequeue(Failedcars, pri);
-		backlist.enqueue(Failedcars->getID(),pri);
+	double failureprobability = 0.9;//el mafrood between zero w 1
+	RndmGen rndmgen;//object to acces function
+	while (!outCars.isEmpty()) {
+		outCars.dequeue(outcar, pri);
+		if (rndmgen.generate(100) <= failureprobability * 100) {//check lw el generated random num is less than failure probability 
+			outcar->getID();
+			if (outcar->getID()) {//this might be removed later
+				failedoutCars.enqueue(outcar, pri); //add the removed car to the failed out cars list 
+			}
+		}
+		else {
+			outCars.enqueue(outcar,pri);//if not re add it to the outcars
+		}
+		incrementTimestep();//for each timestep
+		}
+	}
+//another way w hakhtar
+DerivedPriQueue<Car*> Organizer::OutCarFailureAction(Car* Failedcars) //checkuplist queue
+{
+	/*DerivedPriQueue<int> checkuplist;*/
+	Patient *pat;
+	int pri;
+	while (!failedoutCars.isEmpty()) {
+		failedoutCars.dequeue(Failedcars, pri);//removes the car from the failedoutcars list
+		backCars.enqueue(Failedcars, pri);//add it to the backCars list
+	}
+	while (!backCars.isEmpty()) {
+		backCars.dequeue(Failedcars, pri);
+		checkuplist.enqueue(Failedcars, pri);
 
 	}
-
 }
-////another way w hakhtar
-//DerivedPriQueue<Car*> Organizer::OUTTOBACK(Car* Failedcars)
-//{
-//	DerivedPriQueue<int> checkuplist;
-//	int pri;
-//	while (!failedoutCars.isEmpty()) {
-//		Failedcars->getID();
-//		failedoutCars.dequeue(Failedcars, pri);//removes the car from the failedoutcars list
-//		backCars.enqueue(Failedcars, pri);//add it to the backCars list
-//	}
-//	while (!backCars.isEmpty()) {
-//
-//		
-//	}
-//}
+
+void Organizer::moveCarFromCheckupToFreeList(Car* checkedcar)
+{
+	int pri;
+	timestep = 0;
+	while (!checkuplist.isEmpty()) {
+		//if car is checked condition
+		checkuplist.dequeue(checkedcar, pri);
+		if (checkedcar->getType() == "SC") {
+			hospitalList[checkedcar->getHospitalID() - 1].addScar(checkedcar);
+		}
+		else if(checkedcar->getType() == "NC") {
+			hospitalList[checkedcar->getHospitalID() - 1].addNcar(checkedcar);
+		}
+	}
+}
 
 void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 {
@@ -388,6 +394,12 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 	}
 
 	if (car) {
+
+		// Added by belal 
+		//car->setCarBusy(car->getCarBusyTime());  
+
+		TotalBusyTime = TotalBusyTime + car->getCarBusyTime();
+
 		int id = car->getHospitalID();
 		string type = car->getType();
 		if (type == "NC") {
@@ -475,4 +487,66 @@ Car* Organizer::AssignEP(Patient* patient)
 
 	return hospitalList[idOfShortest].Assign_EP(patient);
 	
+}
+
+int Organizer:: Calculatewaiting()
+{
+
+	int TotalWaiting = 0;
+	Node<Patient*> *dump = finishedList.getFrontPtr();
+
+
+
+    while (!finishedList.isEmpty())
+	{
+		TotalWaiting = dump->getItem()->getWaitingTime() + TotalWaiting;
+		dump = dump->getNext();
+	}
+
+	return ceil(float(TotalWaiting) / finishedList.count);
+
+}
+
+//int Organizer::CalculateCarBusy()
+//{
+//	int TotalBusy = 0;
+//	Node<Patient*>* temp = finishedList.getFrontPtr();
+//
+//	while (!finishedList.isEmpty())
+//	{
+//	
+//		TotalBusy = temp->getItem()->getCarBusy() + TotalBusy;
+//		temp = temp->getNext();
+//	}
+//
+//	return ceil(float(TotalBusy) / finishedList.count);
+//}
+
+int Organizer::CalculateAVG_Busy()
+{
+	
+}
+
+int Organizer::TotalBusyTime()
+{
+	return 0;
+}
+
+//int Organizer::TotalBusyTime()
+//{
+//	return TotalBusyTime;
+//}
+
+void Organizer::setBusyTime(int busytime)
+{
+
+}
+
+//int Organizer::CalculateUtilization()
+////{
+////	return ceil(CalculateCarBusy() / timestep);
+//}
+
+
+
 }

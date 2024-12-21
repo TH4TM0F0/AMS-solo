@@ -51,6 +51,7 @@ void Car::setRequestTime(int requestTime)
 	this->requestTime = requestTime;
 }
 
+
 int Car::getID()
 {
 	return id;
@@ -104,43 +105,35 @@ int Car::getPatientWaitingTime()
 int Car::getDropoffTime()
 {
 	return ceil(pickupTime + float(assignedPatient->getDistance() / speed));
+	assignedPatient->setDropOffTime(ceil(pickupTime + float(assignedPatient->getDistance() / speed)));
 }
 
-//int Car::getCarBusyTime()
+int Car::getCarBusyTime()
+{
+	return   getDropoffTime() - assignmentTime;
+}
+
+int Car::setCarBusy(int carbusyTime)
+{
+	assignedPatient->setCarBusyTime(carbusyTime);
+}
+
+
+
+//int Car::get_backTime()
 //{
-//	/// to be considered in PH2
+//	car_back = dropoffTime - pickupTime;
+//	return car_back;
+//}
+//
+//int Car::get_outTime()
+//{
+//	car_out = pickupTime - assignmentTime;
+//	return car_out;
 //}
 
-//void Car::setAssignmentTime()
-//{
-//	Organizer o;
-//	assignmentTime = o.getTimestep();
-//}
-//
-//void Car::setPickupTime(int assignmentTime)
-//{
-//	pickupTime = assignmentTime + (assignedPatient->getDistance() / getSpeed());
-//}
-//
-//void Car::setPatientWaitingTime()
-//{
-//	patientwaitingTime = pickupTime - requestTime;
-//}
-//
-//void Car::setDropoffTime()
-//{
-//	dropoffTime = pickupTime + (assignedPatient->getDistance() / getSpeed());
-//}
-//
-//void Car::setCarBusyTime()
-//{
-//	carbusyTime = dropoffTime - assignmentTime;
-//}
-//
-//int Car::getCarBusyTime()
-//{
-//	return carbusyTime;
-//}
+int Car::
+
 
 std::ostream& operator<<(std::ostream& out, Car& car)
 {
