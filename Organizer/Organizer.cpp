@@ -286,7 +286,7 @@ DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
 int Organizer::OutCarFailureProbability(Car*outcar) // update input file and add failure probability of out cars and load file 
 {
 	int pri;
-	double failureprobability = 0.9;//el mafrood between zero w 1
+	double failureprobability=0.9;//el mafrood between zero w 1
 	RndmGen rndmgen;//object to acces function
 	while (!outCars.isEmpty()) {
 		outCars.dequeue(outcar, pri);
@@ -299,34 +299,39 @@ int Organizer::OutCarFailureProbability(Car*outcar) // update input file and add
 		else {
 			outCars.enqueue(outcar,pri);//if not re add it to the outcars
 		}
-		
+		incrementTimestep();//for each timestep
 		}
 	}
-//does it mean a new backlist or backcarlist?
-void Organizer::OutCarFailureAction(Car*Failedcars) // checkup list queue
-{
-	DerivedPriQueue<int>backlist;
-	int pri;
-	while (!failedoutCars.isEmpty()) { //check if the failed outcars is empty 
-		failedoutCars.dequeue(Failedcars, pri);
-		backlist.enqueue(Failedcars->getID(),pri);
-
-	}
-
-}
 //another way w hakhtar
-DerivedPriQueue<Car*> Organizer::OUTTOBACK(Car* Failedcars)
+DerivedPriQueue<Car*> Organizer::OutCarFailureAction(Car* Failedcars) //checkuplist queue
 {
-	DerivedPriQueue<int> checkuplist;
+	/*DerivedPriQueue<int> checkuplist;*/
+	Patient *pat;
 	int pri;
 	while (!failedoutCars.isEmpty()) {
-		Failedcars->getID();
 		failedoutCars.dequeue(Failedcars, pri);//removes the car from the failedoutcars list
 		backCars.enqueue(Failedcars, pri);//add it to the backCars list
 	}
 	while (!backCars.isEmpty()) {
+		backCars.dequeue(Failedcars, pri);
+		checkuplist.enqueue(Failedcars, pri);
 
-		
+	}
+}
+
+void Organizer::moveCarFromCheckupToFreeList(Car* checkedcar)
+{
+	int pri;
+	timestep = 0;
+	while (!checkuplist.isEmpty()) {
+		//if car is checked condition
+		checkuplist.dequeue(checkedcar, pri);
+		if (checkedcar->getType() == "SC") {
+			hospitalList[checkedcar->getHospitalID() - 1].addScar(checkedcar);
+		}
+		else if(checkedcar->getType() == "NC") {
+			hospitalList[checkedcar->getHospitalID() - 1].addNcar(checkedcar);
+		}
 	}
 }
 
