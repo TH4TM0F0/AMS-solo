@@ -130,8 +130,6 @@ int Car::setCarBusy(int carbusyTime)
 //	return car_out;
 //}
 
-int Car::
-
 
 std::ostream& operator<<(std::ostream& out, Car& car)
 {
@@ -146,3 +144,4 @@ std::ostream& operator<<(std::ostream& out, Car& car)
 Car::~Car()
 {
 }
+

@@ -123,7 +123,7 @@ int Patient::getDropOffTime()
 {
 	 //ceil(pickupTime + float(assignedPatient->getDistance() / speed));
 
-	return pickupTime + float( getDistance()
+	return pickupTime + float( getDistance() / 
 }
 
 

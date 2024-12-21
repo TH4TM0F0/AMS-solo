@@ -230,7 +230,7 @@ void Organizer::createOutputFile()
 		fout << "Patients: " << numofRequests - numofCancelledRequests << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
 			 << "Hospitals = " << numofHospitals << std::endl
 			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
-			 << "Average Wait Time = " /* << rakam to be calculated */ << std::endl
+			 << "Average Wait Time = " << Calculatewaiting() << std::endl
 			 << "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
 			 << "Average Busy Time = " /*rakam */ << std::endl
 			 << "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
@@ -493,17 +493,12 @@ int Organizer:: Calculatewaiting()
 
 	int TotalWaiting = 0;
 	Node<Patient*> *dump = finishedList.getFrontPtr();
-
-
-
     while (!finishedList.isEmpty())
 	{
 		TotalWaiting = dump->getItem()->getWaitingTime() + TotalWaiting;
 		dump = dump->getNext();
 	}
-
 	return ceil(float(TotalWaiting) / finishedList.count);
-
 }
 
 //int Organizer::CalculateCarBusy()
