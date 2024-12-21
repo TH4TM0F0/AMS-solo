@@ -5,7 +5,7 @@
 #include "../AllowedDS/priQueue.h"
 #include "../DerivedDS/DerivedQueue.h"
 #include "../DerivedDS/DerivedPriQueue.h"
-//#include "../Organizer/Organizer.h"
+
 class Hospital
 {
 private:
@@ -91,6 +91,11 @@ public:
 	Car* Assign_SP(Patient* patient);
 	Car* Assign_NP(Patient* patient);
 
+
+	void printaaa()
+	{
+		EmergencyPatientList.print();
+	}
 
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Hospital& hospital);
