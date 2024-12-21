@@ -182,7 +182,7 @@ void Organizer::startsim()
 
 	//	// do smthg
 	
-	uiPtr->printSimStart();
+	//uiPtr->printSimStart();
 
 
 	//	 
@@ -232,12 +232,16 @@ void Organizer::createOutputFile()
 		for (int i = 0; i < numofRequests - numofCancelledRequests; i++)
 		{
 			finishedList.dequeue(tempPatientPtr);
-			//fout << 
+			fout << std::left << setw(6)/*<< tempPatientPtr.getFinishTime()*/
+				 << std::left << setw(6) << *tempPatientPtr
+				 << std::left << setw(6) << tempPatientPtr->getRequestTime()
+				 << std::left << setw(6) << tempPatientPtr->getPickupTime() - tempPatientPtr->getRequestTime()
+				 << std::endl;
 		}
 		fout << "Patients: " << numofRequests - numofCancelledRequests << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
 			 << "Hospitals = " << numofHospitals << std::endl
 			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
-			 << "Average Wait Time = " /* << rakam to be calculated */ << std::endl
+			 << "Average Wait Time = " << Calculatewaiting() << std::endl
 			 << "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
 			 << "Average Busy Time = " /*rakam */ << std::endl
 			 << "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
@@ -377,7 +381,7 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 		}
 	}
 //	car->setStatus(Assigned);
-	
+	car->setAssignmentTime(timestep);
 	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
 }
 
@@ -505,15 +509,11 @@ int Organizer:: Calculatewaiting()
 
 	int TotalWaiting = 0;
 	Node<Patient*> *dump = finishedList.getFrontPtr();
-
-
-
     while (!finishedList.isEmpty())
 	{
 		TotalWaiting = dump->getItem()->getWaitingTime() + TotalWaiting;
 		dump = dump->getNext();
 	}
-
 	return ceil(float(TotalWaiting) / finishedList.count);
 
 }
@@ -558,3 +558,26 @@ int Organizer::AvgUtilization()
 //}
 
 
+int Organizer::TotalBusyTime()
+{
+	return 0;
+}
+
+//int Organizer::TotalBusyTime()
+//{
+//	return TotalBusyTime;
+//}
+
+void Organizer::setBusyTime(int busytime)
+{
+
+}
+
+//int Organizer::CalculateUtilization()
+////{
+////	return ceil(CalculateCarBusy() / timestep);
+//}
+
+
+
+}

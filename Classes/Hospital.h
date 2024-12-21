@@ -79,23 +79,15 @@ public:
 
 
 	//Car counter functions --> purpose is to return the amount of cars "ready" to be assigned
-
 	int Check_ScarList();
 	int Check_NcarList();
 
 	
 
 	// Patient Assignment Functions
-
 	Car* Assign_EP(Patient* patient);
 	Car* Assign_SP(Patient* patient);
 	Car* Assign_NP(Patient* patient);
-
-
-	void printaaa()
-	{
-		EmergencyPatientList.print();
-	}
 
 	// Operator Overloading
 	friend std::ostream& operator << (std::ostream& out, Hospital& hospital);
