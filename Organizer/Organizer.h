@@ -32,6 +32,8 @@ private:
 	int cancelledPatientid = 0;
 	int cancelledPatienttimestep = 0;
 
+	
+
 	/// counters for patients by type --> to be used in the output file
 	int totalnumofEP = 0;
 	int totalnumofSP = 0;
@@ -69,6 +71,10 @@ private:
 	std::string outputfileName = "outputfile";
 	std::ofstream fout;		/// leh fout? --> 3ashan teb2a shabah cout (console output) , fout (file output)
 public:
+
+
+
+
 	/// Constructor
 	Organizer();
 
@@ -130,6 +136,17 @@ public:
 
 	Car* AssignEP( Patient* patient);
 
+	int Calculatewaiting();
+
+	int CalculateAVG_Busy();
+
+	int TotalBusyTime();
+
+	void setBusyTime(int busytime);
+
+	//int CalculateCarBusy();
+
+	//int CalculateUtilization();
 	
 		
 };
