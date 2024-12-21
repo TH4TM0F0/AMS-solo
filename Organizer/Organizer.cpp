@@ -170,7 +170,8 @@ void Organizer::startsim()
 	//while (!SimEnded())
 	//{
 	//	// do smthg
-	//	//uiPtr->printSimStart();
+	
+	uiPtr->printSimStart();
 
 
 	//	 
@@ -220,7 +221,7 @@ void Organizer::createOutputFile()
 		for (int i = 0; i < numofRequests - numofCancelledRequests; i++)
 		{
 			finishedList.dequeue(tempPatientPtr);
-			fout << 
+			//fout << 
 		}
 		fout << "Patients: " << numofRequests - numofCancelledRequests << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
 			 << "Hospitals = " << numofHospitals << std::endl

@@ -61,7 +61,7 @@ private:
 
 	/// some Ptrs
 	Patient* tempPatientPtr = nullptr;
-	//UI* uiPtr = new UI(this);
+	UI* uiPtr;
 
 	int OutCarCount = 0;
 	int numofCars = 1;														/// variable to help with the car ids uniqueness
