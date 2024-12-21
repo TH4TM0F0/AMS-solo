@@ -162,26 +162,24 @@ void Organizer::startsim()
 {
 	/// start with loading data from the input file
 	loadInputFile();
-	loadPatients();
-	/// then assign all requests to their related hospitals
-	// assignPatientstotheirrelatedhospitals();
 
+	/// then assign all requests to their related hospitals
+	loadPatients();
 
 	/// main loop 
-	while (!SimEnded())
-	{
-		// do smthg
+	//while (!SimEnded())
+	//{
+	//	// do smthg
+	//	//uiPtr->printSimStart();
 
 
-
-		 
-		// increment the timestep at the end of each loop
-		incrementTimestep();
-	}
+	//	 
+	//	// increment the timestep at the end of each loop
+	//	incrementTimestep();
+	//}
 
 	/// end with creating the output file
 	createOutputFile();
-
 }
 
 void Organizer::AddOutCars(Car* car)

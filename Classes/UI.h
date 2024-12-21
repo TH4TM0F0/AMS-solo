@@ -23,12 +23,8 @@ public:
 	void printHospital(Hospital *hospitalToPrint);
 
 	
-
-
 	/// Extra Funcs
 	void clearConcsole();							/// ==> To clear the console when needed
 	void printaMSG(std::string message);			/// ==> to print a specific msg when needed
 	void delay(int delayInSeconds);					/// ==> to delay for a certain time
-
-	
 };
