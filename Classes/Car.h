@@ -43,7 +43,7 @@ public:
 	void setAssignedPatient(Patient* assignedPatient);
 	void setRequestTime(int requestTime);
 	
-
+	void setAssignmentTime(int assignmentTime);
 
 	
 	

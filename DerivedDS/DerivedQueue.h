@@ -12,8 +12,9 @@ public:
 	{
 		if (car->getAssignedPatient()->getType() == "NP") {
 			if (car->getStatus() == Assigned && car->getAssignedPatient()->getCancelTime() < car->getAssignedPatient()->getPickupTime()) {
-				//			cancelledRequests.enqueue(patient);
-				//			car->setStatus(Cancelled);
+
+				//cancelledRequests.enqueue(patient);
+				//	car->setStatus(Cancelled);
 			}
 		}
 	}

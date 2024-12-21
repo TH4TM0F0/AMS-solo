@@ -370,7 +370,7 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 		}
 	}
 //	car->setStatus(Assigned);
-	
+	car->setAssignmentTime(timestep);
 	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
 }
 
@@ -402,7 +402,7 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 		// Added by belal 
 		//car->setCarBusy(car->getCarBusyTime());  
 
-		TotalBusyTime = TotalBusyTime + car->getCarBusyTime();
+	//	TotalBusyTime = TotalBusyTime + car->getCarBusyTime();
 
 		int id = car->getHospitalID();
 		string type = car->getType();
@@ -548,4 +548,4 @@ void Organizer::setBusyTime(int busytime)
 
 
 
-}
+
