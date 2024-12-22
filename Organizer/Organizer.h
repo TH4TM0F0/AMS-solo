@@ -21,6 +21,8 @@ private:
 	int numofScars = 0;
 	int numofNcars = 0;
 
+	int BusyTime = 0;
+
 	int numofRequests = 0;
 	/// temp members to store some data for each request
 	std::string tempPatienttype = " ";
@@ -153,14 +155,10 @@ public:
 
 
 
-	int CalculateAVG_Busy();
-
-	int TotalBusyTime();
-
-	void setBusyTime(int busytime);
-
-	//int CalculateCarBusy();
-
-	//int CalculateUtilization();
 	
+	void setBusy(int busytime);
+	int getBusy();
+
+	int AvgBusy();
+	int AvgUtilization();
 };

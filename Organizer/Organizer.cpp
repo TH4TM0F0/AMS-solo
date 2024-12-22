@@ -415,12 +415,12 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 		return;
 	}
 
-	if (car) {
+	if (car) 
+	{
 
-		// Added by belal 
-		//car->setCarBusy(car->getCarBusyTime());  
+		// added by belal this part helps in calculating average busy time 
 
-	//	TotalBusyTime = TotalBusyTime + car->getCarBusyTime();
+		setBusy(car->getCarBusyTime());    // passes the busy time of the car to the fn set busy 
 
 		int id = car->getHospitalID();
 		string type = car->getType();
@@ -515,6 +515,40 @@ Car* Organizer::AssignEP(Patient* patient)
 
 		
 
+	int TotalWaiting = 0;
+	Node<Patient*> *dump = finishedList.getFrontPtr();
+    while (!finishedList.isEmpty())
+	{
+		TotalWaiting = dump->getItem()->getWaitingTime() + TotalWaiting;
+		dump = dump->getNext();
+	}
+	return ceil(float(TotalWaiting) / finishedList.count);
+
+}
+
+void Organizer::setBusy(int busytime)
+{
+	BusyTime = busytime + BusyTime;
+}
+
+int Organizer::getBusy()
+{
+	return BusyTime;
+}
+
+int Organizer::AvgBusy()
+{
+	return ceil(float(BusyTime) /  timestep);
+}
+
+int Organizer::AvgUtilization()
+{
+	return ceil(AvgBusy() / timestep) *100 ; // needed as percentage
+}
+
+
+
+
 
 //int Organizer::CalculateCarBusy()
 //{
@@ -558,4 +592,4 @@ void Organizer::setBusyTime(int busytime)
 
 
 
-
+}
