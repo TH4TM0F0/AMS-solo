@@ -386,8 +386,8 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
 }
 
-bool Organizer::moveCarFromOutToBack() {
-	Car* car;
+bool Organizer::moveCarFromOutToBack(Car* car) {
+	
 	int pri;
 	//Dequeue car from OUT (check 3ashan lw kan empty f el awl) 
 	if (outCars.dequeue(car, pri)) {
