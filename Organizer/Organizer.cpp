@@ -68,6 +68,7 @@ void Organizer::loadInputFile()
 			numofCars = numofScars + numofNcars;
 		}
 		
+		fin >> carFailureProb;
 
 		/// Patients Requests
 		fin >> numofRequests;
@@ -134,7 +135,6 @@ void Organizer::loadInputFile()
 
 			cancelledRequests.enqueue(tempPatientPtr);
 		}
-		fin >> carFailureProb;
 	}
 	fin.close();
 }
@@ -176,7 +176,6 @@ void Organizer::startsim()
 		/// main loop 
 		while (!SimEnded())
 		{
-			
 			/// Lafeena 3ala kol el hospitals w 3amalna check law fi ay patients elmafrood netala3 car teroo7 tegebhom
 			for (int i = 0; i < numofHospitals; i++)
 			{	
@@ -249,8 +248,6 @@ void Organizer::startsim()
 				///
 			}
 
-
-
 			ui.printTimeStep(timestep, hospitalList, numofHospitals, outCars, backCars, finishedList, checkuplist);
 			std::cin.ignore();
 			ui.printaMSG("Press Enter to display the next timestep.");
@@ -262,6 +259,77 @@ void Organizer::startsim()
 
 	if (ui.mode == 2)
 	{
+		/// Lafeena 3ala kol el hospitals w 3amalna check law fi ay patients elmafrood netala3 car teroo7 tegebhom
+		for (int i = 0; i < numofHospitals; i++)
+		{
+			/// EP handling
+			int pri;
+			hospitalList[i].getEPatientList().dequeue(tempPatientPtr, pri);
+			if (timestep >= tempPatientPtr->getRequestTime())
+			{
+				tempCarPtr = hospitalList[i].Assign_EP(tempPatientPtr);
+				if (tempCarPtr)
+				{
+					tempCarPtr->setAssignmentTime(timestep);
+					AddOutCars(tempCarPtr);
+				}
+				else
+				{
+					tempCarPtr = AssignEP(tempPatientPtr);
+					tempCarPtr->setAssignmentTime(timestep);
+					numofEPserved_secondary++;
+					AddOutCars(tempCarPtr);
+				}
+			}
+			/// 
+
+			/// SP handling
+			hospitalList[i].getSPatientList().peek(tempPatientPtr);
+			if (timestep >= tempPatientPtr->getRequestTime())
+			{
+				tempCarPtr = hospitalList[i].Assign_SP(tempPatientPtr);
+				if (tempCarPtr)
+				{
+					hospitalList[i].getSPatientList().dequeue(tempPatientPtr);
+					tempCarPtr->setAssignmentTime(timestep);
+					AddOutCars(tempCarPtr);
+				}
+			}
+			///
+
+			/// NP handling
+			hospitalList[i].getNPatientList().peek(tempPatientPtr);
+			if (timestep >= tempPatientPtr->getRequestTime())
+			{
+				tempCarPtr = hospitalList[i].Assign_NP(tempPatientPtr);
+				if (tempCarPtr)
+				{
+					hospitalList[i].getNPatientList().dequeue(tempPatientPtr);
+					tempCarPtr->setAssignmentTime(timestep);
+					AddOutCars(tempCarPtr);
+				}
+			}
+			///
+
+
+			/// check law el out cars weslo lel patient move them to the back car queue
+			/*outCars.peek(tempCarPtr, pri);
+			if (tempCarPtr->getPickupTime() == timestep)
+			{
+				moveCarFromOutToBack(tempCarPtr);
+			}*/
+			///
+
+
+			/// check law el back cars weslo lel hospital move them to their free list
+			/*backCars.peek(tempCarPtr, pri);
+			if (tempCarPtr->getDropoffTime() == timestep)
+			{
+				moveCarFromBackToFree(tempCarPtr);
+				AddFinishedList(tempCarPtr->getAssignedPatient());
+			}*/
+			///
+		}
 		ui.silentstartscreen();
 	}
 
@@ -317,7 +385,7 @@ void Organizer::createOutputFile()
 		fout << "Patients: " << numofRequests - numofCancelledRequests << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
 			 << "Hospitals = " << numofHospitals << std::endl
 			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
-			 << "Average Wait Time = " << avgWaitTime << std::endl
+			 << "Average Wait Time = " << getAvgWaitTime() << std::endl
 			 << "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
 			 << "Average Busy Time = " /*rakam */ << std::endl
 			 << "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
@@ -364,41 +432,41 @@ DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
 }
 //handling the random number related to a certain car or not?
 // if the random number falls within the range of failure probability ,a car should fail 
-int Organizer::OutCarFailureProbability(Car* outcar) // update input file and add failure probability of out cars and load file 
-{
-	int pri;
-	int failureprobability = 10;//el mafrood between zero w 1
-	RndmGen rndmgen;//object to acces function
-	while (!outCars.isEmpty()) {
-		outCars.dequeue(outcar, pri);
-		if (rndmgen.generate(100) <= failureprobability) {//check lw el generated random num is less than failure probability 
-			outcar->getID();
-			if (outcar->getID()) {//this might be removed later
-				failedoutCars.enqueue(outcar, pri); //add the removed car to the failed out cars list 
-			}
-		}
-		else {
-			outCars.enqueue(outcar, pri);//if not re add it to the outcars
-		}
-		incrementTimestep();//for each timestep
-	}
-}
-DerivedPriQueue<Car*> Organizer::OutCarFailureAction(Car* Failedcars) //checkuplist queue
-{
-	/*DerivedPriQueue<int> checkuplist;*/
-	Patient *pat;
-	int pri;
-	while (!failedoutCars.isEmpty()) {
-		failedoutCars.dequeue(Failedcars, pri);//removes the car from the failedoutcars list
-		backCars.enqueue(Failedcars, pri);//add it to the backCars list
-	}
-	while (!backCars.isEmpty()) {
-		backCars.dequeue(Failedcars, pri);
-		checkuplist.enqueue(Failedcars, pri);
-	}
-
-	
-}
+//int Organizer::OutCarFailureProbability(Car* outcar) // update input file and add failure probability of out cars and load file 
+//{
+//	int pri;
+//	int failureprobability = 10;//el mafrood between zero w 1
+//	RndmGen rndmgen;//object to acces function
+//	while (!outCars.isEmpty()) {
+//		outCars.dequeue(outcar, pri);
+//		if (rndmgen.generate(100) <= failureprobability) {//check lw el generated random num is less than failure probability 
+//			outcar->getID();
+//			if (outcar->getID()) {//this might be removed later
+//				failedoutCars.enqueue(outcar, pri); //add the removed car to the failed out cars list 
+//			}
+//		}
+//		else {
+//			outCars.enqueue(outcar, pri);//if not re add it to the outcars
+//		}
+//		incrementTimestep();//for each timestep
+//	}
+//}
+//DerivedPriQueue<Car*> Organizer::OutCarFailureAction(Car* Failedcars) //checkuplist queue
+//{
+//	/*DerivedPriQueue<int> checkuplist;*/
+//	Patient *pat;
+//	int pri;
+//	while (!failedoutCars.isEmpty()) {
+//		failedoutCars.dequeue(Failedcars, pri);//removes the car from the failedoutcars list
+//		backCars.enqueue(Failedcars, pri);//add it to the backCars list
+//	}
+//	while (!backCars.isEmpty()) {
+//		backCars.dequeue(Failedcars, pri);
+//		checkuplist.enqueue(Failedcars, pri);
+//	}
+//
+//	
+//}
 
 void Organizer::moveCarFromCheckupToFreeList(Car* checkedcar)
 {
@@ -524,6 +592,11 @@ void Organizer::setBusy(int busytime)
 int Organizer::getBusy()
 {
 	return BusyTime;
+}
+
+int Organizer::getAvgWaitTime()
+{
+	return  ceil(float(totalWaitTime) / finishedList.count);
 }
 
 int Organizer::AvgBusy()

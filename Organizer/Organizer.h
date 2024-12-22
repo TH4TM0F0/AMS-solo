@@ -85,7 +85,7 @@ private:
 
 	/// Output File Calculations
 	int totalWaitTime = 0;
-	int avgWaitTime = ceil(float(totalWaitTime) / finishedList.count);
+	int avgWaitTime = 0;
 	int numofEPserved_secondary = 0;
 
 public:
@@ -156,7 +156,7 @@ public:
 	
 	void setBusy(int busytime);
 	int getBusy();
-
+	int getAvgWaitTime();
 	int AvgBusy();
 	int AvgUtilization();
 };
