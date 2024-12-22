@@ -166,18 +166,33 @@ void Organizer::startsim()
 	/// then assign all requests to their related hospitals
 	loadPatients();
 
-	/// main loop 
-	//while (!SimEnded())
-	//{
-	//	// do smthg
+	ui.printSimStart();
+
+	if (ui.mode == 1)
+	{
+		ui.ineractivestartscreen();
+		/// main loop 
+		while (!SimEnded())
+		{
+			// do smthg
+
+
+
+
+			ui.printTimeStep(timestep, hospitalList, numofHospitals, outCars, backCars, finishedList);
+			std::cin.ignore();
+			ui.printaMSG("Press Enter to display the next timestep.");
+			std::cin.get();
+			/// increment the timestep at the end of each loop
+			incrementTimestep();
+		}
+	}
+	if (ui.mode == 2)
+	{
+		ui.silentstartscreen();
+	}
+
 	
-	//uiPtr->printSimStart();
-
-
-	//	 
-	//	// increment the timestep at the end of each loop
-	//	incrementTimestep();
-	//}
 
 	/// end with creating the output file
 	createOutputFile();
@@ -219,7 +234,7 @@ void Organizer::createOutputFile()
 			 << std::left << setw(6) << "WT"
 			 << std::endl;
 		/// Header Row of Output file is created
-		for (int i = 0; i < numofRequests - numofCancelledRequests; i++)
+		while (!finishedList.isEmpty())
 		{
 			finishedList.dequeue(tempPatientPtr);
 			fout << std::left << setw(6)/*<< tempPatientPtr.getFinishTime()*/
@@ -228,6 +243,7 @@ void Organizer::createOutputFile()
 				 << std::left << setw(6) << tempPatientPtr->getPickupTime() - tempPatientPtr->getRequestTime()
 				 << std::endl;
 		}
+			
 		fout << "Patients: " << numofRequests - numofCancelledRequests << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
 			 << "Hospitals = " << numofHospitals << std::endl
 			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
@@ -312,27 +328,28 @@ int Organizer::OutCarFailureProbability(Car*outcar) // update input file and add
 			}
 		}
 		else {
-			outCars.enqueue(outcar,pri);//if not re add it to the outcars
+			outCars.enqueue(outcar, pri);//if not re add it to the outcars
 		}
 		incrementTimestep();//for each timestep
-		}
 	}
-//another way w hakhtar
-DerivedPriQueue<Car*> Organizer::OutCarFailureAction(Car* Failedcars) //checkuplist queue
-{
-	/*DerivedPriQueue<int> checkuplist;*/
-	Patient *pat;
-	int pri;
-	while (!failedoutCars.isEmpty()) {
-		failedoutCars.dequeue(Failedcars, pri);//removes the car from the failedoutcars list
-		backCars.enqueue(Failedcars, pri);//add it to the backCars list
-	}
-	while (!backCars.isEmpty()) {
-		backCars.dequeue(Failedcars, pri);
-		checkuplist.enqueue(Failedcars, pri);
-
-	}
+	return 0; /// --> sheelo ba2a
 }
+//another way w hakhtar
+//DerivedPriQueue<Car*> Organizer::OutCarFailureAction(Car* Failedcars) //checkuplist queue
+//{
+//	/*DerivedPriQueue<int> checkuplist;*/
+//	Patient *pat;
+//	int pri;
+//	while (!failedoutCars.isEmpty()) {
+//		failedoutCars.dequeue(Failedcars, pri);//removes the car from the failedoutcars list
+//		backCars.enqueue(Failedcars, pri);//add it to the backCars list
+//	}
+//	while (!backCars.isEmpty()) {
+//		backCars.dequeue(Failedcars, pri);
+//		checkuplist.enqueue(Failedcars, pri);
+//
+//	}
+//}
 
 void Organizer::moveCarFromCheckupToFreeList(Car* checkedcar)
 {

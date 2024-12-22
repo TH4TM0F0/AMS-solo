@@ -9,9 +9,7 @@ using namespace std;
 #include "../Classes/Patient.h"
 #include "../Classes/Hospital.h"
 #include "../Classes/RndmGen.h"
-
-
-class UI;
+#include "../Classes/UI.h"
 
 class Organizer
 {
@@ -63,7 +61,7 @@ private:
 
 	/// some Ptrs
 	Patient* tempPatientPtr = nullptr;
-	UI* uiPtr;
+	UI ui;
 
 	int OutCarCount = 0;
 	int numofCars = 1;														/// variable to help with the car ids uniqueness
