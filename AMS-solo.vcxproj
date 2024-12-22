@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Classes\Car.cpp" />
     <ClCompile Include="Classes\Hospital.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Organizer\Organizer.cpp" />
     <ClCompile Include="Classes\Patient.cpp" />
     <ClCompile Include="Classes\UI.cpp" />

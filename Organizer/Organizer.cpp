@@ -179,6 +179,11 @@ void Organizer::startsim()
 
 
 
+
+
+
+
+
 			ui.printTimeStep(timestep, hospitalList, numofHospitals, outCars, backCars, finishedList);
 			std::cin.ignore();
 			ui.printaMSG("Press Enter to display the next timestep.");
@@ -272,26 +277,6 @@ Hospital* Organizer::getHospitalList()
 {
 	return hospitalList;
 }
-
-//int Organizer::getCurrentOutCars()
-//{
-//	return outCars.count;
-//}
-//
-//int Organizer::getCurrentBackCars()
-//{
-//	return backCars.count;
-//}
-//
-//int Organizer::getCurrentFinished()
-//{
-//	return finishedList.count;
-//}
-//
-//void Organizer::printFinishedList()
-//{
-//	finishedList.print();
-//}
 
 DerivedPriQueue<Car*> Organizer::getOutCars()
 {
@@ -443,34 +428,6 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 
 Car* Organizer::AssignEP(Patient* patient)
 {
-
-	
-
-	//{
-	//	if (QID.isEmpty())      // if the queue is empty enqueue 3latool 
-	//	{
-	//		QID.enqueue(hospitalList[i].getID());
-	//		minimum = hospitalList[i].getEmergencyPatientList()->count;
-	//	}
-	//	else                   // the queue is not empty --> empy it then fill 3la nadafa 
-	//	{
-	//		while (!QID.isEmpty())
-	//		{
-	//			int temp = 0;
-	//			QID.peek(temp);
-	//			QID.dequeue(temp);
-
-	//		}
-	//		QID.enqueue(hospitalList[i].getID());
-	//		minimum = hospitalList[i].getEmergencyPatientList()->count;
-	//	}
-	//}
-	//		else if (hospitalList[i].getEmergencyPatientList()->count == minimum)
-	//		{
-	//			QID.enqueue(hospitalList[i].getID());
-	//			}
-
-
 	int current_id = 0;
 	current_id = patient->getNearestHospitalID();
 	int minimum = INT_MAX;
@@ -508,7 +465,6 @@ Car* Organizer::AssignEP(Patient* patient)
 	}
 
 	return hospitalList[idOfShortest].Assign_EP(patient);
-	
 }
 
 void Organizer::setBusy(int busytime)
@@ -523,7 +479,7 @@ int Organizer::getBusy()
 
 int Organizer::AvgBusy()
 {
-	return ceil(float(BusyTime) /  timestep);
+	return ceil(float(BusyTime) /  (totalnumofNC + totalnumofSC));
 }
 
 int Organizer::AvgUtilization()
