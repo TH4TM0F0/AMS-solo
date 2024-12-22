@@ -530,27 +530,3 @@ int Organizer::AvgUtilization()
 {
 	return ceil(AvgBusy() / timestep) *100 ; // needed as percentage
 }
-
-
-
-
-
-
-
-
-
-//int Organizer::TotalBusyTime()
-//{
-//	return TotalBusyTime;
-//}
-
-void Organizer::setBusyTime(int busytime)
-{
-
-}
-
-
-
-
-
-
