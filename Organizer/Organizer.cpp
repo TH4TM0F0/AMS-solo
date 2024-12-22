@@ -312,11 +312,11 @@ DerivedPriQueue<Car*> Organizer::getCurrentFailedOutCars()
 int Organizer::OutCarFailureProbability(Car* outcar) // update input file and add failure probability of out cars and load file 
 {
 	int pri;
-	double failureprobability = 0.9;//el mafrood between zero w 1
+	int failureprobability = 10;//el mafrood between zero w 1
 	RndmGen rndmgen;//object to acces function
 	while (!outCars.isEmpty()) {
 		outCars.dequeue(outcar, pri);
-		if (rndmgen.generate(100) <= failureprobability * 100) {//check lw el generated random num is less than failure probability 
+		if (rndmgen.generate(100) <= failureprobability) {//check lw el generated random num is less than failure probability 
 			outcar->getID();
 			if (outcar->getID()) {//this might be removed later
 				failedoutCars.enqueue(outcar, pri); //add the removed car to the failed out cars list 
@@ -340,8 +340,9 @@ DerivedPriQueue<Car*> Organizer::OutCarFailureAction(Car* Failedcars) //checkupl
 	while (!backCars.isEmpty()) {
 		backCars.dequeue(Failedcars, pri);
 		checkuplist.enqueue(Failedcars, pri);
-
 	}
+
+	
 }
 
 void Organizer::moveCarFromCheckupToFreeList(Car* checkedcar)

@@ -71,5 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Organizer\InputFile.txt" />
+    <Text Include="Organizer\input1.txt" />
+    <Text Include="Organizer\input2.txt" />
+    <Text Include="Organizer\input3.txt" />
+    <Text Include="Organizer\input4.txt" />
+    <Text Include="Organizer\input5.txt" />
+    <Text Include="Organizer\input6.txt" />
   </ItemGroup>
 </Project>
