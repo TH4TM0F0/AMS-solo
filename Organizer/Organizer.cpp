@@ -174,13 +174,63 @@ void Organizer::startsim()
 		/// main loop 
 		while (!SimEnded())
 		{
-			// do smthg
+			
+			/// Lafeena 3ala kol el hospitals w 3amalna check law fi ay patients elmafrood netala3 car teroo7 tegebhom
+			for (int i = 0; i < numofHospitals; i++)
+			{	
+				/// EP handling
+				int pri;
+				hospitalList[i].getEPatientList().dequeue(tempPatientPtr, pri);
+				if (timestep >= tempPatientPtr->getRequestTime())
+				{
+					tempCarPtr = hospitalList[i].Assign_EP(tempPatientPtr);
+					if (tempCarPtr)
+					{
+						tempCarPtr->setAssignmentTime(timestep);
+						AddOutCars(tempCarPtr);
+					}
+					else
+					{
+						tempCarPtr = AssignEP(tempPatientPtr);
+						tempCarPtr->setAssignmentTime(timestep);
+						numofEPserved_secondary++;
+						AddOutCars(tempCarPtr);
+					}
+				}
+				/// 
+
+				/// SP handling
+				hospitalList[i].getSPatientList().peek(tempPatientPtr);
+				if (timestep >= tempPatientPtr->getRequestTime())
+				{
+					tempCarPtr = hospitalList[i].Assign_SP(tempPatientPtr);
+					if (tempCarPtr)
+					{
+						hospitalList[i].getSPatientList().dequeue(tempPatientPtr);
+						tempCarPtr->setAssignmentTime(timestep);
+						AddOutCars(tempCarPtr);
+					}
+				}
+				///
+
+				/// NP handling
+				hospitalList[i].getNPatientList().peek(tempPatientPtr);
+				if (timestep >= tempPatientPtr->getRequestTime())
+				{
+					tempCarPtr = hospitalList[i].Assign_NP(tempPatientPtr);
+					if (tempCarPtr)
+					{
+						hospitalList[i].getNPatientList().dequeue(tempPatientPtr);
+						tempCarPtr->setAssignmentTime(timestep);
+						AddOutCars(tempCarPtr);
+					}
+				}
+				///
 
 
-
-
-
-
+				/// check law el out cars weslo lel patient move them to the back car queue
+				/// check law el back cars weslo lel hospital move them to their free list
+			}
 
 
 
@@ -192,12 +242,11 @@ void Organizer::startsim()
 			incrementTimestep();
 		}
 	}
+
 	if (ui.mode == 2)
 	{
 		ui.silentstartscreen();
 	}
-
-	
 
 	/// end with creating the output file
 	createOutputFile();
@@ -422,17 +471,12 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 	}
 }
 
-
-
-
-
 Car* Organizer::AssignEP(Patient* patient)
 {
 	int current_id = 0;
 	current_id = patient->getNearestHospitalID();
 	int minimum = INT_MAX;
 	int idOfShortest = 0;
-
 
 	for (int i = 0; i < numofHospitals; i++)
 	{
@@ -457,9 +501,7 @@ Car* Organizer::AssignEP(Patient* patient)
 					{
 						idOfShortest = i;
 					}
-
 				}
-
 			}
 		}
 	}

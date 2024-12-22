@@ -55,7 +55,7 @@ private:
 	LinkedQueue<Patient*> finishedList;                                     /// Queue for finished patients 
 	DerivedPriQueue<Car*> failedoutCars;                                    /// PriQ for failed out cars
 	DerivedPriQueue<Car*> checkuplist;                                      /// PriQ for checkup list of out cars
-	Hospital* freelist;
+
 
 	/// 2d Distance Matrix
 	int** distanceMatrix = nullptr;
@@ -63,6 +63,7 @@ private:
 
 	/// some Ptrs
 	Patient* tempPatientPtr = nullptr;
+	Car* tempCarPtr = nullptr;
 	UI ui;
 
 	int OutCarCount = 0;
@@ -81,6 +82,7 @@ private:
 	/// Output File Calculations
 	int totalWaitTime = 0;
 	int avgWaitTime = ceil(float(totalWaitTime) / finishedList.count);
+	int numofEPserved_secondary = 0;
 
 public:
 	/// Constructor
