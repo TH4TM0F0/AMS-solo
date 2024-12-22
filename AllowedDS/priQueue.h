@@ -131,4 +131,15 @@ public:
         return head;
     }
 
+    priQueue(const priQueue<T>& PQ)
+    {
+        head = nullptr;
+        priNode<T>* NodePtr = PQ.head;	//start at the front node in PQ
+        while (NodePtr)
+        {
+            int pri;
+            enqueue(NodePtr->getItem(pri), NodePtr->getPri());	//get data of each node and enqueue it in this queue 
+            NodePtr = NodePtr->getNext();
+        }
+    }
 };
