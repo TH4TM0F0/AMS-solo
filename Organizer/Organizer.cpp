@@ -230,7 +230,7 @@ void Organizer::startsim()
 
 
 				/// check law el out cars weslo lel patient move them to the back car queue
-				outCars.peek(tempCarPtr, pri);
+				/*outCars.peek(tempCarPtr, pri);
 				if (tempCarPtr->getPickupTime() == timestep)
 				{
 					moveCarFromOutToBack(tempCarPtr);
@@ -244,7 +244,7 @@ void Organizer::startsim()
 				{
 					moveCarFromBackToFree(tempCarPtr);
 					AddFinishedList(tempCarPtr->getAssignedPatient());
-				}
+				}*/
 				///
 			}
 
@@ -386,9 +386,9 @@ void Organizer::createOutputFile()
 			 << "Hospitals = " << numofHospitals << std::endl
 			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
 			 << "Average Wait Time = " << getAvgWaitTime() << std::endl
-			 << "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
-			 << "Average Busy Time = " /*rakam */ << std::endl
-			 << "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
+			 << "EP served by secondary Hospitals = " << ceil((float)numofEPserved_secondary / totalnumofEP) << " %" << std::endl
+			 << "Average Busy Time = " << AvgBusy() << std::endl
+			 << "Average Utilization = " << AvgUtilization() << " %" << std::endl;
 	}
 
 	// close the file 

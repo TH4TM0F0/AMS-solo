@@ -3,6 +3,6 @@ Patients: 16 [ NP: 4, SP: 6, EP: 6 ]
 Hospitals = 5
 Cars: 55 [ SCars: 28, NCars: 27 ]
 Average Wait Time = -2147483648
-EP served by secondary Hospitals =  %
-Average Busy Time = 
-Average Utilization =  %
+EP served by secondary Hospitals = 0 %
+Average Busy Time = 0
+Average Utilization = 0 %
