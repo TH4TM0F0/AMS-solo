@@ -273,7 +273,6 @@ void Organizer::AddFinishedList(Patient* patient)
 	totalWaitTime += patient->getWaitingTime();
 }
 
-
 void Organizer::createOutputFile()
 {
 	// creating an empty text file to write the required data
