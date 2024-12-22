@@ -78,11 +78,13 @@ private:
 	/// name --> outputfile.txt in case of silent mode but in interactive mode user can input the name of his file
 	std::string outputfileName = "outputfile";
 	std::ofstream fout;		/// leh fout? --> 3ashan teb2a shabah cout (console output) , fout (file output)
+
+
+	/// Output File Calculations
+	int totalWaitTime = 0;
+	int avgWaitTime = ceil(float(totalWaitTime) / finishedList.count);
+
 public:
-
-
-
-
 	/// Constructor
 	Organizer();
 
@@ -153,7 +155,7 @@ public:
 	Car* AssignEP( Patient* patient);
 	
 
-	int Calculatewaiting();
+
 
 	
 	void setBusy(int busytime);

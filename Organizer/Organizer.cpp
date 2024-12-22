@@ -212,6 +212,7 @@ void Organizer::AddBackCars(Car* car)
 void Organizer::AddFinishedList(Patient* patient)
 {
 	finishedList.enqueue(patient);
+	totalWaitTime += patient->getWaitingTime();
 }
 
 
@@ -241,7 +242,7 @@ void Organizer::createOutputFile()
 		fout << "Patients: " << numofRequests - numofCancelledRequests << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
 			 << "Hospitals = " << numofHospitals << std::endl
 			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
-			 << "Average Wait Time = " << Calculatewaiting() << std::endl
+			 << "Average Wait Time = " << avgWaitTime << std::endl
 			 << "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
 			 << "Average Busy Time = " /*rakam */ << std::endl
 			 << "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
@@ -362,7 +363,7 @@ void Organizer::moveCarFromCheckupToFreeList(Car* checkedcar)
 
 void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 {
-	Car* car;
+	Car* car = new Car;
 	
 	if (Patient->getType() == "NP") {
 		hospital->getNormalCarList().dequeue(car); 
@@ -380,7 +381,7 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 			outCars.enqueue(car, 0);
 		}
 	}
-//	car->setStatus(Assigned);
+	car->setStatus(Assigned);
 	car->setAssignmentTime(timestep);
 	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
 }
@@ -504,8 +505,9 @@ Car* Organizer::AssignEP(Patient* patient)
 	
 }
 
-int Organizer:: Calculatewaiting()
-{
+
+
+		
 
 	int TotalWaiting = 0;
 	Node<Patient*> *dump = finishedList.getFrontPtr();
@@ -557,6 +559,10 @@ int Organizer::AvgUtilization()
 //	return ceil(float(TotalBusy) / finishedList.count);
 //}
 
+int Organizer::CalculateAVG_Busy()
+{
+	return 0;
+}
 
 int Organizer::TotalBusyTime()
 {

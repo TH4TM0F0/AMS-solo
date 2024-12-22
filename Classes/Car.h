@@ -44,7 +44,7 @@ public:
 	void setRequestTime(int requestTime);
 	
 	void setAssignmentTime(int assignmentTime);
-
+	void setCarBusy(int carbusyTime);
 	
 	
 
@@ -65,7 +65,7 @@ public:
 	/*int get_outTime();
 	int get_backTime();*/
 
-	int setCarBusy(int carbusyTime);
+
 
 
 	
