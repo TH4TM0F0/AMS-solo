@@ -119,9 +119,9 @@ Patient* Hospital::removeSpatient()
 	return removedPatient;
 }
 
-Patient* Hospital::removeEpatient()
+Patient* Hospital::removeEpatient(int pri)
 {
-	int pri;
+	///int pri;
 	EmergencyPatientList.dequeue(removedPatient, pri);
 	return removedPatient;
 }
@@ -186,14 +186,14 @@ void Hospital::addScar(Car* car)
 
 Car* Hospital::Assign_EP(Patient* patient)
 {
-	if (NormalCarList.count != 0)
+	if (!NormalCarList.isEmpty())
 	{
 		Car* Ntemp = removeNcar();
 		Ntemp->setStatus(Assigned);
 		Ntemp->setAssignedPatient(patient);
 		return Ntemp;
 	}
-	else if (SpecialCarList.count != 0)
+	else if (!SpecialCarList.isEmpty())
 	{
 		Car* Stemp = removeScar();
 		Stemp->setStatus(Assigned);
