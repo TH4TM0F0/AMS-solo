@@ -23,6 +23,8 @@ private:
 	int numofScars = 0;
 	int numofNcars = 0;
 
+	int BusyTime = 0;
+
 	int numofRequests = 0;
 	/// temp members to store some data for each request
 	std::string tempPatienttype = " ";
@@ -76,11 +78,13 @@ private:
 	/// name --> outputfile.txt in case of silent mode but in interactive mode user can input the name of his file
 	std::string outputfileName = "outputfile";
 	std::ofstream fout;		/// leh fout? --> 3ashan teb2a shabah cout (console output) , fout (file output)
+
+
+	/// Output File Calculations
+	int totalWaitTime = 0;
+	int avgWaitTime = ceil(float(totalWaitTime) / finishedList.count);
+
 public:
-
-
-
-
 	/// Constructor
 	Organizer();
 
@@ -146,16 +150,12 @@ public:
 	Car* AssignEP( Patient* patient);
 	
 
-	int Calculatewaiting();
 
-	int CalculateAVG_Busy();
 
-	int TotalBusyTime();
-
-	void setBusyTime(int busytime);
-
-	//int CalculateCarBusy();
-
-	//int CalculateUtilization();
 	
+	void setBusy(int busytime);
+	int getBusy();
+
+	int AvgBusy();
+	int AvgUtilization();
 };

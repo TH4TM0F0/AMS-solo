@@ -169,6 +169,17 @@ void Organizer::startsim()
 	/// main loop 
 	//while (!SimEnded())
 	//{
+	  
+
+
+
+
+
+
+
+
+
+
 	//	// do smthg
 	
 	//uiPtr->printSimStart();
@@ -201,6 +212,7 @@ void Organizer::AddBackCars(Car* car)
 void Organizer::AddFinishedList(Patient* patient)
 {
 	finishedList.enqueue(patient);
+	totalWaitTime += patient->getWaitingTime();
 }
 
 
@@ -230,7 +242,7 @@ void Organizer::createOutputFile()
 		fout << "Patients: " << numofRequests - numofCancelledRequests << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
 			 << "Hospitals = " << numofHospitals << std::endl
 			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
-			 << "Average Wait Time = " << Calculatewaiting() << std::endl
+			 << "Average Wait Time = " << avgWaitTime << std::endl
 			 << "EP served by secondary Hospitals = " /* << rakam / totalnumofEP */ << " %" << std::endl
 			 << "Average Busy Time = " /*rakam */ << std::endl
 			 << "Average Utilization = " /*avg busy time / total sim time*/ << " %" << std::endl;
@@ -350,7 +362,7 @@ void Organizer::moveCarFromCheckupToFreeList(Car* checkedcar)
 
 void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 {
-	Car* car;
+	Car* car = new Car;
 	
 	if (Patient->getType() == "NP") {
 		hospital->getNormalCarList().dequeue(car); 
@@ -368,7 +380,7 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 			outCars.enqueue(car, 0);
 		}
 	}
-//	car->setStatus(Assigned);
+	car->setStatus(Assigned);
 	car->setAssignmentTime(timestep);
 	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
 }
@@ -396,12 +408,12 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 		return;
 	}
 
-	if (car) {
+	if (car) 
+	{
 
-		// Added by belal 
-		//car->setCarBusy(car->getCarBusyTime());  
+		// added by belal this part helps in calculating average busy time 
 
-	//	TotalBusyTime = TotalBusyTime + car->getCarBusyTime();
+		setBusy(car->getCarBusyTime());    // passes the busy time of the car to the fn set busy 
 
 		int id = car->getHospitalID();
 		string type = car->getType();
@@ -492,8 +504,9 @@ Car* Organizer::AssignEP(Patient* patient)
 	
 }
 
-int Organizer:: Calculatewaiting()
-{
+
+
+		
 
 	int TotalWaiting = 0;
 	Node<Patient*> *dump = finishedList.getFrontPtr();
@@ -503,7 +516,32 @@ int Organizer:: Calculatewaiting()
 		dump = dump->getNext();
 	}
 	return ceil(float(TotalWaiting) / finishedList.count);
+
 }
+
+void Organizer::setBusy(int busytime)
+{
+	BusyTime = busytime + BusyTime;
+}
+
+int Organizer::getBusy()
+{
+	return BusyTime;
+}
+
+int Organizer::AvgBusy()
+{
+	return ceil(float(BusyTime) /  timestep);
+}
+
+int Organizer::AvgUtilization()
+{
+	return ceil(AvgBusy() / timestep) *100 ; // needed as percentage
+}
+
+
+
+
 
 //int Organizer::CalculateCarBusy()
 //{
@@ -522,7 +560,7 @@ int Organizer:: Calculatewaiting()
 
 int Organizer::CalculateAVG_Busy()
 {
-	
+	return 0;
 }
 
 int Organizer::TotalBusyTime()
@@ -547,4 +585,4 @@ void Organizer::setBusyTime(int busytime)
 
 
 
-
+}
