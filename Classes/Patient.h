@@ -44,6 +44,8 @@ public:
 	int getCancelTime();
 	int getWaitingTime();
 	int getDropOffTime();
+	//int getPriority();
+
 
 
 	void setCarBusyTime(int busytime);

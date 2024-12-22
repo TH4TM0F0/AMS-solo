@@ -180,21 +180,34 @@ void Organizer::startsim()
 			{	
 				/// EP handling
 				int pri;
-				hospitalList[i].getEPatientList().dequeue(tempPatientPtr, pri);
+				hospitalList[i].getEPatientList().peek(tempPatientPtr, pri);
+
+				
+
+
+
 				if (timestep >= tempPatientPtr->getRequestTime())
 				{
-					tempCarPtr = hospitalList[i].Assign_EP(tempPatientPtr);
-					if (tempCarPtr)
+					if (tempPatientPtr->getType() == "EP")
 					{
-						tempCarPtr->setAssignmentTime(timestep);
-						AddOutCars(tempCarPtr);
-					}
-					else
-					{
-						tempCarPtr = AssignEP(tempPatientPtr);
-						tempCarPtr->setAssignmentTime(timestep);
-						numofEPserved_secondary++;
-						AddOutCars(tempCarPtr);
+						tempCarPtr = hospitalList[i].Assign_EP(tempPatientPtr);
+						if (tempCarPtr)
+						{
+							
+							hospitalList[i].removeEpatient(tempPatientPtr->getSeverity());
+							tempCarPtr->setAssignmentTime(timestep);
+							AddOutCars(tempCarPtr);
+							
+						}
+						else
+						{
+							hospitalList[i].removeEpatient(tempPatientPtr->getSeverity());
+							tempCarPtr = AssignEP(tempPatientPtr);
+							tempCarPtr->setAssignmentTime(timestep);
+							numofEPserved_secondary++;
+							AddOutCars(tempCarPtr);
+							
+						}
 					}
 				}
 				/// 
@@ -203,12 +216,19 @@ void Organizer::startsim()
 				hospitalList[i].getSPatientList().peek(tempPatientPtr);
 				if (timestep >= tempPatientPtr->getRequestTime())
 				{
-					tempCarPtr = hospitalList[i].Assign_SP(tempPatientPtr);
-					if (tempCarPtr)
+					if (tempPatientPtr->getType() == "SP")   // To validate the the type
 					{
-						hospitalList[i].getSPatientList().dequeue(tempPatientPtr);
-						tempCarPtr->setAssignmentTime(timestep);
-						AddOutCars(tempCarPtr);
+						tempCarPtr = hospitalList[i].Assign_SP(tempPatientPtr);
+						if (tempCarPtr)
+						{
+							if (tempCarPtr->getType() == "SC")
+						{
+								
+								hospitalList[i].removeSpatient();
+								tempCarPtr->setAssignmentTime(timestep);
+								AddOutCars(tempCarPtr);
+						}
+						}
 					}
 				}
 				///
@@ -217,12 +237,19 @@ void Organizer::startsim()
 				hospitalList[i].getNPatientList().peek(tempPatientPtr);
 				if (timestep >= tempPatientPtr->getRequestTime())
 				{
-					tempCarPtr = hospitalList[i].Assign_NP(tempPatientPtr);
-					if (tempCarPtr)
+					if (tempPatientPtr->getType() == "NP")
 					{
-						hospitalList[i].getNPatientList().dequeue(tempPatientPtr);
-						tempCarPtr->setAssignmentTime(timestep);
-						AddOutCars(tempCarPtr);
+						tempCarPtr = hospitalList[i].Assign_NP(tempPatientPtr);
+						if (tempCarPtr)
+						{
+							if (tempCarPtr->getType() == "NC")
+							{
+								
+								hospitalList[i].removeNpatient();
+								tempCarPtr->setAssignmentTime(timestep);
+								AddOutCars(tempCarPtr);
+							}
+						}
 					}
 				}
 				///

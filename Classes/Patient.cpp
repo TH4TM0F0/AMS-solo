@@ -130,6 +130,11 @@ int Patient::getDropOffTime()
 	return dropOffTime;
 }
 
+//int Patient::getPriority()
+//{
+//	return 
+//}
+
 
 
 std::ostream& operator<<(std::ostream& out, Patient& patient)

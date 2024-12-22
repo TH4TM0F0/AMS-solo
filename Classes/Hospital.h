@@ -61,7 +61,7 @@ public:
 	void addEpatient(Patient* patient);
 	Patient* removeNpatient();
 	Patient* removeSpatient();
-	Patient* removeEpatient();
+	Patient* removeEpatient(int pri);
 	
 
 	// addReturning cars --> used only when a car was assigned to a patient and now has returned to it's hospital
