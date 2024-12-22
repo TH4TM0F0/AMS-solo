@@ -56,7 +56,7 @@ void UI::silentstartscreen()
 	
 }
 
-void UI::printTimeStep(int timestep, Hospital* hospitalPtr,int numOfHospitals, priQueue<Car*> outcarsList, priQueue<Car*> backcarList, LinkedQueue<Patient*> finishedList)
+void UI::printTimeStep(int timestep, Hospital* hospitalPtr,int numOfHospitals, priQueue<Car*> outcarsList, priQueue<Car*> backcarList, LinkedQueue<Patient*> finishedList, priQueue<Car*> checkupList)
 {
 	/// Format of 1 timestep
 	std::cout << "Timestep: " << timestep << std::endl;
@@ -74,7 +74,12 @@ void UI::printTimeStep(int timestep, Hospital* hospitalPtr,int numOfHospitals, p
 
 		std::cout << finishedList.count << " Finished Patients: ";
 		finishedList.print();
+
+		std::cout << checkupList.count << "x==>" << " Checkup Cars: ";
+		checkupList.print();
 		std::cout << "-----------------------------------------------------------" << std::endl;
+
+
 
 		if (i != numOfHospitals - 1)
 		{

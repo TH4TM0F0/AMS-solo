@@ -20,6 +20,9 @@ private:
 	int speedofNcar = 0;
 	int numofScars = 0;
 	int numofNcars = 0;
+	int checkuptimeScars = 0;
+	int checkuptimeNcars = 0;
+	int carFailureProb = 0;
 
 	int BusyTime = 0;
 
@@ -31,6 +34,7 @@ private:
 	int tempPatienthospid = 0;
 	int tempPatientdist = 0;
 	int tempPatientSeverity = 0;
+	
 
 	int numofCancelledRequests = 0;
 	int cancelledPatientid = 0;
@@ -143,9 +147,9 @@ public:
 	//Car from Free to OUT
 	void moveCarFromFreeToOut(Patient* Patient, Hospital* hospital);
 	//Car from OUT to Back
-	bool moveCarFromOutToBack(Car* car);
+	void moveCarFromOutToBack(Car* car);
 	//Car from Back to Free
-	void moveCarFromBackToFree(Hospital* hospital); 
+	void moveCarFromBackToFree(Car* car);
 
 
 

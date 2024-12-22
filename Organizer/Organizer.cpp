@@ -21,7 +21,8 @@ void Organizer::loadInputFile()
 	if (fin.is_open())
 	{
 		fin >> numofHospitals
-			>> speedofScar >> speedofNcar;
+			>> speedofScar >> speedofNcar
+			>> checkuptimeScars >> checkuptimeNcars;
 
 		/// creating the 2d dynamically allocated array (2d distance matrix)
 		distanceMatrix = new int* [numofHospitals];
@@ -133,6 +134,7 @@ void Organizer::loadInputFile()
 
 			cancelledRequests.enqueue(tempPatientPtr);
 		}
+		fin >> carFailureProb;
 	}
 	fin.close();
 }
@@ -229,12 +231,27 @@ void Organizer::startsim()
 
 
 				/// check law el out cars weslo lel patient move them to the back car queue
+				outCars.peek(tempCarPtr, pri);
+				if (tempCarPtr->getPickupTime() == timestep)
+				{
+					moveCarFromOutToBack(tempCarPtr);
+				}
+				///
+
+
 				/// check law el back cars weslo lel hospital move them to their free list
+				backCars.peek(tempCarPtr, pri);
+				if (tempCarPtr->getDropoffTime() == timestep)
+				{
+					moveCarFromBackToFree(tempCarPtr);
+					AddFinishedList(tempCarPtr->getAssignedPatient());
+				}
+				///
 			}
 
 
 
-			ui.printTimeStep(timestep, hospitalList, numofHospitals, outCars, backCars, finishedList);
+			ui.printTimeStep(timestep, hospitalList, numofHospitals, outCars, backCars, finishedList, checkuplist);
 			std::cin.ignore();
 			ui.printaMSG("Press Enter to display the next timestep.");
 			std::cin.get();
@@ -290,10 +307,10 @@ void Organizer::createOutputFile()
 		while (!finishedList.isEmpty())
 		{
 			finishedList.dequeue(tempPatientPtr);
-			fout << std::left << setw(6)/*<< tempPatientPtr.getFinishTime()*/
+			fout << std::left << setw(6) << tempPatientPtr->getDropOffTime()
 				 << std::left << setw(6) << *tempPatientPtr
 				 << std::left << setw(6) << tempPatientPtr->getRequestTime()
-				 << std::left << setw(6) << tempPatientPtr->getPickupTime() - tempPatientPtr->getRequestTime()
+				 << std::left << setw(6) << totalWaitTime
 				 << std::endl;
 		}
 			
@@ -425,23 +442,18 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
 }
 
-bool Organizer::moveCarFromOutToBack(Car* car) {
+void Organizer::moveCarFromOutToBack(Car* car) {
 	
 	int pri;
 	//Dequeue car from OUT (check 3ashan lw kan empty f el awl) 
-	if (outCars.dequeue(car, pri)) {
-		car->setStatus(Loaded); 	// Update the car's status to indicate it has reached its patient
-		AddBackCars(car);     // Enqueue the car to the BACK queue
-		return true;
-	}
-	else {
-		return false;
-	}
+	outCars.dequeue(car, pri);
+	car->setStatus(Loaded); 	// Update the car's status to indicate it has reached its patient
+	AddBackCars(car);     // Enqueue the car to the BACK queue
+	
 }
 
-void Organizer::moveCarFromBackToFree(Hospital* hospital)
-{
-	Car* car = nullptr; 
+void Organizer::moveCarFromBackToFree(Car* car)
+{ 
 	int pri;
 	backCars.dequeue(car, pri);
 	if (car->getStatus() != Assigned) {  //make sure car is not in OUt State
@@ -450,18 +462,15 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 
 	if (car) 
 	{
-
-		// added by belal this part helps in calculating average busy time 
+		// added by belal this part helps in calculating average busy time law 3ayez 7aga renelo +201066669671
 
 		setBusy(car->getCarBusyTime());    // passes the busy time of the car to the fn set busy 
 
-		int id = car->getHospitalID();
-		string type = car->getType();
-		if (type == "NC") {
-			(hospitalList + id - 1)->addNcar(car); 
+		if (car->getType() == "NC") {
+			hospitalList[car->getHospitalID() - 1].addNcar(car);
 		}
 		else {
-			(hospitalList + id - 1)->addScar(car);
+			hospitalList[car->getHospitalID() - 1].addScar(car);
 		}
 		car->setStatus(Ready);
 	}
