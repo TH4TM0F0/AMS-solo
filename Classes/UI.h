@@ -24,7 +24,7 @@ public:
 	void printSimStart();
 	void ineractivestartscreen();
 	void silentstartscreen();
-	void printTimeStep(int timestep, Hospital* hospitalPtr, int numOfHospitals, priQueue<Car*> oclist, priQueue<Car*> bclist, LinkedQueue<Patient*> finishedList);
+	void printTimeStep(int timestep, Hospital* hospitalPtr, int numOfHospitals, priQueue<Car*> oclist, priQueue<Car*> bclist, LinkedQueue<Patient*> finishedList, priQueue<Car*> checkupList);
 	void printHospital(Hospital *hospitalToPrint);
 
 	

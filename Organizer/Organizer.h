@@ -20,6 +20,9 @@ private:
 	int speedofNcar = 0;
 	int numofScars = 0;
 	int numofNcars = 0;
+	int checkuptimeScars = 0;
+	int checkuptimeNcars = 0;
+	int carFailureProb = 0;
 
 	int BusyTime = 0;
 
@@ -31,6 +34,7 @@ private:
 	int tempPatienthospid = 0;
 	int tempPatientdist = 0;
 	int tempPatientSeverity = 0;
+	
 
 	int numofCancelledRequests = 0;
 	int cancelledPatientid = 0;
@@ -81,7 +85,7 @@ private:
 
 	/// Output File Calculations
 	int totalWaitTime = 0;
-	int avgWaitTime = ceil(float(totalWaitTime) / finishedList.count);
+	int avgWaitTime = 0;
 	int numofEPserved_secondary = 0;
 
 public:
@@ -129,26 +133,18 @@ public:
 
     DerivedPriQueue<Car*> getCurrentFailedOutCars();
 	
-	//failureAction
-	//DerivedPriQueue<Car*> OutCarFailureAction(Car* Failedcars);
 
 	DerivedPriQueue<Car*>  OutCarFailureAction(Car* Failedcars);
 	//when checkup is done
 	void moveCarFromCheckupToFreeList(Car* checkedcar);
 
-	//void OutCarFailureAction(Car* Failedcars);
-
-	//DerivedPriQueue<Car*>  OUTTOBACK(Car* Failedcars);
 
 	//Car from Free to OUT
 	void moveCarFromFreeToOut(Patient* Patient, Hospital* hospital);
 	//Car from OUT to Back
-	bool moveCarFromOutToBack(Car* car);
+	void moveCarFromOutToBack(Car* car);
 	//Car from Back to Free
-	void moveCarFromBackToFree(Hospital* hospital); 
-
-	//cancel Request 
-	void CancelRequest(int PatientID, int CancelTime, Patient* patient, Car* car);
+	void moveCarFromBackToFree(Car* car);
 
 
 
@@ -160,7 +156,7 @@ public:
 	
 	void setBusy(int busytime);
 	int getBusy();
-
+	int getAvgWaitTime();
 	int AvgBusy();
 	int AvgUtilization();
 };
