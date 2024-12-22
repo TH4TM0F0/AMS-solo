@@ -1,9 +1,7 @@
 #include "UI.h"
 
-UI::UI(Organizer* orgPtr)
+UI::UI()
 {
-	this->orgPtr = orgPtr;
-	hospitalPtr = orgPtr->getHospitalList();
 	mode = 0;
 }
 
@@ -20,76 +18,68 @@ void UI::printSimStart()
 		std::cout << "Please select a valid mode: ";
 		std::cin >> mode;
 	}
-
-	if (mode == 1)
-	{
-		std::cout << "Interactive Mode selected." << std::endl;
-		std::cout << "Clearing the console to start simulation.";
-		delay(3);
-		clearConcsole();
-
-
-		std::cin.ignore();
-		//loop le7ad ma elsimulation ye5las --> elhowa lama a5er hospital yewsal lel finished patient list
-		while (!orgPtr->SimEnded())
-		{
-			std::cout << "Current Timestep: " << orgPtr->getTimestep() << std::endl;
-			printTimeStep();
-			std::cout << "Press Enter to display the next timestep." << std::endl;
-			std::cin.get();
-		}
-	}
-
-	if (mode == 2)
-	{
-		std::cout << "Silent Mode, Simulation starts" << std::endl << std::endl;
-
-		/// Loop to simulate the loading illusion
-		std::cout << "Simulation Loading";
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j < 3; j++)
-			{
-				delay(1);
-				std::cout << ".";
-			}
-			for (int k = 0; k < 3; k++)
-			{
-				delay(1);
-				std::cout << "\b";
-				std::cout << " ";
-				std::cout << "\b";
-			}
-		}
-
-		std::cout << std::endl << std::endl;
-		std::cout << "Simulation ends, Output File created --> outputfile.txt" << std::endl;
-	}
 	return;
 }
 
-void UI::printTimeStep()
+void UI::ineractivestartscreen()
+{
+	std::cout << "Interactive Mode selected." << std::endl;
+	std::cout << "Clearing the console to start simulation.";
+	clearConcsole();	
+}
+
+void UI::silentstartscreen()
+{
+	
+	std::cout << "Silent Mode, Simulation starts" << std::endl << std::endl;
+
+	/// Loop to simulate the loading illusion
+	std::cout << "Simulation Loading";
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			delay(1);
+			std::cout << ".";
+		}
+		for (int k = 0; k < 3; k++)
+		{
+			delay(1);
+			std::cout << "\b";
+			std::cout << " ";
+			std::cout << "\b";
+		}
+	}
+
+	std::cout << std::endl << std::endl;
+	std::cout << "Simulation ends, Output File created --> outputfile.txt" << std::endl;
+	
+}
+
+void UI::printTimeStep(int timestep, Hospital* hospitalPtr,int numOfHospitals, priQueue<Car*> outcarsList, priQueue<Car*> backcarList, LinkedQueue<Patient*> finishedList)
 {
 	/// Format of 1 timestep
+	std::cout << "Timestep: " << timestep << std::endl;
 	std::cin.ignore();
-	for (int i = 0; i < orgPtr->getNumofHospitals(); i++)
+	for (int i = 0; i < numOfHospitals; i++)
 	{
 		printHospital(&hospitalPtr[i]);
 		std::cout << "-----------------------------------------------------------" << std::endl;
 
-		priQueue<Car*> oclist = orgPtr->getOutCars();
-		std::cout << oclist.count << " ==> " << "Out Cars: ";
-		oclist.print();
+		std::cout << outcarsList.count << " ==> " << "Out Cars: ";
+		outcarsList.print();
 
-		priQueue<Car*> bclist = orgPtr->getBackCars();
-		std::cout << bclist.count << " <== " << "Back Cars: ";
-		bclist.print();
+		std::cout << backcarList.count << " <== " << "Back Cars: ";
+		backcarList.print();
 
-		std::cout << orgPtr->getFinishedList().count << " Finished Patients: ";
-		orgPtr->getFinishedList().print();
+		std::cout << finishedList.count << " Finished Patients: ";
+		finishedList.print();
 		std::cout << "-----------------------------------------------------------" << std::endl;
 
-		std::cout << "Press Enter to display the next hospital data." << std::endl;
+		if (i != numOfHospitals - 1)
+		{
+			std::cout << "Press Enter to display the next hospital data." << std::endl;
+		}
 		std::cin.get();
 	}
 }
@@ -114,7 +104,6 @@ void UI::printHospital(Hospital *hospitalToPrint)
 	std::cout << "==============" << "       " << "Hospital #" << *hospitalToPrint << " " << " end " << "       " << "==============" << std::endl;
 }
 
-
 void UI::delay(int delayInSeconds)
 {
 	// Wait for the specified delay
@@ -129,5 +118,5 @@ void UI::clearConcsole()
 
 void UI::printaMSG(std::string message)
 {
-	std::cout << message << std::endl;
+	std::cout << message; /*<< std::endl;*/
 }

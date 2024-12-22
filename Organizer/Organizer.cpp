@@ -166,29 +166,87 @@ void Organizer::startsim()
 	/// then assign all requests to their related hospitals
 	loadPatients();
 
-	/// main loop 
-	//while (!SimEnded())
-	//{
-	  
+	ui.printSimStart();
+
+	if (ui.mode == 1)
+	{
+		ui.ineractivestartscreen();
+		/// main loop 
+		while (!SimEnded())
+		{
+			
+			/// Lafeena 3ala kol el hospitals w 3amalna check law fi ay patients elmafrood netala3 car teroo7 tegebhom
+			for (int i = 0; i < numofHospitals; i++)
+			{	
+				/// EP handling
+				int pri;
+				hospitalList[i].getEPatientList().dequeue(tempPatientPtr, pri);
+				if (timestep >= tempPatientPtr->getRequestTime())
+				{
+					tempCarPtr = hospitalList[i].Assign_EP(tempPatientPtr);
+					if (tempCarPtr)
+					{
+						tempCarPtr->setAssignmentTime(timestep);
+						AddOutCars(tempCarPtr);
+					}
+					else
+					{
+						tempCarPtr = AssignEP(tempPatientPtr);
+						tempCarPtr->setAssignmentTime(timestep);
+						numofEPserved_secondary++;
+						AddOutCars(tempCarPtr);
+					}
+				}
+				/// 
+
+				/// SP handling
+				hospitalList[i].getSPatientList().peek(tempPatientPtr);
+				if (timestep >= tempPatientPtr->getRequestTime())
+				{
+					tempCarPtr = hospitalList[i].Assign_SP(tempPatientPtr);
+					if (tempCarPtr)
+					{
+						hospitalList[i].getSPatientList().dequeue(tempPatientPtr);
+						tempCarPtr->setAssignmentTime(timestep);
+						AddOutCars(tempCarPtr);
+					}
+				}
+				///
+
+				/// NP handling
+				hospitalList[i].getNPatientList().peek(tempPatientPtr);
+				if (timestep >= tempPatientPtr->getRequestTime())
+				{
+					tempCarPtr = hospitalList[i].Assign_NP(tempPatientPtr);
+					if (tempCarPtr)
+					{
+						hospitalList[i].getNPatientList().dequeue(tempPatientPtr);
+						tempCarPtr->setAssignmentTime(timestep);
+						AddOutCars(tempCarPtr);
+					}
+				}
+				///
+
+
+				/// check law el out cars weslo lel patient move them to the back car queue
+				/// check law el back cars weslo lel hospital move them to their free list
+			}
 
 
 
+			ui.printTimeStep(timestep, hospitalList, numofHospitals, outCars, backCars, finishedList);
+			std::cin.ignore();
+			ui.printaMSG("Press Enter to display the next timestep.");
+			std::cin.get();
+			/// increment the timestep at the end of each loop
+			incrementTimestep();
+		}
+	}
 
-
-
-
-
-
-
-	//	// do smthg
-	
-	//uiPtr->printSimStart();
-
-
-	//	 
-	//	// increment the timestep at the end of each loop
-	//	incrementTimestep();
-	//}
+	if (ui.mode == 2)
+	{
+		ui.silentstartscreen();
+	}
 
 	/// end with creating the output file
 	createOutputFile();
@@ -215,7 +273,6 @@ void Organizer::AddFinishedList(Patient* patient)
 	totalWaitTime += patient->getWaitingTime();
 }
 
-
 void Organizer::createOutputFile()
 {
 	// creating an empty text file to write the required data
@@ -230,7 +287,7 @@ void Organizer::createOutputFile()
 			 << std::left << setw(6) << "WT"
 			 << std::endl;
 		/// Header Row of Output file is created
-		for (int i = 0; i < numofRequests - numofCancelledRequests; i++)
+		while (!finishedList.isEmpty())
 		{
 			finishedList.dequeue(tempPatientPtr);
 			fout << std::left << setw(6)/*<< tempPatientPtr.getFinishTime()*/
@@ -239,6 +296,7 @@ void Organizer::createOutputFile()
 				 << std::left << setw(6) << tempPatientPtr->getPickupTime() - tempPatientPtr->getRequestTime()
 				 << std::endl;
 		}
+			
 		fout << "Patients: " << numofRequests - numofCancelledRequests << " [ NP: " << totalnumofNP << ", SP: " << totalnumofSP << ", EP: " << totalnumofEP << " ]" << std::endl
 			 << "Hospitals = " << numofHospitals << std::endl
 			 << "Cars: " << totalnumofSC + totalnumofNC << " [ SCars: " << totalnumofSC << ", NCars: " << totalnumofNC << " ]" << std::endl
@@ -267,26 +325,6 @@ Hospital* Organizer::getHospitalList()
 {
 	return hospitalList;
 }
-
-//int Organizer::getCurrentOutCars()
-//{
-//	return outCars.count;
-//}
-//
-//int Organizer::getCurrentBackCars()
-//{
-//	return backCars.count;
-//}
-//
-//int Organizer::getCurrentFinished()
-//{
-//	return finishedList.count;
-//}
-//
-//void Organizer::printFinishedList()
-//{
-//	finishedList.print();
-//}
 
 DerivedPriQueue<Car*> Organizer::getOutCars()
 {
@@ -367,18 +405,18 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 	
 	if (Patient->getType() == "NP") {
 		hospital->getNormalCarList().dequeue(car); 
-		outCars.enqueue(car, 0);
+		AddOutCars(car);
 	} else if (Patient->getType() == "SP") {
 		hospital->getSpecialCarList().dequeue(car);
-		outCars.enqueue(car, 0);
+		AddOutCars(car);
 	}else if (Patient->getType() == "EP") {
 		if (hospital->getNormalCarList().isEmpty()) {
 			hospital->getSpecialCarList().dequeue(car);
-			outCars.enqueue(car, 0);
+			AddOutCars(car);
 		}
 		else {
 			hospital->getNormalCarList().dequeue(car);
-			outCars.enqueue(car, 0);
+			AddOutCars(car);
 		}
 	}
 	car->setStatus(Assigned);
@@ -386,13 +424,13 @@ void Organizer::moveCarFromFreeToOut(Patient* Patient, Hospital* hospital)
 	//Must record the timestep elly et7rkt feeh ->assignement time = car time step 
 }
 
-bool Organizer::moveCarFromOutToBack() {
-	Car* car;
+bool Organizer::moveCarFromOutToBack(Car* car) {
+	
 	int pri;
 	//Dequeue car from OUT (check 3ashan lw kan empty f el awl) 
 	if (outCars.dequeue(car, pri)) {
 		car->setStatus(Loaded); 	// Update the car's status to indicate it has reached its patient
-		backCars.enqueue(car, pri);     // Enqueue the car to the BACK queue
+		AddBackCars(car);     // Enqueue the car to the BACK queue
 		return true;
 	}
 	else {
@@ -431,45 +469,12 @@ void Organizer::moveCarFromBackToFree(Hospital* hospital)
 	}
 }
 
-
-
-
-
 Car* Organizer::AssignEP(Patient* patient)
 {
-
-	
-
-	//{
-	//	if (QID.isEmpty())      // if the queue is empty enqueue 3latool 
-	//	{
-	//		QID.enqueue(hospitalList[i].getID());
-	//		minimum = hospitalList[i].getEmergencyPatientList()->count;
-	//	}
-	//	else                   // the queue is not empty --> empy it then fill 3la nadafa 
-	//	{
-	//		while (!QID.isEmpty())
-	//		{
-	//			int temp = 0;
-	//			QID.peek(temp);
-	//			QID.dequeue(temp);
-
-	//		}
-	//		QID.enqueue(hospitalList[i].getID());
-	//		minimum = hospitalList[i].getEmergencyPatientList()->count;
-	//	}
-	//}
-	//		else if (hospitalList[i].getEmergencyPatientList()->count == minimum)
-	//		{
-	//			QID.enqueue(hospitalList[i].getID());
-	//			}
-
-
 	int current_id = 0;
 	current_id = patient->getNearestHospitalID();
 	int minimum = INT_MAX;
 	int idOfShortest = 0;
-
 
 	for (int i = 0; i < numofHospitals; i++)
 	{
@@ -494,30 +499,12 @@ Car* Organizer::AssignEP(Patient* patient)
 					{
 						idOfShortest = i;
 					}
-
 				}
-
 			}
 		}
 	}
 
 	return hospitalList[idOfShortest].Assign_EP(patient);
-	
-}
-
-
-
-		
-
-	int TotalWaiting = 0;
-	Node<Patient*> *dump = finishedList.getFrontPtr();
-    while (!finishedList.isEmpty())
-	{
-		TotalWaiting = dump->getItem()->getWaitingTime() + TotalWaiting;
-		dump = dump->getNext();
-	}
-	return ceil(float(TotalWaiting) / finishedList.count);
-
 }
 
 void Organizer::setBusy(int busytime)
@@ -532,58 +519,10 @@ int Organizer::getBusy()
 
 int Organizer::AvgBusy()
 {
-	return ceil(float(BusyTime) /  timestep);
+	return ceil(float(BusyTime) /  (totalnumofNC + totalnumofSC));
 }
 
 int Organizer::AvgUtilization()
 {
 	return ceil(AvgBusy() / timestep) *100 ; // needed as percentage
-}
-
-
-
-
-
-//int Organizer::CalculateCarBusy()
-//{
-//	int TotalBusy = 0;
-//	Node<Patient*>* temp = finishedList.getFrontPtr();
-//
-//	while (!finishedList.isEmpty())
-//	{
-//	
-//		TotalBusy = temp->getItem()->getCarBusy() + TotalBusy;
-//		temp = temp->getNext();
-//	}
-//
-//	return ceil(float(TotalBusy) / finishedList.count);
-//}
-
-int Organizer::CalculateAVG_Busy()
-{
-	return 0;
-}
-
-int Organizer::TotalBusyTime()
-{
-	return 0;
-}
-
-//int Organizer::TotalBusyTime()
-//{
-//	return TotalBusyTime;
-//}
-
-void Organizer::setBusyTime(int busytime)
-{
-
-}
-
-//int Organizer::CalculateUtilization()
-////{
-////	return ceil(CalculateCarBusy() / timestep);
-//}
-
-
-
 }

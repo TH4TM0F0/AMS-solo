@@ -192,7 +192,6 @@ Car* Hospital::Assign_EP(Patient* patient)
 		Ntemp->setStatus(Assigned);
 		Ntemp->setAssignedPatient(patient);
 		return Ntemp;
-
 	}
 	else if (SpecialCarList.count != 0)
 	{

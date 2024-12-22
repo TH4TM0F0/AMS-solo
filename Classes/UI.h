@@ -1,5 +1,8 @@
 #pragma once
-#include "../Organizer/Organizer.h"
+#include "../Classes/Car.h"
+#include "../Classes/Hospital.h"
+#include "../Classes/Patient.h"
+#include "../DerivedDS/DerivedpriQueue.h"
 #include <iostream>
 #include <windows.h>
 #include <chrono>
@@ -7,18 +10,21 @@
 class UI
 {
 private:
-	Organizer* orgPtr = nullptr;
-	Hospital* hospitalPtr = nullptr;
-	int mode;
+	
 public:
 	/// Constructor
-	UI(Organizer* orgPtr);
+	UI();
+
+	/// Utility data members
+	int mode = 0;
 
 	/// Main Print Func
 
 	/// Printing Funcs
 	void printSimStart();
-	void printTimeStep();
+	void ineractivestartscreen();
+	void silentstartscreen();
+	void printTimeStep(int timestep, Hospital* hospitalPtr, int numOfHospitals, priQueue<Car*> oclist, priQueue<Car*> bclist, LinkedQueue<Patient*> finishedList);
 	void printHospital(Hospital *hospitalToPrint);
 
 	

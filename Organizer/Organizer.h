@@ -9,9 +9,7 @@ using namespace std;
 #include "../Classes/Patient.h"
 #include "../Classes/Hospital.h"
 #include "../Classes/RndmGen.h"
-
-
-class UI;
+#include "../Classes/UI.h"
 
 class Organizer
 {
@@ -57,7 +55,7 @@ private:
 	LinkedQueue<Patient*> finishedList;                                     /// Queue for finished patients 
 	DerivedPriQueue<Car*> failedoutCars;                                    /// PriQ for failed out cars
 	DerivedPriQueue<Car*> checkuplist;                                      /// PriQ for checkup list of out cars
-	Hospital* freelist;
+
 
 	/// 2d Distance Matrix
 	int** distanceMatrix = nullptr;
@@ -65,7 +63,8 @@ private:
 
 	/// some Ptrs
 	Patient* tempPatientPtr = nullptr;
-	UI* uiPtr;
+	Car* tempCarPtr = nullptr;
+	UI ui;
 
 	int OutCarCount = 0;
 	int numofCars = 1;														/// variable to help with the car ids uniqueness
@@ -83,6 +82,7 @@ private:
 	/// Output File Calculations
 	int totalWaitTime = 0;
 	int avgWaitTime = ceil(float(totalWaitTime) / finishedList.count);
+	int numofEPserved_secondary = 0;
 
 public:
 	/// Constructor
@@ -138,12 +138,9 @@ public:
 	//Car from Free to OUT
 	void moveCarFromFreeToOut(Patient* Patient, Hospital* hospital);
 	//Car from OUT to Back
-	bool moveCarFromOutToBack();
+	bool moveCarFromOutToBack(Car* car);
 	//Car from Back to Free
 	void moveCarFromBackToFree(Hospital* hospital); 
-
-	//cancel Request 
-	void CancelRequest(int PatientID, int CancelTime, Patient* patient, Car* car);
 
 
 
