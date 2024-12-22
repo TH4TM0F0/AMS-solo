@@ -25,18 +25,7 @@ void UI::ineractivestartscreen()
 {
 	std::cout << "Interactive Mode selected." << std::endl;
 	std::cout << "Clearing the console to start simulation.";
-	clearConcsole();
-
-
-		/*std::cin.ignore();
-		//loop le7ad ma elsimulation ye5las --> elhowa lama a5er hospital yewsal lel finished patient list
-		while (!orgPtr->SimEnded())
-		{
-			std::cout << "Current Timestep: " << orgPtr->getTimestep() << std::endl;
-			printTimeStep();
-			std::cout << "Press Enter to display the next timestep." << std::endl;
-			std::cin.get();
-		}*/
+	clearConcsole();	
 }
 
 void UI::silentstartscreen()
@@ -67,7 +56,7 @@ void UI::silentstartscreen()
 	
 }
 
-void UI::printTimeStep(int timestep, Hospital* hospitalPtr,int numOfHospitals, priQueue<Car*> oclist, priQueue<Car*> bclist, LinkedQueue<Patient*> finishedList)
+void UI::printTimeStep(int timestep, Hospital* hospitalPtr,int numOfHospitals, priQueue<Car*> outcarsList, priQueue<Car*> backcarList, LinkedQueue<Patient*> finishedList)
 {
 	/// Format of 1 timestep
 	std::cout << "Timestep: " << timestep << std::endl;
@@ -77,11 +66,11 @@ void UI::printTimeStep(int timestep, Hospital* hospitalPtr,int numOfHospitals, p
 		printHospital(&hospitalPtr[i]);
 		std::cout << "-----------------------------------------------------------" << std::endl;
 
-		std::cout << oclist.count << " ==> " << "Out Cars: ";
-		oclist.print();
+		std::cout << outcarsList.count << " ==> " << "Out Cars: ";
+		outcarsList.print();
 
-		std::cout << bclist.count << " <== " << "Back Cars: ";
-		bclist.print();
+		std::cout << backcarList.count << " <== " << "Back Cars: ";
+		backcarList.print();
 
 		std::cout << finishedList.count << " Finished Patients: ";
 		finishedList.print();
@@ -114,7 +103,6 @@ void UI::printHospital(Hospital *hospitalToPrint)
 
 	std::cout << "==============" << "       " << "Hospital #" << *hospitalToPrint << " " << " end " << "       " << "==============" << std::endl;
 }
-
 
 void UI::delay(int delayInSeconds)
 {

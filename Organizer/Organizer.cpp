@@ -511,21 +511,6 @@ Car* Organizer::AssignEP(Patient* patient)
 	
 }
 
-
-
-		
-
-	int TotalWaiting = 0;
-	Node<Patient*> *dump = finishedList.getFrontPtr();
-    while (!finishedList.isEmpty())
-	{
-		TotalWaiting = dump->getItem()->getWaitingTime() + TotalWaiting;
-		dump = dump->getNext();
-	}
-	return ceil(float(TotalWaiting) / finishedList.count);
-
-}
-
 void Organizer::setBusy(int busytime)
 {
 	BusyTime = busytime + BusyTime;
@@ -550,30 +535,9 @@ int Organizer::AvgUtilization()
 
 
 
-//int Organizer::CalculateCarBusy()
-//{
-//	int TotalBusy = 0;
-//	Node<Patient*>* temp = finishedList.getFrontPtr();
-//
-//	while (!finishedList.isEmpty())
-//	{
-//	
-//		TotalBusy = temp->getItem()->getCarBusy() + TotalBusy;
-//		temp = temp->getNext();
-//	}
-//
-//	return ceil(float(TotalBusy) / finishedList.count);
-//}
 
-int Organizer::CalculateAVG_Busy()
-{
-	return 0;
-}
 
-int Organizer::TotalBusyTime()
-{
-	return 0;
-}
+
 
 //int Organizer::TotalBusyTime()
 //{
@@ -585,11 +549,8 @@ void Organizer::setBusyTime(int busytime)
 
 }
 
-//int Organizer::CalculateUtilization()
-////{
-////	return ceil(CalculateCarBusy() / timestep);
-//}
 
 
 
-}
+
+

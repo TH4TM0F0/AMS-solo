@@ -131,10 +131,9 @@ public:
         return head;
     }
 
-    template <typename T>
     priQueue<T>::priQueue(const priQueue<T>& LQ)
     {
-        head nullptr;
+        head = nullptr;
         priNode<T>* NodePtr = LQ.head;	//start at the front node in LQ
         while (NodePtr)
         {
@@ -142,5 +141,4 @@ public:
             NodePtr = NodePtr->getNext();
         }
     }
-
 };
